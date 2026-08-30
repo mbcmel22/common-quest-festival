@@ -18,7 +18,7 @@ export default function EventCard({
 
   return (
     <Link href={`/${locale}/programme/${event.slug}`} className="event-card group focus:outline-none">
-      <div className="relative aspect-[4/3] overflow-hidden bg-ink">
+      <div className="relative aspect-[16/10] overflow-hidden bg-ink">
         {event.cover_url ? (
           <Image
             src={event.cover_url}
@@ -29,7 +29,7 @@ export default function EventCard({
           />
         ) : (
           <div className="flex h-full items-center justify-center bg-gradient-to-br from-violet/70 to-ink">
-            <Image src="/brand/picto-jaune.png" alt="" width={90} height={90} className="opacity-70" />
+            <Image src="/brand/picto-jaune.png" alt="" width={48} height={48} className="opacity-60" />
           </div>
         )}
         <span className="absolute left-3 top-3 tag bg-ink/80 text-acid">
@@ -48,11 +48,11 @@ export default function EventCard({
         </span>
       </div>
 
-      <div className="p-5">
-        <p className="text-[15px] font-medium text-acid">{when}</p>
-        <h3 className="mt-3 font-display text-2xl uppercase leading-[0.98] md:text-[26px]">{title}</h3>
-        {event.t?.tagline && <p className="mt-2 text-base text-paper/70">{event.t.tagline}</p>}
-        {event.venue && <p className="mt-4 text-[15px] text-smoke">{event.venue}</p>}
+      <div className="p-4 md:p-5">
+        <p className="text-[14px] font-medium text-acid">{when}</p>
+        <h3 className="mt-2 font-display text-xl uppercase leading-[1.1] md:text-[22px]">{title}</h3>
+        {event.t?.tagline && <p className="mt-2 text-[15px] text-paper/70">{event.t.tagline}</p>}
+        {event.venue && <p className="mt-3 text-[14px] text-smoke">{event.venue}</p>}
       </div>
     </Link>
   );

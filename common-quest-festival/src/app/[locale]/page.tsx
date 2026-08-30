@@ -109,8 +109,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               {dict.home.teamCta}
             </Link>
           </div>
-          <div className="relative aspect-square w-32 justify-self-center md:w-full md:max-w-sm md:justify-self-end">
-            <Image src="/brand/picto-jaune.png" alt="" fill sizes="(max-width: 768px) 128px, 384px" className="object-contain" />
+          <div className="relative hidden aspect-square w-full max-w-[220px] justify-self-end md:block">
+            <Image src="/brand/picto-jaune.png" alt="" fill sizes="220px" className="object-contain" />
           </div>
         </div>
       </section>

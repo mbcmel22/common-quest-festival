@@ -57,7 +57,7 @@
   }
   .display-l {
     font-size: calc(clamp(2.1rem, 4.8vw, 3.5rem) * var(--type-scale, 1));
-    line-height: 1.22;
+    line-height: 1.35;
   }
   .display-m {
     font-size: calc(clamp(1.45rem, 2.6vw, 2.05rem) * var(--type-scale, 1));
@@ -161,7 +161,7 @@
   }
 
   .tag {
-    @apply inline-block rounded-full border-2 border-white/25 px-4 py-1.5 font-display text-[13px] uppercase leading-none tracking-[0.05em] transition-colors;
+    @apply inline-block rounded-full border-2 border-white/25 px-3.5 py-1 font-display text-[12px] uppercase leading-none tracking-[0.05em] transition-colors;
   }
   /* Le survol ne s applique jamais a l onglet actif, sinon le texte disparait */
   a.tag:not([data-active="true"]):hover {
