@@ -15,7 +15,14 @@ function detectLocale(request: NextRequest) {
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  if (pathname.startsWith("/_next") || pathname.startsWith("/api") || PUBLIC_FILE.test(pathname)) {
+  // Ces chemins ne doivent jamais recevoir de prefixe de langue :
+  // /auth/callback est le point d arrivee des liens de confirmation d email.
+  if (
+    pathname.startsWith("/_next") ||
+    pathname.startsWith("/api") ||
+    pathname.startsWith("/auth") ||
+    PUBLIC_FILE.test(pathname)
+  ) {
     return NextResponse.next();
   }
 
