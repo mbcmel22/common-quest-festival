@@ -66,7 +66,7 @@ export default async function LocaleLayout({
           Aller au contenu
         </a>
         <SiteHeader locale={locale as Locale} dict={dict} userEmail={user?.email ?? null} isAdmin={isAdmin} logoUrl={brand?.logo_url ?? null} />
-        <main id="contenu" className="pt-32 md:pt-40">
+        <main id="contenu" className="pt-32 md:pt-44">
           {children}
         </main>
         <SiteFooter locale={locale as Locale} dict={dict} logoUrl={brand?.logo_url ?? null} socials={socials} />

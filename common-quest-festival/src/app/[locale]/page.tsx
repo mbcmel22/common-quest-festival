@@ -99,8 +99,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       )}
 
       {/* EQUIPE */}
-      <section className="border-t border-white/10 py-20 md:py-28">
-        <div className="shell grid gap-10 md:grid-cols-[1fr_1fr] md:items-center">
+      <section className="border-t border-white/10 py-14 md:py-28">
+        <div className="shell grid gap-6 md:grid-cols-[1fr_1fr] md:items-center md:gap-10">
           <div>
             <p className="eyebrow">{dict.home.teamTitle}</p>
             <h2 className="mt-4 display-l">PRISM</h2>
@@ -109,8 +109,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               {dict.home.teamCta}
             </Link>
           </div>
-          <div className="relative aspect-square w-full max-w-sm justify-self-center md:justify-self-end">
-            <Image src="/brand/picto-jaune.png" alt="" fill className="object-contain" />
+          <div className="relative aspect-square w-32 justify-self-center md:w-full md:max-w-sm md:justify-self-end">
+            <Image src="/brand/picto-jaune.png" alt="" fill sizes="(max-width: 768px) 128px, 384px" className="object-contain" />
           </div>
         </div>
       </section>

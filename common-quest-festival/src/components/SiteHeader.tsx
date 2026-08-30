@@ -47,15 +47,15 @@ export default function SiteHeader({ locale, dict, userEmail, isAdmin, logoUrl }
         solid || open ? "bg-ink/95 backdrop-blur border-b border-white/10" : "bg-transparent"
       }`}
     >
-      <div className="shell flex h-32 items-center justify-between gap-4 md:h-40">
+      <div className="shell flex h-32 items-center justify-between gap-4 md:h-44">
         <Link href={`/${locale}`} aria-label="Common Quest, accueil" className="shrink-0">
           <Image
             src={logoUrl ?? "/brand/logo-horiz-jaune.png"}
             alt="Common Quest"
-            width={640}
-            height={192}
+            width={891}
+            height={264}
             priority
-            className="h-[72px] w-auto md:h-28"
+            className="h-[76px] w-auto md:h-[104px]"
           />
         </Link>
 
