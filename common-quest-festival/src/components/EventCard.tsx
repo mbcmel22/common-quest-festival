@@ -44,14 +44,14 @@ export default function EventCard({
       </div>
 
       <div className="p-5">
-        <p className="font-mono text-[13px] uppercase tracking-[0.16em] text-acid">
+        <p className="font-mono text-[12px] uppercase tracking-[0.14em] text-acid">
           {dict.common.daysShort[event.day_index - 1]} {time && `. ${time}`}
         </p>
-        <h3 className="mt-3 font-display text-3xl uppercase leading-[0.95]">{title}</h3>
+        <h3 className="mt-3 font-display text-2xl uppercase leading-[0.98] md:text-[26px]">{title}</h3>
         {event.t?.tagline && <p className="mt-2 text-base text-paper/70">{event.t.tagline}</p>}
-        <p className="mt-5 flex items-center justify-between gap-3 font-mono text-[12px] uppercase tracking-[0.14em] text-smoke">
+        <p className="mt-5 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1 text-[15px] text-smoke">
           <span>{event.venue}</span>
-          <span className="text-paper transition-colors group-hover:text-acid">
+          <span className="font-medium text-paper transition-colors group-hover:text-acid">
             {event.price_label ?? ""}
           </span>
         </p>

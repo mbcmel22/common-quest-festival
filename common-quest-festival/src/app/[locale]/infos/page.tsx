@@ -3,6 +3,7 @@ import { getDictionary } from "@/i18n";
 import { getTeam, getPartners, getSetting } from "@/lib/queries";
 import Marquee from "@/components/Marquee";
 import SocialLinks from "@/components/SocialLinks";
+import { pickTicker, type TickerSetting } from "@/lib/ticker";
 
 export const revalidate = 120;
 
@@ -13,16 +14,16 @@ export default async function InfosPage({ params }: { params: Promise<{ locale: 
     getTeam(),
     getPartners(),
     getSetting("practical"),
-    getSetting<{ fr?: string; en?: string; es?: string }>("ticker")
+    getSetting<TickerSetting>("ticker")
   ]);
-  const tickerText = ticker?.[locale as "fr" | "en" | "es"]?.trim() || dict.home.ticker;
+  const tickerText = pickTicker(ticker, "infos", locale, dict.home.ticker);
 
   const roleFor = (member: { role_fr: string | null; role_en: string | null; role_es: string | null }) =>
     locale === "en" ? member.role_en ?? member.role_fr : locale === "es" ? member.role_es ?? member.role_fr : member.role_fr;
 
   return (
     <>
-      <section className="shell pb-12 pt-16 md:pt-24">
+      <section className="shell pb-10 pt-12 md:pt-16">
         <h1 className="display-xl">{dict.infos.title}</h1>
         <p className="mt-6 max-w-xl text-lg text-paper/75">{dict.infos.intro}</p>
       </section>
@@ -59,7 +60,7 @@ export default async function InfosPage({ params }: { params: Promise<{ locale: 
         </div>
       </section>
 
-      <Marquee text={tickerText} tone="violet" />
+      <Marquee text={tickerText} tone="violet" speed={ticker?.speed_infos ?? 75} />
 
       {/* EQUIPE */}
       <section id="equipe" className="shell scroll-mt-28 py-20 md:py-28">
@@ -87,7 +88,7 @@ export default async function InfosPage({ params }: { params: Promise<{ locale: 
           </ul>
         ) : (
           <p className="mt-10 text-smoke">
-            Les membres de l equipe apparaitront ici des qu ils seront ajoutes dans le back office.
+            Les membres de l’équipe apparaitront ici des qu’ils seront ajoutes dans le back office.
           </p>
         )}
       </section>

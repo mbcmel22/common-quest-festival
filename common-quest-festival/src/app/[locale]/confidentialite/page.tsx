@@ -12,7 +12,7 @@ export default function PrivacyPage() {
         <section>
           <h2 className="display-m text-paper">Qui traite vos donnees</h2>
           <p className="mt-3">
-            Le responsable de traitement est l association PRISM, 31 avenue Arthur Benoit, 44100 Nantes,
+            Le responsable de traitement est l’association PRISM, 31 avenue Arthur Benoit, 44100 Nantes,
             associationprism.hello@gmail.com.
           </p>
         </section>
@@ -20,7 +20,7 @@ export default function PrivacyPage() {
           <h2 className="display-m text-paper">Ce que nous collectons</h2>
           <ul className="mt-3 list-disc space-y-2 pl-5">
             <li>Creation de compte : adresse email, prenom et nom si vous les renseignez, langue choisie.</li>
-            <li>Mot de passe : stocke uniquement sous forme chiffree et irreversible par notre prestataire d authentification. Personne dans l equipe, y compris les administrateurs, ne peut le lire.</li>
+            <li>Mot de passe : stocke uniquement sous forme chiffree et irreversible par notre prestataire d authentification. Personne dans l’équipe, y compris les administrateurs, ne peut le lire.</li>
             <li>Newsletter : votre email, si et seulement si vous cochez la case correspondante.</li>
             <li>Fonctionnement du site : cookie de session et cookie de langue. Aucun traceur publicitaire, aucun revente de donnees.</li>
           </ul>
@@ -36,7 +36,7 @@ export default function PrivacyPage() {
         <section>
           <h2 className="display-m text-paper">Vos droits</h2>
           <p className="mt-3">
-            Vous disposez d un droit d acces, de rectification, d effacement, de limitation, d opposition et de
+            Vous disposez d’un droit d’accès, de rectification, d effacement, de limitation, d opposition et de
             portabilite. Ecrivez a associationprism.hello@gmail.com : nous repondons sous un mois. Vous pouvez aussi
             saisir la CNIL, 3 place de Fontenoy, 75007 Paris, www.cnil.fr.
           </p>

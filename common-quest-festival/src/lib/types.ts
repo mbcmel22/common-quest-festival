@@ -14,6 +14,7 @@ export type EventRow = {
   price_label: string | null;
   price_from: number | null;
   ticket_url: string | null;
+  video_url: string | null;
   is_free: boolean;
   is_pwyw: boolean;
   cover_url: string | null;

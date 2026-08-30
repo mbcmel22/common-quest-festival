@@ -52,22 +52,22 @@
 
   /* Titres de section : la question du festival revient partout */
   .display-xl {
-    font-size: clamp(3.4rem, 12.5vw, 10rem);
+    font-size: clamp(2.4rem, 7.5vw, 5.6rem);
   }
   .display-l {
-    font-size: clamp(2.6rem, 7vw, 5.4rem);
+    font-size: clamp(1.9rem, 4.4vw, 3.2rem);
   }
   .display-m {
-    font-size: clamp(1.8rem, 3.6vw, 2.8rem);
+    font-size: clamp(1.35rem, 2.4vw, 1.9rem);
   }
 
   .eyebrow {
-    @apply font-mono text-[13px] uppercase tracking-[0.22em] text-smoke;
+    @apply font-body text-[12px] font-medium uppercase tracking-[0.18em] text-smoke;
   }
 
   /* Boutons pastille : gros, pleins, avec un decalage a la pression */
   .btn {
-    @apply relative inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 font-display text-[17px] uppercase leading-none tracking-[0.04em];
+    @apply relative inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 font-display text-[15px] uppercase leading-none tracking-[0.04em];
     transition: transform 0.18s cubic-bezier(0.2, 0.7, 0.3, 1), box-shadow 0.18s, background-color 0.18s, color 0.18s;
   }
   .btn:active {
@@ -113,7 +113,7 @@
     @apply w-full rounded-xl border border-ink/15 bg-white px-4 py-3 text-ink outline-none transition-colors placeholder:text-ink/40 focus:border-violet;
   }
   .label {
-    @apply mb-1.5 block font-mono text-[12px] uppercase tracking-[0.16em] text-smoke;
+    @apply mb-1.5 block font-body text-[12px] font-medium uppercase tracking-[0.14em] text-smoke;
   }
 
   /* Signature : le fil de la quete qui relie les journees */
@@ -158,9 +158,10 @@
   }
 
   .tag {
-    @apply inline-block rounded-full border-2 border-white/25 px-4 py-1.5 font-display text-[14px] uppercase leading-none tracking-[0.05em] transition-colors;
+    @apply inline-block rounded-full border-2 border-white/25 px-4 py-1.5 font-display text-[13px] uppercase leading-none tracking-[0.05em] transition-colors;
   }
-  a.tag:hover {
+  /* Le survol ne s applique jamais a l onglet actif, sinon le texte disparait */
+  a.tag:not([data-active="true"]):hover {
     @apply border-acid text-acid;
   }
 }
@@ -171,7 +172,7 @@
     color: transparent;
   }
   .marquee-track {
-    animation: marquee 75s linear infinite;
+    animation: marquee var(--marquee-duration, 75s) linear infinite;
   }
   @keyframes marquee {
     from { transform: translateX(0); }

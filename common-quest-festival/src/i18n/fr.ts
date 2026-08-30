@@ -7,7 +7,7 @@ export const fr = {
   nav: {
     programme: "Programme",
     infos: "Infos",
-    equipe: "L equipe",
+    equipe: "L’équipe",
     billetterie: "Billetterie",
     compte: "Mon compte",
     connexion: "Se connecter",
@@ -19,7 +19,7 @@ export const fr = {
   },
   hero: {
     eyebrow: "1re edition",
-    question: "Qu avons-nous en commun ?",
+    question: "Qu’avons-nous en commun ?",
     answer: "Le hip hop.",
     dates: "1 > 4 octobre 2026",
     place: "Quartier de la Creation, ile de Nantes",
@@ -39,8 +39,8 @@ export const fr = {
     teamTitle: "Derriere le festival",
     teamText:
       "Common Quest est porte par PRISM, collectif nantais majoritairement feminin issu de la culture hip hop, de la communication et du developpement de projets.",
-    teamCta: "Rencontrer l equipe",
-    ticker: "Qu avons-nous en commun ? Le hip hop."
+    teamCta: "Rencontrer l’équipe",
+    ticker: "Qu’avons-nous en commun ? Le hip hop."
   },
   programme: {
     title: "Programme",
@@ -60,7 +60,7 @@ export const fr = {
     doors: "Ouverture des portes",
     tarifs: "Tarifs",
     lieu: "Lieu",
-    lineup: "A l affiche",
+    lineup: "A l’affiche",
     infosPratiques: "Bon a savoir",
     cta: "Je prends ma place",
     ctaSoon: "Billetterie bientot ouverte",
@@ -70,13 +70,13 @@ export const fr = {
   },
   infos: {
     title: "Infos",
-    intro: "Tout ce qu il faut savoir avant de venir, et qui se cache derriere le festival.",
+    intro: "Tout ce qu’il faut savoir avant de venir, et qui se cache derriere le festival.",
     practicalTitle: "Infos pratiques",
     address: "Adresse",
     transport: "Y aller",
     accessibility: "Accessibilite",
     contact: "Contact",
-    teamTitle: "L equipe PRISM",
+    teamTitle: "L’équipe PRISM",
     teamIntro:
       "PRISM est une association nantaise dediee a la culture hip hop. Des parcours et des histoires differentes avec cette culture, une meme envie : imaginer un festival qui laisse une place a toutes les facons de la vivre.",
     partnersTitle: "Ils construisent le festival avec nous"
@@ -125,7 +125,7 @@ export const fr = {
     artists: "Artistes",
     partners: "Partenaires",
     settings: "Reglages",
-    newEvent: "Nouvel evenement",
+    newEvent: "Nouvel’événement",
     edit: "Modifier",
     delete: "Supprimer",
     published: "En ligne",
@@ -146,7 +146,7 @@ export const fr = {
     more: "En savoir plus"
   },
   footer: {
-    baseline: "Qu avons-nous en commun ? Le hip hop.",
+    baseline: "Qu’avons-nous en commun ? Le hip hop.",
     legal: "Mentions legales",
     privacy: "Confidentialite",
     contact: "Contact",

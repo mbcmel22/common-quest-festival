@@ -44,7 +44,7 @@ export async function middleware(request: NextRequest) {
     `img-src 'self' blob: data: https://*.supabase.co`,
     `font-src 'self'`,
     `connect-src 'self' https://*.supabase.co wss://*.supabase.co`,
-    `frame-src 'self' https://www.google.com https://www.openstreetmap.org`,
+    `frame-src 'self' https://www.youtube-nocookie.com https://www.youtube.com https://www.google.com https://www.openstreetmap.org`,
     `frame-ancestors 'none'`,
     `base-uri 'self'`,
     `form-action 'self'`,

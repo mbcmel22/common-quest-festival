@@ -75,7 +75,7 @@ export default function ImageUploader({
           {error && <p className="text-xs text-red-600">{error}</p>}
           {value && (
             <button type="button" onClick={() => onChange(null)} className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink/50 hover:text-red-600">
-              Retirer l image
+              Retirer l’image
             </button>
           )}
         </div>

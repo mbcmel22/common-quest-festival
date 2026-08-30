@@ -86,7 +86,7 @@ export default function AuthForm({ mode, locale, dict }: { mode: Mode; locale: L
         password,
         options: {
           // Le mot de passe part chiffre en TLS vers Supabase, qui le hashe en bcrypt.
-          // Il n est jamais stocke dans notre base ni lisible par l equipe.
+          // Il n est jamais stocke dans notre base ni lisible par l’équipe.
           data: { full_name: fullName, locale, newsletter_opt_in: newsletter },
           emailRedirectTo: `${window.location.origin}/auth/callback?next=/${locale}/compte`
         }

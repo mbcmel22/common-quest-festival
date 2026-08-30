@@ -38,18 +38,19 @@ export default async function ProgrammePage({
 
   return (
     <>
-      <section className="shell pb-10 pt-16 md:pt-24">
+      <section className="shell pb-8 pt-12 md:pt-16">
         <h1 className="display-xl">{dict.programme.title}</h1>
         <p className="mt-6 max-w-xl text-lg text-paper/75">{dict.programme.intro}</p>
       </section>
 
       {/* Filtres : journee puis discipline */}
-      <div className="sticky top-16 z-30 border-y border-white/10 bg-ink/95 py-3 backdrop-blur md:top-20">
-        <div className="shell flex flex-col gap-3">
-          <div className="flex gap-2 overflow-x-auto pb-1">
+      <div className="sticky top-24 z-30 border-y border-white/10 bg-ink/95 py-3 backdrop-blur md:top-32">
+        <div className="shell flex flex-col items-center gap-2.5">
+          <div className="flex w-full flex-wrap justify-center gap-2">
             <Link
               href={buildHref({ jour: null })}
-              className={`tag whitespace-nowrap ${!activeDay ? "bg-acid text-ink" : "text-paper/70"}`}
+              data-active={!activeDay}
+              className={`tag whitespace-nowrap ${!activeDay ? "border-acid bg-acid text-ink" : "text-paper/70"}`}
             >
               {dict.programme.allDays}
             </Link>
@@ -57,16 +58,18 @@ export default async function ProgrammePage({
               <Link
                 key={day}
                 href={buildHref({ jour: i + 1 })}
-                className={`tag whitespace-nowrap ${activeDay === i + 1 ? "bg-acid text-ink" : "text-paper/70"}`}
+                data-active={activeDay === i + 1}
+                className={`tag whitespace-nowrap ${activeDay === i + 1 ? "border-acid bg-acid text-ink" : "text-paper/70"}`}
               >
                 {day}
               </Link>
             ))}
           </div>
-          <div className="flex gap-2 overflow-x-auto pb-1">
+          <div className="flex w-full flex-wrap justify-center gap-2">
             <Link
               href={buildHref({ discipline: null })}
-              className={`tag whitespace-nowrap ${!activeCategory ? "border-violet text-violet" : "text-smoke"}`}
+              data-active={!activeCategory}
+              className={`tag whitespace-nowrap ${!activeCategory ? "border-violet bg-violet text-white" : "text-smoke"}`}
             >
               {dict.programme.allCategories}
             </Link>
@@ -74,7 +77,8 @@ export default async function ProgrammePage({
               <Link
                 key={cat}
                 href={buildHref({ discipline: cat })}
-                className={`tag whitespace-nowrap ${activeCategory === cat ? "border-violet text-violet" : "text-smoke"}`}
+                data-active={activeCategory === cat}
+                className={`tag whitespace-nowrap ${activeCategory === cat ? "border-violet bg-violet text-white" : "text-smoke"}`}
               >
                 {categoryLabels[locale][cat]}
               </Link>
@@ -91,7 +95,7 @@ export default async function ProgrammePage({
             .filter((day) => filtered.some((e) => e.day_index === day))
             .map((day) => (
               <div key={day} className="mb-16">
-                <h2 className="mb-6 flex items-center gap-4 font-display text-3xl md:text-4xl">
+                <h2 className="mb-6 flex items-center gap-4 font-display text-2xl md:text-3xl">
                   <span className="marker">{day}</span>
                   {dict.common.days[day - 1]}
                 </h2>

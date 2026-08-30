@@ -8,7 +8,7 @@ export default function LegalPage() {
         <section>
           <h2 className="display-m text-paper">Editeur du site</h2>
           <p className="mt-3">
-            Festival Common Quest, edite par l association PRISM (association loi 1901), 31 avenue Arthur Benoit,
+            Festival Common Quest, edite par l’association PRISM (association loi 1901), 31 avenue Arthur Benoit,
             44100 Nantes. Directrice de la publication : Shirlene Sandemoy, presidente.
             Contact : associationprism.hello@gmail.com
           </p>

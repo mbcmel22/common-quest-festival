@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { getDictionary } from "@/i18n";
 import { getEvent } from "@/lib/queries";
 import { formatRange, formatTime, categoryLabels } from "@/lib/format";
+import VideoEmbed from "@/components/VideoEmbed";
 
 export const revalidate = 60;
 
@@ -34,7 +35,7 @@ export default async function EventPage({ params }: { params: Promise<{ locale: 
   return (
     <article>
       {/* Visuel de tete */}
-      <div className="relative h-[46vh] min-h-[320px] w-full overflow-hidden bg-ink-soft">
+      <div className="relative h-[38vh] min-h-[260px] w-full overflow-hidden bg-ink-soft">
         {event.cover_url ? (
           <Image src={event.cover_url} alt="" fill priority sizes="100vw" className="object-cover opacity-70" />
         ) : (
@@ -55,6 +56,12 @@ export default async function EventPage({ params }: { params: Promise<{ locale: 
           </Link>
           {event.t?.description && (
             <p className="mt-8 whitespace-pre-line text-lg leading-relaxed text-paper/85">{event.t.description}</p>
+          )}
+
+          {event.video_url && (
+            <div className="mt-10">
+              <VideoEmbed url={event.video_url} title={event.t?.title ?? "Common Quest"} />
+            </div>
           )}
 
           {event.artists?.length > 0 && (
@@ -97,7 +104,7 @@ export default async function EventPage({ params }: { params: Promise<{ locale: 
           <dl className="space-y-5">
             <div>
               <dt className="eyebrow">{dict.event.horaires}</dt>
-              <dd className="mt-1 font-display text-2xl">
+              <dd className="mt-1 font-display text-xl uppercase md:text-2xl">
                 {dict.common.days[event.day_index - 1]}
                 <span className="block text-acid">{time}</span>
               </dd>
@@ -115,7 +122,7 @@ export default async function EventPage({ params }: { params: Promise<{ locale: 
             </div>
             <div>
               <dt className="eyebrow">{dict.event.tarifs}</dt>
-              <dd className="mt-1 font-display text-3xl uppercase text-acid">
+              <dd className="mt-1 font-display text-xl uppercase text-acid md:text-2xl">
                 {event.is_free ? dict.programme.free : event.is_pwyw ? dict.programme.pwyw : event.price_label}
               </dd>
               {event.is_pwyw && !event.is_free && event.price_label && (

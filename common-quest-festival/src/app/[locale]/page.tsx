@@ -4,6 +4,7 @@ import { getDictionary, type Locale } from "@/i18n";
 import { getEvents, getSetting } from "@/lib/queries";
 import EventCard from "@/components/EventCard";
 import Marquee from "@/components/Marquee";
+import { pickTicker, type TickerSetting } from "@/lib/ticker";
 
 export const revalidate = 60;
 
@@ -11,8 +12,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   const dict = getDictionary(locale);
   const events = await getEvents(locale);
-  const ticker = await getSetting<{ fr?: string; en?: string; es?: string }>("ticker");
-  const tickerText = ticker?.[locale as "fr" | "en" | "es"]?.trim() || dict.home.ticker;
+  const ticker = await getSetting<TickerSetting>("ticker");
+  const tickerText = pickTicker(ticker, "home", locale, dict.home.ticker);
+  const tickerSpeed = ticker?.speed_home ?? 75;
   const highlights = events.filter((e) => e.is_highlight).slice(0, 3);
   const countByDay = [1, 2, 3, 4].map((day) => events.filter((e) => e.day_index === day).length);
 
@@ -20,13 +22,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     <>
       {/* HERO : la question du festival, en grand */}
       <section className="relative overflow-hidden border-b border-white/10">
-        <div
-          className="pointer-events-none absolute -right-24 -top-16 h-[420px] w-[420px] opacity-20 blur-[2px] md:right-0 md:h-[560px] md:w-[560px]"
-          aria-hidden
-        >
-          <Image src="/brand/picto-violet.png" alt="" fill className="object-contain" priority />
-        </div>
-
         <div className="shell relative py-20 md:py-28">
           <h1 className="reveal display-xl">
             <span className="block text-paper">{dict.hero.question}</span>
@@ -47,7 +42,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </div>
       </section>
 
-      <Marquee text={tickerText} />
+      <Marquee text={tickerText} speed={tickerSpeed} />
 
       {/* INTRO */}
       <section className="shell py-20 md:py-28">
@@ -55,13 +50,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <h2 className="display-l">{dict.home.introTitle}</h2>
           <div>
             <p className="text-lg leading-relaxed text-paper/80">{dict.home.introText}</p>
-            <ul className="mt-8 flex flex-wrap gap-2">
-              {dict.home.disciplines.map((d) => (
-                <li key={d} className="tag text-paper/80">
-                  {d}
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       </section>
@@ -70,10 +58,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <section className="bg-paper py-20 text-ink md:py-28">
         <div className="shell">
           <div className="flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <p className="eyebrow text-ink/50">{dict.home.programmeTitle}</p>
-              <h2 className="mt-3 display-l">{dict.home.programmeText}</h2>
-            </div>
+            <h2 className="display-l max-w-2xl">{dict.home.programmeText}</h2>
             <Link href={`/${locale}/programme`} className="btn-ink">
               {dict.home.programmeCta}
             </Link>
@@ -90,8 +75,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   <span className="absolute inset-y-0 left-0 w-0 bg-violet transition-all duration-300 group-hover:w-full" aria-hidden />
                   <span className="relative flex flex-wrap items-baseline justify-between gap-3 transition-colors group-hover:text-white">
                     <span className="font-display text-3xl md:text-5xl">{day}</span>
-                    <span className="font-mono text-[11px] uppercase tracking-[0.16em] opacity-60">
-                      {countByDay[index]} {countByDay[index] > 1 ? "rendez-vous" : "rendez-vous"}
+                    <span className="text-[15px] opacity-70">
+                      {countByDay[index]} rendez-vous
                     </span>
                   </span>
                 </Link>

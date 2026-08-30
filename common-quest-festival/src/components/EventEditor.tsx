@@ -40,6 +40,7 @@ export default function EventEditor({
     address: "",
     price_label: "",
     ticket_url: "",
+    video_url: "",
     is_free: false,
     is_pwyw: false,
     cover_url: null as string | null,
@@ -67,7 +68,8 @@ export default function EventEditor({
             venue: rest.venue ?? "",
             address: rest.address ?? "",
             price_label: rest.price_label ?? "",
-            ticket_url: rest.ticket_url ?? ""
+            ticket_url: rest.ticket_url ?? "",
+            video_url: rest.video_url ?? ""
           });
           const next = emptyTranslations();
           (rows ?? []).forEach((row: any) => {
@@ -113,6 +115,7 @@ export default function EventEditor({
       end_time: event.end_time || null,
       doors_time: event.doors_time || null,
       ticket_url: event.ticket_url || null,
+      video_url: event.video_url || null,
       day_index: Number(event.day_index),
       sort_order: Number(event.sort_order)
     };
@@ -189,11 +192,11 @@ export default function EventEditor({
         </div>
       </div>
 
-      {/* Reglages de l evenement */}
+      {/* Reglages de l’événement */}
       <div className="space-y-6">
         <div className="rounded-2xl border border-ink/12 bg-white p-6 space-y-4">
           <ImageUploader
-            label="Visuel de l evenement"
+            label="Visuel de l’événement"
             value={event.cover_url}
             folder="evenements"
             onChange={(url) => setField("cover_url", url)}
@@ -251,6 +254,20 @@ export default function EventEditor({
             <label className="label" htmlFor="ticket">Lien billetterie</label>
             <input id="ticket" type="url" className="field-light" value={event.ticket_url} onChange={(e) => setField("ticket_url", e.target.value)} placeholder="https://..." />
           </div>
+          <div>
+            <label className="label" htmlFor="video">Lien YouTube</label>
+            <input
+              id="video"
+              type="url"
+              className="field-light"
+              value={event.video_url}
+              onChange={(e) => setField("video_url", e.target.value)}
+              placeholder="https://www.youtube.com/watch?v=..."
+            />
+            <p className="mt-1 text-xs text-ink/50">
+              Aftermovie, clip ou teaser. La video s’affiche sous la description de l’événement.
+            </p>
+          </div>
           <label className="flex items-center gap-3 text-sm">
             <input type="checkbox" checked={event.is_free} onChange={(e) => setField("is_free", e.target.checked)} className="h-4 w-4 accent-[#7E1AFF]" />
             Entree gratuite
@@ -262,11 +279,11 @@ export default function EventEditor({
               onChange={(e) => setField("is_pwyw", e.target.checked)}
               className="h-4 w-4 accent-[#7E1AFF]"
             />
-            Prix libre, le public donne ce qu il veut
+            Prix libre, le public donne ce qu’il veut
           </label>
           <label className="flex items-center gap-3 text-sm">
             <input type="checkbox" checked={event.is_highlight} onChange={(e) => setField("is_highlight", e.target.checked)} className="h-4 w-4 accent-[#7E1AFF]" />
-            Mettre en avant sur l accueil
+            Mettre en avant sur l’accueil
           </label>
           <label className="flex items-center gap-3 text-sm">
             <input type="checkbox" checked={event.is_published} onChange={(e) => setField("is_published", e.target.checked)} className="h-4 w-4 accent-[#7E1AFF]" />
@@ -278,7 +295,7 @@ export default function EventEditor({
               <input id="slug" className="field-light" value={event.slug} onChange={(e) => setField("slug", e.target.value)} placeholder="genere depuis le titre" />
             </div>
             <div>
-              <label className="label" htmlFor="order">Ordre d affichage</label>
+              <label className="label" htmlFor="order">Ordre d’affichage</label>
               <input id="order" type="number" className="field-light" value={event.sort_order} onChange={(e) => setField("sort_order", Number(e.target.value))} />
             </div>
           </div>
