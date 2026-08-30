@@ -9,6 +9,42 @@ import type { Locale, Dictionary } from "@/i18n";
 
 type Mode = "login" | "signup";
 
+const eyeLabels: Record<string, { show: string; hide: string }> = {
+  fr: { show: "Afficher le mot de passe", hide: "Masquer le mot de passe" },
+  en: { show: "Show password", hide: "Hide password" },
+  es: { show: "Mostrar la contrasena", hide: "Ocultar la contrasena" }
+};
+
+function EyeButton({ shown, onToggle, locale }: { shown: boolean; onToggle: () => void; locale: Locale }) {
+  const label = shown ? eyeLabels[locale].hide : eyeLabels[locale].show;
+  return (
+    <button
+      type="button"
+      onClick={onToggle}
+      aria-label={label}
+      title={label}
+      aria-pressed={shown}
+      className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-smoke transition-colors hover:text-acid"
+    >
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+        {shown ? (
+          <>
+            <path d="M3 3l18 18" />
+            <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8" />
+            <path d="M9.4 5.2A9.8 9.8 0 0 1 12 5c5 0 9 4.5 9 7 0 .9-.7 2.2-1.9 3.4" />
+            <path d="M6.2 6.7C4 8.2 3 10.2 3 12c0 2.5 4 7 9 7 1.4 0 2.6-.3 3.7-.8" />
+          </>
+        ) : (
+          <>
+            <path d="M3 12s3.6-7 9-7 9 7 9 7-3.6 7-9 7-9-7-9-7z" />
+            <circle cx="12" cy="12" r="2.6" />
+          </>
+        )}
+      </svg>
+    </button>
+  );
+}
+
 export default function AuthForm({ mode, locale, dict }: { mode: Mode; locale: Locale; dict: Dictionary }) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -17,6 +53,8 @@ export default function AuthForm({ mode, locale, dict }: { mode: Mode; locale: L
   const [confirm, setConfirm] = useState("");
   const [fullName, setFullName] = useState("");
   const [newsletter, setNewsletter] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
@@ -113,17 +151,20 @@ export default function AuthForm({ mode, locale, dict }: { mode: Mode; locale: L
         <label className="label" htmlFor="password">
           {dict.auth.password}
         </label>
-        <input
-          id="password"
-          type="password"
-          className="field"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          autoComplete={mode === "signup" ? "new-password" : "current-password"}
-          required
-          minLength={mode === "signup" ? 12 : undefined}
-          aria-describedby="password-hint"
-        />
+        <div className="relative">
+          <input
+            id="password"
+            type={showPassword ? "text" : "password"}
+            className="field pr-12"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            autoComplete={mode === "signup" ? "new-password" : "current-password"}
+            required
+            minLength={mode === "signup" ? 12 : undefined}
+            aria-describedby="password-hint"
+          />
+          <EyeButton shown={showPassword} onToggle={() => setShowPassword((v) => !v)} locale={locale} />
+        </div>
         {mode === "signup" && (
           <>
             <div className="mt-2 flex gap-1" aria-hidden>
@@ -144,15 +185,18 @@ export default function AuthForm({ mode, locale, dict }: { mode: Mode; locale: L
             <label className="label" htmlFor="confirm">
               {dict.auth.passwordConfirm}
             </label>
-            <input
-              id="confirm"
-              type="password"
-              className="field"
-              value={confirm}
-              onChange={(e) => setConfirm(e.target.value)}
-              autoComplete="new-password"
-              required
-            />
+            <div className="relative">
+              <input
+                id="confirm"
+                type={showConfirm ? "text" : "password"}
+                className="field pr-12"
+                value={confirm}
+                onChange={(e) => setConfirm(e.target.value)}
+                autoComplete="new-password"
+                required
+              />
+              <EyeButton shown={showConfirm} onToggle={() => setShowConfirm((v) => !v)} locale={locale} />
+            </div>
           </div>
           <label className="flex items-start gap-3 text-sm text-paper/80">
             <input
