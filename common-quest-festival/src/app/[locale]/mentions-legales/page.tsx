@@ -17,21 +17,21 @@ export default function LegalPage() {
           <h2 className="display-m text-paper">Hebergement</h2>
           <p className="mt-3">
             Site heberge par Vercel Inc. Base de donnees et authentification par Supabase, avec stockage des donnees
-            sur des serveurs situes dans l Union europeenne.
+            sur des serveurs situés dans l'Union europeenne.
           </p>
         </section>
         <section>
-          <h2 className="display-m text-paper">Propriete intellectuelle</h2>
+          <h2 className="display-m text-paper">Propriété intellectuelle</h2>
           <p className="mt-3">
-            L identite visuelle, les textes, les photographies et les contenus du site sont proteges. Toute
-            reproduction sans autorisation ecrite prealable est interdite. Les visuels des artistes sont publies avec
-            leur accord ou celui de leurs representants.
+            L'identite visuelle, les textes, les photographies et les contenus du site sont protégés. Toute
+            reproduction sans autorisation ecrite préalable est interdite. Les visuels des artistes sont publiés avec
+            leur accord ou celui de leurs représentants.
           </p>
         </section>
         <section>
           <h2 className="display-m text-paper">Signaler un contenu</h2>
           <p className="mt-3">
-            Pour toute demande de retrait, de correction ou de signalement, ecrivez a associationprism.hello@gmail.com.
+            Pour toute demande de retrait, de correction ou de signalement, écrivez à associationprism.hello@gmail.com.
             Nous repondons sous 30 jours au plus tard.
           </p>
         </section>
