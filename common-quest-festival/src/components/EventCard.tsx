@@ -35,24 +35,24 @@ export default function EventCard({
         <span className="absolute left-3 top-3 tag bg-ink/80 text-acid">
           {categoryLabels[locale][event.category]}
         </span>
-        {event.is_free && (
-          <span className="absolute right-3 top-3 tag border-acid bg-acid text-ink">{dict.programme.free}</span>
-        )}
-        {!event.is_free && event.is_pwyw && (
-          <span className="absolute right-3 top-3 tag border-violet bg-violet text-white">{dict.programme.pwyw}</span>
-        )}
+        <span
+          className={`absolute right-3 top-3 tag ${
+            event.is_free
+              ? "border-acid bg-acid text-ink"
+              : event.is_pwyw
+                ? "border-violet bg-violet text-white"
+                : "border-white/40 bg-ink/80 text-paper"
+          }`}
+        >
+          {event.is_free ? dict.programme.free : event.is_pwyw ? dict.programme.pwyw : dict.programme.paid}
+        </span>
       </div>
 
       <div className="p-5">
         <p className="text-[15px] font-medium text-acid">{when}</p>
         <h3 className="mt-3 font-display text-2xl uppercase leading-[0.98] md:text-[26px]">{title}</h3>
         {event.t?.tagline && <p className="mt-2 text-base text-paper/70">{event.t.tagline}</p>}
-        <p className="mt-5 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1 text-[15px] text-smoke">
-          <span>{event.venue}</span>
-          <span className="font-medium text-paper transition-colors group-hover:text-acid">
-            {event.price_label ?? ""}
-          </span>
-        </p>
+        {event.venue && <p className="mt-4 text-[15px] text-smoke">{event.venue}</p>}
       </div>
     </Link>
   );

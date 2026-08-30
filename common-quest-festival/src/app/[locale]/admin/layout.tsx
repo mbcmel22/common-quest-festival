@@ -16,7 +16,7 @@ export default async function AdminLayout({
   const links = [
     { href: `/${locale}/admin`, label: dict.admin.title },
     { href: `/${locale}/admin/evenements`, label: dict.admin.events },
-    { href: `/${locale}/admin/équipe`, label: dict.admin.team },
+    { href: `/${locale}/admin/equipe`, label: dict.admin.team },
     { href: `/${locale}/admin/reglages`, label: dict.admin.settings }
   ];
 

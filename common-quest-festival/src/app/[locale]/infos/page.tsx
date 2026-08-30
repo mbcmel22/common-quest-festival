@@ -64,7 +64,7 @@ export default async function InfosPage({ params }: { params: Promise<{ locale: 
       <Marquee text={tickerText} tone="violet" speed={ticker?.speed_infos ?? 75} />
 
       {/* EQUIPE */}
-      <section id="équipe" className="shell scroll-mt-28 py-20 md:py-28">
+      <section id="equipe" className="shell scroll-mt-28 py-20 md:py-28">
         <h2 className="display-l">{dict.infos.teamTitle}</h2>
         <p className="mt-6 max-w-2xl text-lg text-paper/75">{dict.infos.teamIntro}</p>
 

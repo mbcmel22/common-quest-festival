@@ -50,6 +50,7 @@ export const es: Dictionary = {
     allDays: "Ver todo",
     free: "Gratis",
     pwyw: "Precio libre",
+    paid: "De pago",
     soon: "Pronto",
     noEvents: "Todavía no hay nada para este día. Vuelve pronto.",
     filterCategory: "Disciplina",

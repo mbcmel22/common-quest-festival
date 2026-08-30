@@ -15,7 +15,7 @@ export default async function AdminHome({ params }: { params: Promise<{ locale: 
 
   const cards = [
     { label: dict.admin.events, value: `${publishedCount ?? 0} / ${eventsCount ?? 0}`, href: `/${locale}/admin/evenements` },
-    { label: dict.admin.team, value: String(teamCount ?? 0), href: `/${locale}/admin/équipe` },
+    { label: dict.admin.team, value: String(teamCount ?? 0), href: `/${locale}/admin/equipe` },
     { label: dict.admin.settings, value: "Infos pratiques", href: `/${locale}/admin/reglages` }
   ];
 

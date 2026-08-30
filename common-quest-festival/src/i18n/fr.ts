@@ -49,6 +49,7 @@ export const fr = {
     allDays: "Tout voir",
     free: "Gratuit",
     pwyw: "Prix libre",
+    paid: "Payant",
     soon: "Bientôt",
     noEvents: "Rien à afficher pour cette journée pour le moment. Revenez bientôt.",
     filterCategory: "Discipline",

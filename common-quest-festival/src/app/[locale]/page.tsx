@@ -105,7 +105,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <p className="eyebrow">{dict.home.teamTitle}</p>
             <h2 className="mt-4 display-l">PRISM</h2>
             <p className="mt-6 max-w-lg text-lg text-paper/75">{dict.home.teamText}</p>
-            <Link href={`/${locale}/infos#équipe`} className="btn-violet mt-8">
+            <Link href={`/${locale}/infos#equipe`} className="btn-violet mt-8">
               {dict.home.teamCta}
             </Link>
           </div>

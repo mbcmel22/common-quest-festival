@@ -13,12 +13,12 @@ values
   ('clash-crew-rap', 2, '2026-10-02', '20:00', '21:30', 'rap', 'Quartier de la Creation', 'Sur billet soiree', false, true, true, 23),
   ('4vs4-exhibition-congo-bolingo', 2, '2026-10-02', '21:30', '23:30', 'danse', 'Quartier de la Creation', 'Billet + don libre au profit de Congo Bolingo', false, true, true, 24),
   ('afterparty-vendredi', 2, '2026-10-02', '23:30', '02:00', 'soiree', 'Quartier de la Creation', 'Inclus dans le billet du soir', false, true, false, 25),
-  ('workshops-danse-samedi', 3, '2026-10-03', '10:00', '13:00', 'atelier', 'Quartier de la Creation', '10 EUR le workshop', false, true, false, 30),
+  ('workshops-danse-samedi', 3, '2026-10-03', '10:00', '13:00', 'atelier', 'Quartier de la Creation', '10 € le workshop', false, true, false, 30),
   ('parcours-graffiti-douze-mille-prod', 3, '2026-10-03', '11:00', '18:00', 'graffiti', 'Quartier de la Creation', 'Gratuit', true, true, false, 31),
   ('ateliers-kontrat-dixtion', 3, '2026-10-03', '14:00', '17:00', 'atelier', 'Village du festival', 'Gratuit', true, true, false, 32),
-  ('qualifications-battle-common-quest', 3, '2026-10-03', '13:00', '18:00', 'danse', 'Magmaa Food Hall', '8 EUR', false, true, false, 33),
-  ('finales-battle-common-quest', 3, '2026-10-03', '20:00', '00:00', 'danse', 'Magmaa Food Hall', '18 EUR prevente / 22 EUR sur place', false, true, true, 34),
-  ('soiree-rap-og', 3, '2026-10-03', '20:30', '01:00', 'rap', 'Quartier de la Creation', '20 EUR prevente / 24 EUR sur place', false, true, true, 35),
+  ('qualifications-battle-common-quest', 3, '2026-10-03', '13:00', '18:00', 'danse', 'Magmaa Food Hall', '8 €', false, true, false, 33),
+  ('finales-battle-common-quest', 3, '2026-10-03', '20:00', '00:00', 'danse', 'Magmaa Food Hall', '18 € prevente / 22 € sur place', false, true, true, 34),
+  ('soiree-rap-og', 3, '2026-10-03', '20:30', '01:00', 'rap', 'Quartier de la Creation', '20 € prevente / 24 € sur place', false, true, true, 35),
   ('tsara-club', 3, '2026-10-03', '01:00', '04:00', 'dj', 'Quartier de la Creation', 'Inclus dans le billet du soir', false, true, false, 36),
   ('dimanche-en-construction', 4, '2026-10-04', '12:00', '20:00', 'autre', 'Quartier de la Creation', 'A venir', false, true, false, 40)
 on conflict (slug) do nothing;

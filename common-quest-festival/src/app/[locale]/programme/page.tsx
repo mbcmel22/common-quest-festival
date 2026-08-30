@@ -44,7 +44,7 @@ export default async function ProgrammePage({
       </section>
 
       {/* Filtres : journee puis discipline */}
-      <div className="relative z-30 border-y border-white/10 bg-ink/95 py-3 backdrop-blur md:sticky md:top-36">
+      <div className="relative z-30 border-y border-white/10 bg-ink/95 py-3 backdrop-blur md:sticky md:top-40">
         <div className="shell flex flex-col items-center gap-2.5">
           <div className="flex w-full flex-wrap justify-center gap-2">
             <Link

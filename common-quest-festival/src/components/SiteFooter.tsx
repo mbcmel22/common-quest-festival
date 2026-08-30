@@ -24,7 +24,7 @@ export default function SiteFooter({
               alt="Common Quest"
               width={640}
               height={192}
-              className="h-16 w-auto md:h-24"
+              className="h-24 w-auto md:h-32"
             />
           </Link>
           <p className="mt-6 max-w-sm font-display text-2xl uppercase leading-[1] md:text-[26px]">
