@@ -4,12 +4,12 @@ export const en: Dictionary = {
   meta: {
     title: "Common Quest, multidisciplinary hip hop festival in Nantes",
     description:
-      "1 to 4 October 2026 at the Quartier de la Creation, ile de Nantes. Concerts, battles, workshops, graffiti, DJ sets, talks and encounters."
+      "1 to 4 October 2026 at the Quartier de la Création, île de Nantes. Concerts, battles, workshops, graffiti, DJ sets, talks and encounters."
   },
   nav: {
     programme: "Line-up",
     infos: "Info",
-    equipe: "The team",
+    équipe: "The team",
     billetterie: "Tickets",
     compte: "My account",
     connexion: "Log in",
@@ -24,7 +24,7 @@ export const en: Dictionary = {
     question: "What do we have in common?",
     answer: "Hip hop.",
     dates: "1 > 4 October 2026",
-    place: "Quartier de la Creation, ile de Nantes",
+    place: "Quartier de la Création, île de Nantes",
     cta: "See the line-up",
     ctaTickets: "Get your ticket",
     scroll: "Scroll"

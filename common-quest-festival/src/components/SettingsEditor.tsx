@@ -5,14 +5,17 @@ import { createClient } from "@/lib/supabase/client";
 import ImageUploader from "./ImageUploader";
 import type { Dictionary } from "@/i18n";
 
-type Practical = { address: string; transport: string; accessibility: string; instagram: string };
+type Practical = { address: string; transport: string; accessibility: string };
+type Socials = { instagram: string; tiktok: string; facebook: string; youtube: string; linkedin: string };
 type Zone = { fr: string; en: string; es: string };
 type Ticker = { home: Zone; infos: Zone; speed_home: number; speed_infos: number };
 
 const emptyZone: Zone = { fr: "", en: "", es: "" };
 
 export default function SettingsEditor({ dict }: { dict: Dictionary }) {
-  const [practical, setPractical] = useState<Practical>({ address: "", transport: "", accessibility: "", instagram: "" });
+  const [practical, setPractical] = useState<Practical>({ address: "", transport: "", accessibility: "" });
+  const [socials, setSocials] = useState<Socials>({ instagram: "", tiktok: "", facebook: "", youtube: "", linkedin: "" });
+  const [typeScale, setTypeScale] = useState(1);
   const [ticker, setTicker] = useState<Ticker>({ home: { ...emptyZone }, infos: { ...emptyZone }, speed_home: 75, speed_infos: 75 });
   const [logoUrl, setLogoUrl] = useState<string | null>(null);
   const [state, setState] = useState<"idle" | "saving" | "saved" | "error">("idle");
@@ -22,7 +25,7 @@ export default function SettingsEditor({ dict }: { dict: Dictionary }) {
     supabase
       .from("site_settings")
       .select("key, value")
-      .in("key", ["practical", "ticker", "brand"])
+      .in("key", ["practical", "ticker", "brand", "socials", "typography"])
       .then(({ data }) => {
         (data ?? []).forEach((row: { key: string; value: Record<string, string> }) => {
           if (row.key === "practical") setPractical((v) => ({ ...v, ...row.value }));
@@ -36,6 +39,8 @@ export default function SettingsEditor({ dict }: { dict: Dictionary }) {
             }));
           }
           if (row.key === "brand") setLogoUrl(row.value?.logo_url ?? null);
+          if (row.key === "socials") setSocials((v) => ({ ...v, ...row.value }));
+          if (row.key === "typography") setTypeScale(Number(row.value?.scale ?? 1));
         });
       });
   }, []);
@@ -48,7 +53,9 @@ export default function SettingsEditor({ dict }: { dict: Dictionary }) {
       [
         { key: "practical", value: practical },
         { key: "ticker", value: ticker },
-        { key: "brand", value: { logo_url: logoUrl } }
+        { key: "brand", value: { logo_url: logoUrl } },
+        { key: "socials", value: socials },
+        { key: "typography", value: { scale: typeScale } }
       ],
       { onConflict: "key" }
     );
@@ -58,12 +65,19 @@ export default function SettingsEditor({ dict }: { dict: Dictionary }) {
   const practicalFields: { key: keyof Practical; label: string }[] = [
     { key: "address", label: "Adresse du festival" },
     { key: "transport", label: "Comment venir" },
-    { key: "accessibility", label: "Accessibilite" },
-    { key: "instagram", label: "Lien Instagram" }
+    { key: "accessibility", label: "Accessibilité" }
+  ];
+
+  const socialFields: { key: keyof Socials; label: string; placeholder: string }[] = [
+    { key: "instagram", label: "Instagram", placeholder: "https://www.instagram.com/commonquest_" },
+    { key: "tiktok", label: "TikTok", placeholder: "https://www.tiktok.com/@common.quest" },
+    { key: "facebook", label: "Facebook", placeholder: "https://www.facebook.com/..." },
+    { key: "youtube", label: "YouTube", placeholder: "https://www.youtube.com/@..." },
+    { key: "linkedin", label: "LinkedIn", placeholder: "https://www.linkedin.com/company/..." }
   ];
 
   const langs: { key: keyof Zone; label: string }[] = [
-    { key: "fr", label: "Francais" },
+    { key: "fr", label: "Français" },
     { key: "en", label: "Anglais" },
     { key: "es", label: "Espagnol" }
   ];
@@ -78,8 +92,8 @@ export default function SettingsEditor({ dict }: { dict: Dictionary }) {
       <div className="space-y-4 rounded-2xl border border-ink/12 bg-white p-6">
         <h2 className="display-m">Logo du site</h2>
         <p className="text-sm text-ink/60">
-          Format conseille : PNG a fond transparent, environ 900 pixels de large. Il remplace le logo dans l’entête et
-          le pied de page. Laissez vide pour revenir au logo par defaut.
+          Format conseillé : PNG à fond transparent, environ 900 pixels de large. Il remplace le logo dans l’entête et
+          le pied de page. Laissez vide pour revenir au logo par défaut.
         </p>
         <ImageUploader label="Logo horizontal" value={logoUrl} folder="marque" onChange={setLogoUrl} />
       </div>
@@ -111,7 +125,7 @@ export default function SettingsEditor({ dict }: { dict: Dictionary }) {
             ))}
             <div>
               <label className="label" htmlFor={zone.speedKey}>
-                Duree d’un defilement : {ticker[zone.speedKey]} secondes
+                Durée d’un défilement : {ticker[zone.speedKey]} secondes
               </label>
               <input
                 id={zone.speedKey}
@@ -123,10 +137,52 @@ export default function SettingsEditor({ dict }: { dict: Dictionary }) {
                 onChange={(e) => setTicker((v) => ({ ...v, [zone.speedKey]: Number(e.target.value) }))}
                 className="w-full accent-[#7E1AFF]"
               />
-              <p className="text-xs text-ink/50">Plus la duree est longue, plus le texte defile lentement.</p>
+              <p className="text-xs text-ink/50">Plus la durée est longue, plus le texte défile lentement.</p>
             </div>
           </div>
         ))}
+      </div>
+
+      <div className="space-y-4 rounded-2xl border border-ink/12 bg-white p-6">
+        <h2 className="display-m">Taille du texte</h2>
+        <p className="text-sm text-ink/60">
+          Agrandit ou réduit tous les titres et le texte du site d’un seul coup. 100 % est la taille de référence.
+        </p>
+        <label className="label" htmlFor="type-scale">
+          Échelle : {Math.round(typeScale * 100)} %
+        </label>
+        <input
+          id="type-scale"
+          type="range"
+          min={0.8}
+          max={1.4}
+          step={0.05}
+          value={typeScale}
+          onChange={(e) => setTypeScale(Number(e.target.value))}
+          className="w-full accent-[#7E1AFF]"
+        />
+      </div>
+
+      <div className="space-y-4 rounded-2xl border border-ink/12 bg-white p-6">
+        <h2 className="display-m">Réseaux sociaux</h2>
+        <p className="text-sm text-ink/60">Laissez vide pour masquer l’icône.</p>
+        <div className="grid gap-3 sm:grid-cols-2">
+          {socialFields.map((field) => (
+            <div key={field.key}>
+              <label className="label" htmlFor={`social-${field.key}`}>
+                {field.label}
+              </label>
+              <input
+                id={`social-${field.key}`}
+                type="url"
+                className="field-light"
+                value={socials[field.key]}
+                placeholder={field.placeholder}
+                onChange={(e) => setSocials((v) => ({ ...v, [field.key]: e.target.value }))}
+              />
+            </div>
+          ))}
+        </div>
       </div>
 
       <div className="space-y-4 rounded-2xl border border-ink/12 bg-white p-6 lg:col-span-2">

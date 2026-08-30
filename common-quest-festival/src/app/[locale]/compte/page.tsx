@@ -1,14 +1,14 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getDictionary } from "@/i18n";
-import { getSessionContext } from "@/lib/queries";
+import { getSessionContext, getDict } from "@/lib/queries";
 import AccountForm from "@/components/AccountForm";
 
 export const metadata = { title: "Mon compte . Common Quest", robots: { index: false } };
 
 export default async function AccountPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const dict = getDictionary(locale);
+  const dict = await getDict(locale);
   const { user, profile, isAdmin } = await getSessionContext();
   if (!user) redirect(`/${locale}/connexion`);
 

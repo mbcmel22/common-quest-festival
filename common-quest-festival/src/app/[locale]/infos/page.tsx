@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { getDictionary } from "@/i18n";
-import { getTeam, getPartners, getSetting } from "@/lib/queries";
+import { getTeam, getPartners, getSetting, getDict } from "@/lib/queries";
 import Marquee from "@/components/Marquee";
 import SocialLinks from "@/components/SocialLinks";
 import { pickTicker, type TickerSetting } from "@/lib/ticker";
@@ -9,12 +9,13 @@ export const revalidate = 120;
 
 export default async function InfosPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const dict = getDictionary(locale);
-  const [team, partners, practical, ticker] = await Promise.all([
+  const dict = await getDict(locale);
+  const [team, partners, practical, ticker, socials] = await Promise.all([
     getTeam(),
     getPartners(),
     getSetting("practical"),
-    getSetting<TickerSetting>("ticker")
+    getSetting<TickerSetting>("ticker"),
+    getSetting<Record<string, string>>("socials")
   ]);
   const tickerText = pickTicker(ticker, "infos", locale, dict.home.ticker);
 
@@ -35,7 +36,7 @@ export default async function InfosPage({ params }: { params: Promise<{ locale: 
           <dl className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             <div>
               <dt className="eyebrow text-ink/50">{dict.infos.address}</dt>
-              <dd className="mt-2 text-lg">{practical?.address ?? "Quartier de la Creation, ile de Nantes"}</dd>
+              <dd className="mt-2 text-lg">{practical?.address ?? "Quartier de la Création, île de Nantes"}</dd>
             </div>
             <div>
               <dt className="eyebrow text-ink/50">{dict.infos.transport}</dt>
@@ -53,7 +54,7 @@ export default async function InfosPage({ params }: { params: Promise<{ locale: 
                 </a>
               </dd>
               <dd className="mt-4">
-                <SocialLinks tone="light" />
+                <SocialLinks tone="light" socials={socials} />
               </dd>
             </div>
           </dl>
@@ -63,7 +64,7 @@ export default async function InfosPage({ params }: { params: Promise<{ locale: 
       <Marquee text={tickerText} tone="violet" speed={ticker?.speed_infos ?? 75} />
 
       {/* EQUIPE */}
-      <section id="equipe" className="shell scroll-mt-28 py-20 md:py-28">
+      <section id="équipe" className="shell scroll-mt-28 py-20 md:py-28">
         <h2 className="display-l">{dict.infos.teamTitle}</h2>
         <p className="mt-6 max-w-2xl text-lg text-paper/75">{dict.infos.teamIntro}</p>
 

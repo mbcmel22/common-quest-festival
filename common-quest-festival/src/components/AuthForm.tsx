@@ -12,7 +12,7 @@ type Mode = "login" | "signup";
 const eyeLabels: Record<string, { show: string; hide: string }> = {
   fr: { show: "Afficher le mot de passe", hide: "Masquer le mot de passe" },
   en: { show: "Show password", hide: "Hide password" },
-  es: { show: "Mostrar la contrasena", hide: "Ocultar la contrasena" }
+  es: { show: "Mostrar la contraseña", hide: "Ocultar la contraseña" }
 };
 
 function EyeButton({ shown, onToggle, locale }: { shown: boolean; onToggle: () => void; locale: Locale }) {

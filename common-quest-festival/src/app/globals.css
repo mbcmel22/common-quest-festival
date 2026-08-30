@@ -17,14 +17,14 @@
 
   body {
     @apply bg-ink text-paper font-body antialiased;
-    font-size: 19px;
-    line-height: 1.6;
+    font-size: calc(18px * var(--type-scale, 1));
+    line-height: 1.65;
   }
 
   h1, h2, h3, h4 {
     @apply font-display uppercase;
     font-weight: 400;
-    line-height: 0.92;
+    line-height: 1.08;
     letter-spacing: 0.005em;
     text-wrap: balance;
   }
@@ -52,13 +52,16 @@
 
   /* Titres de section : la question du festival revient partout */
   .display-xl {
-    font-size: clamp(2.4rem, 7.5vw, 5.6rem);
+    font-size: calc(clamp(2.7rem, 8.4vw, 6.2rem) * var(--type-scale, 1));
+    line-height: 1.06;
   }
   .display-l {
-    font-size: clamp(1.9rem, 4.4vw, 3.2rem);
+    font-size: calc(clamp(2.1rem, 4.8vw, 3.5rem) * var(--type-scale, 1));
+    line-height: 1.08;
   }
   .display-m {
-    font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+    font-size: calc(clamp(1.45rem, 2.6vw, 2.05rem) * var(--type-scale, 1));
+    line-height: 1.12;
   }
 
   .eyebrow {

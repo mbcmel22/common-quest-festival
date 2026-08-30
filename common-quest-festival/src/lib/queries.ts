@@ -1,4 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
+import { mergeCopy, type CopyOverrides } from "@/lib/copy";
+import type { Dictionary } from "@/i18n";
 import type { EventRow, EventTranslation, EventWithTranslation, TeamMember, Partner, Artist } from "@/lib/types";
 
 type RawEvent = EventRow & { translations: EventTranslation[] };
@@ -101,4 +103,17 @@ export async function getSessionContext() {
   } catch {
     return { user: null, isAdmin: false, profile: null };
   }
+}
+
+/** Dictionnaire enrichi des textes saisis dans le back office. */
+export async function getDict(locale: string): Promise<Dictionary> {
+  const overrides = await getSetting<CopyOverrides>("copy");
+  return mergeCopy(locale, overrides);
+}
+
+/** Echelle typographique reglable dans le back office, 1 = taille de reference. */
+export async function getTypeScale() {
+  const typography = await getSetting<{ scale?: number }>("typography");
+  const scale = Number(typography?.scale ?? 1);
+  return Number.isFinite(scale) ? Math.min(1.4, Math.max(0.8, scale)) : 1;
 }

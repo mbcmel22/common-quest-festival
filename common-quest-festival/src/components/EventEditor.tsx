@@ -186,13 +186,13 @@ export default function EventEditor({
             <textarea id="description" rows={7} className="field-light" value={translations[tab].description} onChange={(e) => setTranslation("description", e.target.value)} maxLength={4000} />
           </div>
           <div>
-            <label className="label" htmlFor="practical">Bon a savoir</label>
+            <label className="label" htmlFor="practical">Bon à savoir</label>
             <textarea id="practical" rows={3} className="field-light" value={translations[tab].practical_info} onChange={(e) => setTranslation("practical_info", e.target.value)} maxLength={1000} />
           </div>
         </div>
       </div>
 
-      {/* Reglages de l’événement */}
+      {/* Réglages de l’événement */}
       <div className="space-y-6">
         <div className="rounded-2xl border border-ink/12 bg-white p-6 space-y-4">
           <ImageUploader
@@ -219,7 +219,7 @@ export default function EventEditor({
               </select>
             </div>
             <div>
-              <label className="label" htmlFor="start">Debut</label>
+              <label className="label" htmlFor="start">Début</label>
               <input id="start" type="time" className="field-light" value={event.start_time} onChange={(e) => setField("start_time", e.target.value)} />
             </div>
             <div>
@@ -247,7 +247,7 @@ export default function EventEditor({
 
         <div className="rounded-2xl border border-ink/12 bg-white p-6 space-y-4">
           <div>
-            <label className="label" htmlFor="price">Tarifs affiches</label>
+            <label className="label" htmlFor="price">Tarifs affichés</label>
             <input id="price" className="field-light" value={event.price_label} onChange={(e) => setField("price_label", e.target.value)} placeholder="18 EUR prevente / 22 EUR sur place" maxLength={120} />
           </div>
           <div>
@@ -265,12 +265,12 @@ export default function EventEditor({
               placeholder="https://www.youtube.com/watch?v=..."
             />
             <p className="mt-1 text-xs text-ink/50">
-              Aftermovie, clip ou teaser. La video s’affiche sous la description de l’événement.
+              Aftermovie, clip ou teaser. La vidéo s’affiche sous la description de l’événement.
             </p>
           </div>
           <label className="flex items-center gap-3 text-sm">
             <input type="checkbox" checked={event.is_free} onChange={(e) => setField("is_free", e.target.checked)} className="h-4 w-4 accent-[#7E1AFF]" />
-            Entree gratuite
+            Entrée gratuite
           </label>
           <label className="flex items-center gap-3 text-sm">
             <input

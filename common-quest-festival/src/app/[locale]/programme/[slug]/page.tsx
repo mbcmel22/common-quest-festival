@@ -3,7 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getDictionary } from "@/i18n";
-import { getEvent } from "@/lib/queries";
+import { getEvent, getDict } from "@/lib/queries";
 import { formatRange, formatTime, categoryLabels } from "@/lib/format";
 import VideoEmbed from "@/components/VideoEmbed";
 
@@ -26,7 +26,7 @@ export async function generateMetadata({
 
 export default async function EventPage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
   const { locale, slug } = await params;
-  const dict = getDictionary(locale);
+  const dict = await getDict(locale);
   const event = await getEvent(slug, locale);
   if (!event) notFound();
 

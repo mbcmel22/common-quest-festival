@@ -55,7 +55,7 @@ export default async function AdminEvents({ params }: { params: Promise<{ locale
             </li>
           );
         })}
-        {events.length === 0 && <li className="p-8 text-center text-ink/50">Aucun evenement pour le moment.</li>}
+        {events.length === 0 && <li className="p-8 text-center text-ink/50">Aucun événement pour le moment.</li>}
       </ul>
     </div>
   );

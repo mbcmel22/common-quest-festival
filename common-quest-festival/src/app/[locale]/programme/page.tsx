@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getDictionary, type Locale } from "@/i18n";
-import { getEvents } from "@/lib/queries";
+import { getEvents, getDict } from "@/lib/queries";
 import EventCard from "@/components/EventCard";
 import { categoryLabels } from "@/lib/format";
 
@@ -15,7 +15,7 @@ export default async function ProgrammePage({
 }) {
   const { locale } = await params;
   const { jour, discipline } = await searchParams;
-  const dict = getDictionary(locale);
+  const dict = await getDict(locale);
   const events = await getEvents(locale);
 
   const activeDay = jour && ["1", "2", "3", "4"].includes(jour) ? Number(jour) : null;
@@ -44,7 +44,7 @@ export default async function ProgrammePage({
       </section>
 
       {/* Filtres : journee puis discipline */}
-      <div className="sticky top-24 z-30 border-y border-white/10 bg-ink/95 py-3 backdrop-blur md:top-32">
+      <div className="relative z-30 border-y border-white/10 bg-ink/95 py-3 backdrop-blur md:sticky md:top-36">
         <div className="shell flex flex-col items-center gap-2.5">
           <div className="flex w-full flex-wrap justify-center gap-2">
             <Link

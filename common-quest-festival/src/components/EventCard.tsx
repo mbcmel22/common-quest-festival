@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { EventWithTranslation } from "@/lib/types";
-import { formatRange, categoryLabels } from "@/lib/format";
+import { formatWhen, categoryLabels } from "@/lib/format";
 import type { Locale, Dictionary } from "@/i18n";
 
 export default function EventCard({
@@ -14,7 +14,7 @@ export default function EventCard({
   dict: Dictionary;
 }) {
   const title = event.t?.title ?? event.slug;
-  const time = formatRange(event.start_time, event.end_time, locale);
+  const when = formatWhen(event.event_date, event.start_time, event.end_time, locale);
 
   return (
     <Link href={`/${locale}/programme/${event.slug}`} className="event-card group focus:outline-none">
@@ -44,9 +44,7 @@ export default function EventCard({
       </div>
 
       <div className="p-5">
-        <p className="font-mono text-[12px] uppercase tracking-[0.14em] text-acid">
-          {dict.common.daysShort[event.day_index - 1]} {time && `. ${time}`}
-        </p>
+        <p className="text-[15px] font-medium text-acid">{when}</p>
         <h3 className="mt-3 font-display text-2xl uppercase leading-[0.98] md:text-[26px]">{title}</h3>
         {event.t?.tagline && <p className="mt-2 text-base text-paper/70">{event.t.tagline}</p>}
         <p className="mt-5 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1 text-[15px] text-smoke">

@@ -35,3 +35,27 @@ export function passwordIssues(password: string) {
 export function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
 }
+
+const whenWords: Record<string, { from: string; to: string }> = {
+  fr: { from: "de", to: "à" },
+  en: { from: "from", to: "to" },
+  es: { from: "de", to: "a" }
+};
+
+/** "Jeu 01/10 de 19H00 à 01H00" en francais, adapte a la langue affichee. */
+export function formatWhen(eventDate: string, start: string | null, end: string | null, locale: string) {
+  const date = new Date(`${eventDate}T12:00:00`);
+  const weekday = new Intl.DateTimeFormat(locale, { weekday: "short" })
+    .format(date)
+    .replace(".", "");
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const head = `${weekday.charAt(0).toUpperCase()}${weekday.slice(1)} ${day}/${month}`;
+
+  const words = whenWords[locale] ?? whenWords.fr;
+  const s = formatTime(start, locale);
+  const e = formatTime(end, locale);
+  if (s && e) return `${head} ${words.from} ${s.toUpperCase()} ${words.to} ${e.toUpperCase()}`;
+  if (s) return `${head} ${words.from} ${s.toUpperCase()}`;
+  return head;
+}

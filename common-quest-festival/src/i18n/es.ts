@@ -9,19 +9,19 @@ export const es: Dictionary = {
   nav: {
     programme: "Programa",
     infos: "Info",
-    equipe: "El equipo",
+    équipe: "El equipo",
     billetterie: "Entradas",
     compte: "Mi cuenta",
-    connexion: "Iniciar sesion",
+    connexion: "Iniciar sesión",
     inscription: "Crear una cuenta",
-    deconnexion: "Cerrar sesion",
+    deconnexion: "Cerrar sesión",
     admin: "Back office",
     menu: "Menu",
     fermer: "Cerrar"
   },
   hero: {
-    eyebrow: "1a edicion",
-    question: "Que tenemos en comun?",
+    eyebrow: "1ª edición",
+    question: "¿Qué tenemos en común?",
     answer: "El hip hop.",
     dates: "1 > 4 de octubre de 2026",
     place: "Quartier de la Creation, isla de Nantes",
@@ -30,28 +30,28 @@ export const es: Dictionary = {
     scroll: "Desplazar"
   },
   home: {
-    introTitle: "Cuatro dias, una busqueda comun",
+    introTitle: "Cuatro días, una búsqueda común",
     introText:
       "Los conciertos de rap y los battles se multiplican, pero las citas que reunen las disciplinas del hip hop son raras. Common Quest vuelve a sentar en la misma mesa al rap, la danza, el DJing y el grafiti, sin encerrar la cultura en una definicion.",
     disciplines: ["Rap", "Danza", "DJing", "Arte urbano", "Talleres", "Battles", "Conciertos", "Charlas", "Sesiones"],
     programmeTitle: "El recorrido",
-    programmeText: "Cuatro dias, cuatro ambientes. Elige un dia para ver el detalle.",
+    programmeText: "Cuatro días, cuatro ambientes. Elige un dia para ver el detalle.",
     programmeCta: "Programa completo",
     highlightsTitle: "Momentos fuertes",
-    teamTitle: "Detras del festival",
+    teamTitle: "Detrás del festival",
     teamText:
       "Common Quest esta impulsado por PRISM, colectivo nantes mayoritariamente femenino surgido de la cultura hip hop, la comunicacion y el desarrollo de proyectos.",
     teamCta: "Conocer al equipo",
-    ticker: "Que tenemos en comun? El hip hop."
+    ticker: "¿Qué tenemos en común? El hip hop."
   },
   programme: {
     title: "Programa",
-    intro: "Cuatro dias en el corazon del Quartier de la Creation. Se actualiza con cada anuncio.",
+    intro: "Cuatro días en el corazon del Quartier de la Creation. Se actualiza con cada anuncio.",
     allDays: "Ver todo",
     free: "Gratis",
     pwyw: "Precio libre",
     soon: "Pronto",
-    noEvents: "Todavia no hay nada para este dia. Vuelve pronto.",
+    noEvents: "Todavía no hay nada para este día. Vuelve pronto.",
     filterCategory: "Disciplina",
     allCategories: "Todas"
   },
@@ -72,9 +72,9 @@ export const es: Dictionary = {
   infos: {
     title: "Info",
     intro: "Todo lo que hay que saber antes de venir y quien esta detras del festival.",
-    practicalTitle: "Info practica",
-    address: "Direccion",
-    transport: "Como llegar",
+    practicalTitle: "Info práctica",
+    address: "Dirección",
+    transport: "Cómo llegar",
     accessibility: "Accesibilidad",
     contact: "Contacto",
     teamTitle: "El equipo PRISM",
@@ -83,29 +83,29 @@ export const es: Dictionary = {
     partnersTitle: "Construyen el festival con nosotros"
   },
   auth: {
-    loginTitle: "Iniciar sesion",
+    loginTitle: "Iniciar sesión",
     loginSubtitle: "Encuentra tus entradas, tus talleres y tus favoritos.",
     signupTitle: "Crear una cuenta",
     signupSubtitle: "Una cuenta para seguir el programa y recibir los anuncios antes que nadie.",
     email: "Correo electronico",
-    password: "Contrasena",
-    passwordConfirm: "Confirmar contrasena",
+    password: "Contraseña",
+    passwordConfirm: "Confirmar contraseña",
     fullName: "Nombre y apellidos",
     passwordHint: "12 caracteres minimo, con al menos una mayuscula, una minuscula y un numero.",
     newsletter: "Quiero recibir los anuncios del festival por correo",
     rgpd:
-      "Al crear una cuenta aceptas nuestra politica de privacidad. Tus datos se quedan con nosotros y nunca se venden.",
-    submitLogin: "Iniciar sesion",
+      "Al crear una cuenta aceptas nuestra política de privacidad. Tus datos se quedan con nosotros y nunca se venden.",
+    submitLogin: "Iniciar sesión",
     submitSignup: "Crear mi cuenta",
-    noAccount: "Todavia sin cuenta?",
-    hasAccount: "Ya tienes cuenta?",
-    forgot: "Olvidaste tu contrasena?",
-    resetTitle: "Restablecer contrasena",
+    noAccount: "¿Todavía sin cuenta?",
+    hasAccount: "¿Ya tienes cuenta?",
+    forgot: "Olvidaste tu contraseña?",
+    resetTitle: "Restablecer contraseña",
     resetSent: "Si existe una cuenta con esta direccion, acabamos de enviar un enlace.",
     checkEmail: "Revisa tu correo: te espera un enlace de confirmacion.",
     errorGeneric: "No se pudo iniciar sesion. Revisa tus datos e intentalo de nuevo.",
-    errorPasswordWeak: "Contrasena demasiado corta o simple. Sigue los criterios de arriba.",
-    errorPasswordMatch: "Las dos contrasenas no coinciden.",
+    errorPasswordWeak: "Contraseña demasiado corta o simple. Sigue los criterios de arriba.",
+    errorPasswordMatch: "Las dos contraseñas no coinciden.",
     errorEmail: "Esta direccion de correo no es valida."
   },
   account: {
@@ -136,7 +136,7 @@ export const es: Dictionary = {
     saved: "Guardado",
     uploadImage: "Elegir una imagen",
     uploading: "Subiendo...",
-    confirmDelete: "Eliminar definitivamente este elemento?",
+    confirmDelete: "¿Eliminar definitivamente este elemento?",
     langTabs: "Traducciones",
     backToSite: "Volver al sitio"
   },
@@ -147,7 +147,7 @@ export const es: Dictionary = {
     more: "Saber mas"
   },
   footer: {
-    baseline: "Que tenemos en comun? El hip hop.",
+    baseline: "¿Qué tenemos en común? El hip hop.",
     legal: "Aviso legal",
     privacy: "Privacidad",
     contact: "Contacto",
@@ -155,8 +155,8 @@ export const es: Dictionary = {
     prism: "Un festival del colectivo PRISM, Nantes."
   },
   common: {
-    days: ["Jueves 1 de octubre", "Viernes 2 de octubre", "Sabado 3 de octubre", "Domingo 4 de octubre"],
-    daysShort: ["Jue 01", "Vie 02", "Sab 03", "Dom 04"],
+    days: ["Jueves 1 de octubre", "Viernes 2 de octubre", "Sábado 3 de octubre", "Domingo 4 de octubre"],
+    daysShort: ["Jue 01", "Vie 02", "Sáb 03", "Dom 04"],
     loading: "Cargando...",
     backToTop: "Volver arriba",
     error: "Ha ocurrido un error. Intentalo de nuevo en un momento."

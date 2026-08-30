@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 
-/** Point d arrivee des liens de confirmation d email et de reinitialisation. */
+/** Point d arrivee des liens de confirmation d email et de réinitialisation. */
 export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");

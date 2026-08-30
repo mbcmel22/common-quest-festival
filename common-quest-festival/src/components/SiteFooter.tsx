@@ -1,16 +1,18 @@
 import Link from "next/link";
 import Image from "next/image";
-import SocialLinks from "./SocialLinks";
+import SocialLinks, { type Socials } from "./SocialLinks";
 import type { Locale, Dictionary } from "@/i18n";
 
 export default function SiteFooter({
   locale,
   dict,
-  logoUrl
+  logoUrl,
+  socials
 }: {
   locale: Locale;
   dict: Dictionary;
   logoUrl?: string | null;
+  socials?: Socials | null;
 }) {
   return (
     <footer className="border-t border-white/10 bg-ink py-14 md:py-16">
@@ -42,7 +44,7 @@ export default function SiteFooter({
 
         <div className="space-y-4">
           <p className="mb-4 font-display text-[15px] uppercase tracking-[0.05em] text-acid">{dict.footer.follow}</p>
-          <SocialLinks />
+          <SocialLinks socials={socials} />
           <a href="mailto:associationprism.hello@gmail.com" className="block break-all pt-2 hover:text-acid">
             associationprism.hello@gmail.com
           </a>

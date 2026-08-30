@@ -47,7 +47,7 @@ export default function SiteHeader({ locale, dict, userEmail, isAdmin, logoUrl }
         solid || open ? "bg-ink/95 backdrop-blur border-b border-white/10" : "bg-transparent"
       }`}
     >
-      <div className="shell flex h-24 items-center justify-between gap-4 md:h-32">
+      <div className="shell flex h-28 items-center justify-between gap-4 md:h-36">
         <Link href={`/${locale}`} aria-label="Common Quest, accueil" className="shrink-0">
           <Image
             src={logoUrl ?? "/brand/logo-horiz-jaune.png"}
@@ -55,7 +55,7 @@ export default function SiteHeader({ locale, dict, userEmail, isAdmin, logoUrl }
             width={640}
             height={192}
             priority
-            className="h-14 w-auto md:h-20"
+            className="h-16 w-auto md:h-24"
           />
         </Link>
 
@@ -127,8 +127,8 @@ export default function SiteHeader({ locale, dict, userEmail, isAdmin, logoUrl }
                 {dict.nav.admin}
               </Link>
             )}
-            <div className="mt-3 flex items-center justify-between border-t border-white/10 pt-4">
-              <LanguageSwitcher locale={locale} />
+            <div className="mt-3 flex items-center justify-between gap-4 border-t border-white/10 pt-4">
+              <LanguageSwitcher locale={locale} align="left" />
               {userEmail ? (
                 <button onClick={signOut} className="font-display text-[16px] uppercase tracking-[0.04em] text-smoke">
                   {dict.nav.deconnexion}

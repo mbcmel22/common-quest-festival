@@ -1,9 +1,9 @@
-export const metadata = { title: "Mentions legales . Common Quest" };
+export const metadata = { title: "Mentions légales . Common Quest" };
 
 export default function LegalPage() {
   return (
     <article className="shell max-w-3xl py-16 md:py-24">
-      <h1 className="display-l">Mentions legales</h1>
+      <h1 className="display-l">Mentions légales</h1>
       <div className="mt-10 space-y-8 text-paper/80">
         <section>
           <h2 className="display-m text-paper">Editeur du site</h2>

@@ -3,7 +3,7 @@ import { Anton, Inter_Tight, Space_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
 import "../globals.css";
 import { getDictionary, isLocale, locales, type Locale } from "@/i18n";
-import { getSessionContext, getSetting } from "@/lib/queries";
+import { getSessionContext, getSetting, getDict, getTypeScale } from "@/lib/queries";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -19,7 +19,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const dict = getDictionary(locale);
+  const dict = await getDict(locale);
   return {
     title: dict.meta.title,
     description: dict.meta.description,
@@ -50,13 +50,15 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
-  const dict = getDictionary(locale);
+  const dict = await getDict(locale);
   const { user, isAdmin } = await getSessionContext();
   const brand = await getSetting<{ logo_url?: string }>("brand");
+  const typeScale = await getTypeScale();
+  const socials = await getSetting<Record<string, string>>("socials");
 
   return (
     <html lang={locale} className={`${display.variable} ${body.variable} ${mono.variable}`}>
-      <body className="min-h-screen">
+      <body className="min-h-screen" style={{ "--type-scale": typeScale } as React.CSSProperties}>
         <a
           href="#contenu"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-acid focus:px-5 focus:py-2 focus:text-ink"
@@ -64,10 +66,10 @@ export default async function LocaleLayout({
           Aller au contenu
         </a>
         <SiteHeader locale={locale as Locale} dict={dict} userEmail={user?.email ?? null} isAdmin={isAdmin} logoUrl={brand?.logo_url ?? null} />
-        <main id="contenu" className="pt-24 md:pt-32">
+        <main id="contenu" className="pt-28 md:pt-36">
           {children}
         </main>
-        <SiteFooter locale={locale as Locale} dict={dict} logoUrl={brand?.logo_url ?? null} />
+        <SiteFooter locale={locale as Locale} dict={dict} logoUrl={brand?.logo_url ?? null} socials={socials} />
         <ScrollToTop label={dict.common.backToTop} />
         <CookieBanner locale={locale as Locale} dict={dict} />
       </body>

@@ -64,7 +64,7 @@ export default function TeamEditor({ dict }: { dict: Dictionary }) {
         <ImageUploader label="Photo" value={draft.photo_url ?? null} folder="equipe" onChange={(url) => setDraft((d) => ({ ...d, photo_url: url }))} />
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="label" htmlFor="m-name">Prenom et nom</label>
+            <label className="label" htmlFor="m-name">Prénom et nom</label>
             <input id="m-name" className="field-light" value={draft.name ?? ""} onChange={(e) => setDraft((d) => ({ ...d, name: e.target.value }))} maxLength={80} required />
           </div>
           <div>
@@ -73,16 +73,16 @@ export default function TeamEditor({ dict }: { dict: Dictionary }) {
           </div>
         </div>
         <div>
-          <label className="label" htmlFor="m-role-fr">Role, francais</label>
+          <label className="label" htmlFor="m-role-fr">Rôle, français</label>
           <input id="m-role-fr" className="field-light" value={draft.role_fr ?? ""} onChange={(e) => setDraft((d) => ({ ...d, role_fr: e.target.value }))} maxLength={80} />
         </div>
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="label" htmlFor="m-role-en">Role, anglais</label>
+            <label className="label" htmlFor="m-role-en">Rôle, anglais</label>
             <input id="m-role-en" className="field-light" value={draft.role_en ?? ""} onChange={(e) => setDraft((d) => ({ ...d, role_en: e.target.value }))} maxLength={80} />
           </div>
           <div>
-            <label className="label" htmlFor="m-role-es">Role, espagnol</label>
+            <label className="label" htmlFor="m-role-es">Rôle, espagnol</label>
             <input id="m-role-es" className="field-light" value={draft.role_es ?? ""} onChange={(e) => setDraft((d) => ({ ...d, role_es: e.target.value }))} maxLength={80} />
           </div>
         </div>

@@ -1,12 +1,13 @@
 import { Suspense } from "react";
+import { getDict } from "@/lib/queries";
 import { getDictionary, type Locale } from "@/i18n";
 import AuthForm from "@/components/AuthForm";
 
-export const metadata = { title: "Creer un compte . Common Quest" };
+export const metadata = { title: "Créer un compte . Common Quest" };
 
 export default async function SignupPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const dict = getDictionary(locale);
+  const dict = await getDict(locale);
   return (
     <section className="shell max-w-md py-16 md:py-24">
       <h1 className="display-l">{dict.auth.signupTitle}</h1>

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getDictionary, type Locale } from "@/i18n";
-import { getEvents, getSetting } from "@/lib/queries";
+import { getEvents, getSetting, getDict } from "@/lib/queries";
 import EventCard from "@/components/EventCard";
 import Marquee from "@/components/Marquee";
 import { pickTicker, type TickerSetting } from "@/lib/ticker";
@@ -10,7 +10,7 @@ export const revalidate = 60;
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const dict = getDictionary(locale);
+  const dict = await getDict(locale);
   const events = await getEvents(locale);
   const ticker = await getSetting<TickerSetting>("ticker");
   const tickerText = pickTicker(ticker, "home", locale, dict.home.ticker);
@@ -25,7 +25,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <div className="shell relative py-20 md:py-28">
           <h1 className="reveal display-xl">
             <span className="block text-paper">{dict.hero.question}</span>
-            <span className="mt-1 block text-acid">{dict.hero.answer}</span>
+            <span className="mt-3 block text-acid md:mt-4">{dict.hero.answer}</span>
           </h1>
           <p className="reveal mt-8 font-display text-2xl uppercase leading-tight text-paper/85 md:text-4xl">
             {dict.hero.dates}
@@ -105,7 +105,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <p className="eyebrow">{dict.home.teamTitle}</p>
             <h2 className="mt-4 display-l">PRISM</h2>
             <p className="mt-6 max-w-lg text-lg text-paper/75">{dict.home.teamText}</p>
-            <Link href={`/${locale}/infos#equipe`} className="btn-violet mt-8">
+            <Link href={`/${locale}/infos#équipe`} className="btn-violet mt-8">
               {dict.home.teamCta}
             </Link>
           </div>

@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { locales, type Locale } from "@/i18n";
 
-const names: Record<Locale, string> = { fr: "Francais", en: "English", es: "Espanol" };
+const names: Record<Locale, string> = { fr: "Français", en: "English", es: "Español" };
 const codes: Record<Locale, string> = { fr: "FR", en: "EN", es: "ES" };
 
 function Flag({ code }: { code: Locale }) {
@@ -34,7 +34,15 @@ function Flag({ code }: { code: Locale }) {
   );
 }
 
-export default function LanguageSwitcher({ locale, tone = "dark" }: { locale: Locale; tone?: "dark" | "light" }) {
+export default function LanguageSwitcher({
+  locale,
+  tone = "dark",
+  align = "right"
+}: {
+  locale: Locale;
+  tone?: "dark" | "light";
+  align?: "right" | "left";
+}) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
@@ -84,7 +92,9 @@ export default function LanguageSwitcher({ locale, tone = "dark" }: { locale: Lo
       {open && (
         <ul
           role="listbox"
-          className="absolute right-0 top-[calc(100%+8px)] z-50 w-44 overflow-hidden rounded-2xl border border-white/15 bg-ink-soft py-1 shadow-xl"
+          className={`absolute top-[calc(100%+8px)] z-50 w-44 max-w-[calc(100vw-2.5rem)] overflow-hidden rounded-2xl border border-white/15 bg-ink-soft py-1 shadow-xl ${
+            align === "left" ? "left-0" : "right-0"
+          }`}
         >
           {locales.map((code) => (
             <li key={code}>

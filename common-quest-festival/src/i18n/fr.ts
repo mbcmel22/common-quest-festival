@@ -1,56 +1,56 @@
 export const fr = {
   meta: {
-    title: "Common Quest, festival hip hop pluridisciplinaire a Nantes",
+    title: "Common Quest, festival hip hop pluridisciplinaire à Nantes",
     description:
-      "Du 1er au 4 octobre 2026 au Quartier de la Creation, ile de Nantes. Concerts, battles, workshops, graffiti, DJ sets, talks et rencontres."
+      "Du 1er au 4 octobre 2026 au Quartier de la Création, île de Nantes. Concerts, battles, workshops, graffiti, DJ sets, talks et rencontres."
   },
   nav: {
     programme: "Programme",
     infos: "Infos",
-    equipe: "L’équipe",
+    équipe: "L’équipe",
     billetterie: "Billetterie",
     compte: "Mon compte",
     connexion: "Se connecter",
-    inscription: "Creer un compte",
-    deconnexion: "Se deconnecter",
+    inscription: "Créer un compte",
+    deconnexion: "Se déconnecter",
     admin: "Back office",
     menu: "Menu",
     fermer: "Fermer"
   },
   hero: {
-    eyebrow: "1re edition",
+    eyebrow: "1re édition",
     question: "Qu’avons-nous en commun ?",
     answer: "Le hip hop.",
     dates: "1 > 4 octobre 2026",
-    place: "Quartier de la Creation, ile de Nantes",
+    place: "Quartier de la Création, île de Nantes",
     cta: "Voir le programme",
     ctaTickets: "Prendre sa place",
-    scroll: "Faire defiler"
+    scroll: "Faire défiler"
   },
   home: {
-    introTitle: "Quatre jours, une quete commune",
+    introTitle: "Quatre jours, une quête commune",
     introText:
-      "Les concerts de rap et les battles se multiplient, mais les rendez-vous qui reunissent les disciplines du hip hop se font rares. Common Quest remet autour de la meme table celles et ceux qui font vivre le rap, la danse, le DJing et le graffiti, sans enfermer la culture dans une definition.",
+      "Les concerts de rap et les battles se multiplient, mais les rendez-vous qui réunissent les disciplines du hip hop se font rares. Common Quest remet autour de la même table celles et ceux qui font vivre le rap, la danse, le DJing et le graffiti, sans enfermer la culture dans une définition.",
     disciplines: ["Rap", "Danse", "DJing", "Street art", "Workshops", "Battles", "Concerts", "Talks", "Ateliers"],
     programmeTitle: "Le parcours",
-    programmeText: "Quatre jours, quatre ambiances. Cliquez sur une journee pour voir le detail.",
+    programmeText: "Quatre jours, quatre ambiances. Cliquez sur une journée pour voir le détail.",
     programmeCta: "Programme complet",
     highlightsTitle: "Les temps forts",
-    teamTitle: "Derriere le festival",
+    teamTitle: "Derrière le festival",
     teamText:
-      "Common Quest est porte par PRISM, collectif nantais majoritairement feminin issu de la culture hip hop, de la communication et du developpement de projets.",
+      "Common Quest est porté par PRISM, collectif nantais majoritairement féminin issu de la culture hip hop, de la communication et du développement de projets.",
     teamCta: "Rencontrer l’équipe",
     ticker: "Qu’avons-nous en commun ? Le hip hop."
   },
   programme: {
     title: "Programme",
     intro:
-      "Quatre jours au coeur du Quartier de la Creation. Le programme est mis a jour au fil des annonces.",
+      "Quatre jours au cœur du Quartier de la Création. Le programme est mis à jour au fil des annonces.",
     allDays: "Tout voir",
     free: "Gratuit",
     pwyw: "Prix libre",
-    soon: "Bientot",
-    noEvents: "Rien a afficher pour cette journee pour le moment. Revenez bientot.",
+    soon: "Bientôt",
+    noEvents: "Rien à afficher pour cette journée pour le moment. Revenez bientôt.",
     filterCategory: "Discipline",
     allCategories: "Toutes"
   },
@@ -60,105 +60,105 @@ export const fr = {
     doors: "Ouverture des portes",
     tarifs: "Tarifs",
     lieu: "Lieu",
-    lineup: "A l’affiche",
-    infosPratiques: "Bon a savoir",
+    lineup: "À l’affiche",
+    infosPratiques: "Bon à savoir",
     cta: "Je prends ma place",
-    ctaSoon: "Billetterie bientot ouverte",
-    ctaFree: "Entree libre, sans reservation",
+    ctaSoon: "Billetterie bientôt ouverte",
+    ctaFree: "Entrée libre, sans réservation",
     ctaPwyw: "Je participe au prix libre",
     share: "Partager"
   },
   infos: {
     title: "Infos",
-    intro: "Tout ce qu’il faut savoir avant de venir, et qui se cache derriere le festival.",
+    intro: "Tout ce qu’il faut savoir avant de venir, et qui se cache derrière le festival.",
     practicalTitle: "Infos pratiques",
     address: "Adresse",
     transport: "Y aller",
-    accessibility: "Accessibilite",
+    accessibility: "Accessibilité",
     contact: "Contact",
     teamTitle: "L’équipe PRISM",
     teamIntro:
-      "PRISM est une association nantaise dediee a la culture hip hop. Des parcours et des histoires differentes avec cette culture, une meme envie : imaginer un festival qui laisse une place a toutes les facons de la vivre.",
+      "PRISM est une association nantaise dédiée à la culture hip hop. Des parcours et des histoires différentes avec cette culture, une même envie : imaginer un festival qui laisse une place à toutes les façons de la vivre.",
     partnersTitle: "Ils construisent le festival avec nous"
   },
   auth: {
     loginTitle: "Se connecter",
     loginSubtitle: "Retrouvez vos billets, vos ateliers et vos favoris.",
-    signupTitle: "Creer un compte",
+    signupTitle: "Créer un compte",
     signupSubtitle: "Un compte pour suivre le programme et recevoir les annonces avant tout le monde.",
     email: "Adresse email",
     password: "Mot de passe",
     passwordConfirm: "Confirmer le mot de passe",
-    fullName: "Prenom et nom",
-    passwordHint: "12 caracteres minimum, avec au moins une majuscule, une minuscule et un chiffre.",
+    fullName: "Prénom et nom",
+    passwordHint: "12 caractères minimum, avec au moins une majuscule, une minuscule et un chiffre.",
     newsletter: "Je souhaite recevoir les annonces du festival par email",
     rgpd:
-      "En creant un compte, vous acceptez notre politique de confidentialite. Vos donnees restent chez nous et ne sont jamais revendues.",
+      "En créant un compte, vous acceptez notre politique de confidentialité. Vos données restent chez nous et ne sont jamais revendues.",
     submitLogin: "Se connecter",
-    submitSignup: "Creer mon compte",
+    submitSignup: "Créer mon compte",
     noAccount: "Pas encore de compte ?",
-    hasAccount: "Deja un compte ?",
-    forgot: "Mot de passe oublie ?",
-    resetTitle: "Reinitialiser le mot de passe",
-    resetSent: "Si un compte existe pour cette adresse, un lien de reinitialisation vient d etre envoye.",
-    checkEmail: "Verifiez votre boite mail : un lien de confirmation vous attend.",
-    errorGeneric: "La connexion a echoue. Verifiez vos identifiants et reessayez.",
-    errorPasswordWeak: "Mot de passe trop court ou trop simple. Reprenez les criteres ci-dessus.",
+    hasAccount: "Déjà un compte ?",
+    forgot: "Mot de passe oublié ?",
+    resetTitle: "Réinitialiser le mot de passe",
+    resetSent: "Si un compte existe pour cette adresse, un lien de réinitialisation vient d etre envoye.",
+    checkEmail: "Vérifiez votre boîte mail : un lien de confirmation vous attend.",
+    errorGeneric: "La connexion a échoué. Vérifiez vos identifiants et réessayez.",
+    errorPasswordWeak: "Mot de passe trop court ou trop simple. Reprenez les critères ci-dessus.",
     errorPasswordMatch: "Les deux mots de passe ne sont pas identiques.",
-    errorEmail: "Cette adresse email n est pas valide."
+    errorEmail: "Cette adresse email n’est pas valide."
   },
   account: {
     title: "Mon compte",
     hello: "Salut",
     profile: "Mes informations",
-    save: "Enregistrer",
-    saved: "Modifications enregistrees.",
+    save: "Enregistrér",
+    saved: "Modifications enregistrées.",
     deleteTitle: "Supprimer mon compte",
-    deleteText: "Vous pouvez demander la suppression de votre compte et de vos donnees a tout moment.",
+    deleteText: "Vous pouvez demander la suppression de votre compte et de vos données à tout moment.",
     deleteCta: "Demander la suppression"
   },
   admin: {
     title: "Back office",
     subtitle: "Modifiez le contenu du site sans toucher au code.",
-    events: "Evenements",
-    team: "Equipe",
+    events: "Événements",
+    team: "Équipe",
     artists: "Artistes",
     partners: "Partenaires",
-    settings: "Reglages",
+    settings: "Réglages",
     newEvent: "Nouvel’événement",
     edit: "Modifier",
     delete: "Supprimer",
     published: "En ligne",
     draft: "Brouillon",
-    save: "Enregistrer",
-    saving: "Enregistrement...",
-    saved: "Enregistre",
+    save: "Enregistrér",
+    saving: "Enregistrément...",
+    saved: "Enregistré",
     uploadImage: "Choisir une image",
     uploading: "Envoi en cours...",
-    confirmDelete: "Supprimer definitivement cet element ?",
+    confirmDelete: "Supprimer définitivement cet élément ?",
     langTabs: "Traductions",
     backToSite: "Retour au site"
   },
   cookies: {
     text:
-      "Ce site n utilise que les cookies necessaires a son fonctionnement, notamment pour garder votre session ouverte. Aucun traceur publicitaire.",
-    accept: "J ai compris",
+      "Ce site n’utilise que les cookies nécessaires à son fonctionnement, notamment pour garder votre session ouverte. Aucun traceur publicitaire.",
+    accept: "J’ai compris",
     more: "En savoir plus"
   },
   footer: {
     baseline: "Qu’avons-nous en commun ? Le hip hop.",
-    legal: "Mentions legales",
-    privacy: "Confidentialite",
+    legal: "Mentions légales",
+    privacy: "Confidentialité",
     contact: "Contact",
     follow: "Suivre le festival",
-    prism: "Un festival porte par le collectif PRISM, Nantes."
+    prism: "Un festival porté par le collectif PRISM, Nantes."
   },
   common: {
     days: ["Jeudi 1er octobre", "Vendredi 2 octobre", "Samedi 3 octobre", "Dimanche 4 octobre"],
     daysShort: ["Jeu 01", "Ven 02", "Sam 03", "Dim 04"],
     loading: "Chargement...",
     backToTop: "Remonter en haut de la page",
-    error: "Une erreur est survenue. Reessayez dans un instant."
+    error: "Une erreur est survenue. Réessayez dans un instant."
   }
 };
 export type Dictionary = typeof fr;
