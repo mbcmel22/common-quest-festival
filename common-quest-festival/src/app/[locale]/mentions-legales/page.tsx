@@ -6,18 +6,18 @@ export default function LegalPage() {
       <h1 className="display-l">Mentions légales</h1>
       <div className="mt-10 space-y-8 text-paper/80">
         <section>
-          <h2 className="display-m text-paper">Editeur du site</h2>
+          <h2 className="display-m text-paper">Éditeur du site</h2>
           <p className="mt-3">
-            Festival Common Quest, edite par l’association PRISM (association loi 1901), 31 avenue Arthur Benoit,
-            44100 Nantes. Directrice de la publication : Shirlene Sandemoy, presidente.
+            Festival Common Quest, édite par l’association PRISM (association loi 1901), 31 avenue Arthur Benoit,
+            44100 Nantes. Directrice de la publication : Shirlene Sandemoy, présidente.
             Contact : associationprism.hello@gmail.com
           </p>
         </section>
         <section>
-          <h2 className="display-m text-paper">Hebergement</h2>
+          <h2 className="display-m text-paper">Hébergement</h2>
           <p className="mt-3">
-            Site heberge par Vercel Inc. Base de donnees et authentification par Supabase, avec stockage des donnees
-            sur des serveurs situés dans l'Union europeenne.
+            Site héberge par Vercel Inc. Base de données et authentification par Supabase, avec stockage des données
+            sur des serveurs situés dans l'Union européenne.
           </p>
         </section>
         <section>
