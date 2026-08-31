@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import LanguageSwitcher from "./LanguageSwitcher";
 import type { Locale, Dictionary } from "@/i18n";
-import { createClient } from "@/lib/supabase/client";
 
 type Props = {
   locale: Locale;
@@ -35,12 +34,6 @@ export default function SiteHeader({ locale, dict, userEmail, isAdmin, logoUrl, 
     { href: `/${locale}/programme`, label: dict.nav.programme },
     { href: `/${locale}/infos`, label: dict.nav.infos }
   ];
-
-  async function signOut() {
-    const supabase = createClient();
-    await supabase.auth.signOut();
-    window.location.href = `/${locale}`;
-  }
 
   return (
     <header
@@ -83,9 +76,15 @@ export default function SiteHeader({ locale, dict, userEmail, isAdmin, logoUrl, 
               <Link href={`/${locale}/compte`} className="font-display text-[17px] uppercase tracking-[0.04em] hover:text-acid">
                 {dict.nav.compte}
               </Link>
-              <button onClick={signOut} className="font-display text-[17px] uppercase tracking-[0.04em] text-smoke hover:text-paper">
-                {dict.nav.deconnexion}
-              </button>
+              <form action="/auth/signout" method="post">
+                <input type="hidden" name="locale" value={locale} />
+                <button
+                  type="submit"
+                  className="font-display text-[17px] uppercase tracking-[0.04em] text-smoke transition-colors hover:text-paper"
+                >
+                  {dict.nav.deconnexion}
+                </button>
+              </form>
             </div>
           ) : (
             <Link href={`/${locale}/connexion`} className="font-display text-[17px] uppercase tracking-[0.04em] hover:text-acid">
@@ -147,9 +146,12 @@ export default function SiteHeader({ locale, dict, userEmail, isAdmin, logoUrl, 
             <div className="mt-3 flex items-center justify-between gap-4 border-t border-white/10 pt-4">
               <LanguageSwitcher locale={locale} align="left" />
               {userEmail ? (
-                <button onClick={signOut} className="font-display text-[16px] uppercase tracking-[0.04em] text-smoke">
-                  {dict.nav.deconnexion}
-                </button>
+                <form action="/auth/signout" method="post">
+                  <input type="hidden" name="locale" value={locale} />
+                  <button type="submit" className="font-display text-[16px] uppercase tracking-[0.04em] text-smoke">
+                    {dict.nav.deconnexion}
+                  </button>
+                </form>
               ) : (
                 <Link href={`/${locale}/connexion`} className="font-display text-[16px] uppercase tracking-[0.04em]">
                   {dict.nav.connexion}
