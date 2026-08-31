@@ -53,7 +53,9 @@ export const fr = {
     soon: "Bientôt",
     noEvents: "Rien à afficher pour cette journée pour le moment. Revenez bientôt.",
     filterCategory: "Discipline",
-    allCategories: "Toutes"
+    allCategories: "Toutes",
+    price: "Tarif",
+    allPrices: "Tous les tarifs"
   },
   event: {
     back: "Retour au programme",
@@ -67,7 +69,10 @@ export const fr = {
     ctaSoon: "Billetterie bientôt ouverte",
     ctaFree: "Entrée libre, sans réservation",
     ctaPwyw: "Je participe au prix libre",
-    share: "Partager"
+    share: "Partager",
+    favoriteAdd: "Ajouter à mes favoris",
+    favoriteRemove: "Retirer de mes favoris",
+    favoriteLogin: "Connectez-vous pour enregistrer vos favoris"
   },
   infos: {
     title: "Infos",
@@ -110,13 +115,15 @@ export const fr = {
   },
   account: {
     title: "Mon compte",
-    hello: "Salut",
+    hello: "Bonjour",
     profile: "Mes informations",
-    save: "Enregistrér",
+    save: "Enregistrer",
     saved: "Modifications enregistrées.",
     deleteTitle: "Supprimer mon compte",
     deleteText: "Vous pouvez demander la suppression de votre compte et de vos données à tout moment.",
-    deleteCta: "Demander la suppression"
+    deleteCta: "Demander la suppression",
+    favorites: "Mes favoris",
+    favoritesEmpty: "Aucun événement en favori pour le moment. Ouvrez une page événement et cliquez sur le cœur."
   },
   admin: {
     title: "Back office",
@@ -126,13 +133,13 @@ export const fr = {
     artists: "Artistes",
     partners: "Partenaires",
     settings: "Réglages",
-    newEvent: "Nouvel’événement",
+    newEvent: "Nouvel événement",
     edit: "Modifier",
     delete: "Supprimer",
     published: "En ligne",
     draft: "Brouillon",
-    save: "Enregistrér",
-    saving: "Enregistrément...",
+    save: "Enregistrer",
+    saving: "Enregistrement...",
     saved: "Enregistré",
     uploadImage: "Choisir une image",
     uploading: "Envoi en cours...",

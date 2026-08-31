@@ -6,32 +6,32 @@ export default function LegalPage() {
       <h1 className="display-l">Mentions légales</h1>
       <div className="mt-10 space-y-8 text-paper/80">
         <section>
-          <h2 className="display-m text-paper">Éditeur du site</h2>
+          <h2 className="display-m text-paper">Editeur du site</h2>
           <p className="mt-3">
-            Festival Common Quest, édite par l’association PRISM (association loi 1901), 31 avenue Arthur Benoit,
-            44100 Nantes. Directrice de la publication : Shirlene Sandemoy, présidente.
+            Festival Common Quest, edite par l’association PRISM (association loi 1901), 31 avenue Arthur Benoit,
+            44100 Nantes. Directrice de la publication : Shirlene Sandemoy, presidente.
             Contact : associationprism.hello@gmail.com
           </p>
         </section>
         <section>
-          <h2 className="display-m text-paper">Hébergement</h2>
+          <h2 className="display-m text-paper">Hebergement</h2>
           <p className="mt-3">
-            Site héberge par Vercel Inc. Base de données et authentification par Supabase, avec stockage des données
-            sur des serveurs situés dans l'Union européenne.
+            Site heberge par Vercel Inc. Base de donnees et authentification par Supabase, avec stockage des donnees
+            sur des serveurs situes dans l Union europeenne.
           </p>
         </section>
         <section>
-          <h2 className="display-m text-paper">Propriété intellectuelle</h2>
+          <h2 className="display-m text-paper">Propriete intellectuelle</h2>
           <p className="mt-3">
-            L'identite visuelle, les textes, les photographies et les contenus du site sont protégés. Toute
-            reproduction sans autorisation ecrite préalable est interdite. Les visuels des artistes sont publiés avec
-            leur accord ou celui de leurs représentants.
+            L identite visuelle, les textes, les photographies et les contenus du site sont proteges. Toute
+            reproduction sans autorisation ecrite prealable est interdite. Les visuels des artistes sont publies avec
+            leur accord ou celui de leurs representants.
           </p>
         </section>
         <section>
           <h2 className="display-m text-paper">Signaler un contenu</h2>
           <p className="mt-3">
-            Pour toute demande de retrait, de correction ou de signalement, écrivez à associationprism.hello@gmail.com.
+            Pour toute demande de retrait, de correction ou de signalement, ecrivez a associationprism.hello@gmail.com.
             Nous repondons sous 30 jours au plus tard.
           </p>
         </section>

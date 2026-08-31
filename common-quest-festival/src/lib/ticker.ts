@@ -9,11 +9,13 @@ export type TickerSetting = {
 };
 
 /** Recupere le texte de banderole, avec repli sur l ancien format puis sur le dictionnaire. */
+export const DEFAULT_SLOGAN = "What do we have in common? Hip hop.";
+
 export function pickTicker(
   setting: TickerSetting | null,
   zone: "home" | "infos",
   locale: string,
-  fallback: string
+  fallback: string = DEFAULT_SLOGAN
 ) {
   const zoned = setting?.[zone]?.[locale]?.trim();
   if (zoned) return zoned;

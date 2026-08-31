@@ -11,27 +11,40 @@ export default async function ProgrammePage({
   searchParams
 }: {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ jour?: string; discipline?: string }>;
+  searchParams: Promise<{ jour?: string; discipline?: string; tarif?: string }>;
 }) {
   const { locale } = await params;
-  const { jour, discipline } = await searchParams;
+  const { jour, discipline, tarif } = await searchParams;
   const dict = await getDict(locale);
   const events = await getEvents(locale);
 
   const activeDay = jour && ["1", "2", "3", "4"].includes(jour) ? Number(jour) : null;
   const categories = Array.from(new Set(events.map((e) => e.category)));
   const activeCategory = discipline && categories.includes(discipline as never) ? discipline : null;
+  const priceOptions = [
+    { key: "gratuit", label: dict.programme.free },
+    { key: "libre", label: dict.programme.pwyw },
+    { key: "payant", label: dict.programme.paid }
+  ];
+  const activePrice = tarif && priceOptions.some((o) => o.key === tarif) ? tarif : null;
+  const matchPrice = (event: { is_free: boolean; is_pwyw: boolean }) =>
+    !activePrice ||
+    (activePrice === "gratuit" && event.is_free) ||
+    (activePrice === "libre" && !event.is_free && event.is_pwyw) ||
+    (activePrice === "payant" && !event.is_free && !event.is_pwyw);
 
   const filtered = events.filter(
-    (e) => (!activeDay || e.day_index === activeDay) && (!activeCategory || e.category === activeCategory)
+    (e) => (!activeDay || e.day_index === activeDay) && (!activeCategory || e.category === activeCategory) && matchPrice(e)
   );
 
-  const buildHref = (next: { jour?: number | null; discipline?: string | null }) => {
+  const buildHref = (next: { jour?: number | null; discipline?: string | null; tarif?: string | null }) => {
     const p = new URLSearchParams();
     const day = next.jour === undefined ? activeDay : next.jour;
     const cat = next.discipline === undefined ? activeCategory : next.discipline;
+    const price = next.tarif === undefined ? activePrice : next.tarif;
     if (day) p.set("jour", String(day));
     if (cat) p.set("discipline", cat);
+    if (price) p.set("tarif", price);
     const qs = p.toString();
     return `/${locale}/programme${qs ? `?${qs}` : ""}`;
   };
@@ -81,6 +94,25 @@ export default async function ProgrammePage({
                 className={`tag whitespace-nowrap ${activeCategory === cat ? "border-violet bg-violet text-white" : "text-smoke"}`}
               >
                 {categoryLabels[locale][cat]}
+              </Link>
+            ))}
+          </div>
+          <div className="flex w-full flex-wrap justify-center gap-2">
+            <Link
+              href={buildHref({ tarif: null })}
+              data-active={!activePrice}
+              className={`tag whitespace-nowrap ${!activePrice ? "border-paper bg-paper text-ink" : "text-smoke"}`}
+            >
+              {dict.programme.allPrices}
+            </Link>
+            {priceOptions.map((option) => (
+              <Link
+                key={option.key}
+                href={buildHref({ tarif: option.key })}
+                data-active={activePrice === option.key}
+                className={`tag whitespace-nowrap ${activePrice === option.key ? "border-paper bg-paper text-ink" : "text-smoke"}`}
+              >
+                {option.label}
               </Link>
             ))}
           </div>

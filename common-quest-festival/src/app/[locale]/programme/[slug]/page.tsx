@@ -6,6 +6,8 @@ import { getDictionary } from "@/i18n";
 import { getEvent, getDict } from "@/lib/queries";
 import { formatRange, formatTime, categoryLabels } from "@/lib/format";
 import VideoEmbed from "@/components/VideoEmbed";
+import CoverImage from "@/components/CoverImage";
+import FavoriteButton from "@/components/FavoriteButton";
 
 export const revalidate = 60;
 
@@ -35,13 +37,13 @@ export default async function EventPage({ params }: { params: Promise<{ locale: 
   return (
     <article>
       {/* Visuel de tete */}
-      <div className="relative h-[38vh] min-h-[260px] w-full overflow-hidden bg-ink-soft">
+      <div className="relative h-[46vh] min-h-[300px] w-full overflow-hidden bg-ink-soft md:h-[52vh]">
         {event.cover_url ? (
-          <Image src={event.cover_url} alt="" fill priority sizes="100vw" className="object-cover opacity-70" />
+          <CoverImage src={event.cover_url} alt={event.t?.title ?? ""} sizes="100vw" priority />
         ) : (
           <div className="absolute inset-0 bg-gradient-to-br from-violet/60 via-ink to-ink" />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-transparent" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/55 to-ink/10" />
         <div className="shell absolute inset-x-0 bottom-0 pb-10">
           <span className="tag bg-acid text-ink">{categoryLabels[locale][event.category]}</span>
           <h1 className="mt-4 display-l max-w-3xl">{event.t?.title}</h1>
@@ -131,7 +133,11 @@ export default async function EventPage({ params }: { params: Promise<{ locale: 
             </div>
           </dl>
 
-          <div className="mt-7">
+          <div className="mt-5">
+            <FavoriteButton eventId={event.id} locale={locale} dict={dict} />
+          </div>
+
+          <div className="mt-6">
             {event.is_free && !event.ticket_url ? (
               <p className="rounded-full border-2 border-acid/40 px-5 py-3.5 text-center font-display text-[16px] uppercase tracking-[0.04em] text-acid">
                 {dict.event.ctaFree}

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import CoverImage from "./CoverImage";
 import type { EventWithTranslation } from "@/lib/types";
 import { formatWhen, categoryLabels } from "@/lib/format";
 import type { Locale, Dictionary } from "@/i18n";
@@ -20,13 +21,7 @@ export default function EventCard({
     <Link href={`/${locale}/programme/${event.slug}`} className="event-card group focus:outline-none">
       <div className="relative aspect-[16/10] overflow-hidden bg-ink">
         {event.cover_url ? (
-          <Image
-            src={event.cover_url}
-            alt={title}
-            fill
-            sizes="(max-width: 768px) 100vw, 33vw"
-            className="object-cover"
-          />
+          <CoverImage src={event.cover_url} alt={title} />
         ) : (
           <div className="flex h-full items-center justify-center bg-gradient-to-br from-violet/70 to-ink">
             <Image src="/brand/picto-jaune.png" alt="" width={48} height={48} className="opacity-60" />

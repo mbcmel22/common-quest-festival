@@ -54,7 +54,9 @@ export const en: Dictionary = {
     soon: "Soon",
     noEvents: "Nothing to show for this day yet. Come back soon.",
     filterCategory: "Discipline",
-    allCategories: "All"
+    allCategories: "All",
+    price: "Price",
+    allPrices: "All prices"
   },
   event: {
     back: "Back to the line-up",
@@ -68,7 +70,10 @@ export const en: Dictionary = {
     ctaSoon: "Tickets on sale soon",
     ctaFree: "Free entry, no booking needed",
     ctaPwyw: "Pay what you want",
-    share: "Share"
+    share: "Share",
+    favoriteAdd: "Add to my favourites",
+    favoriteRemove: "Remove from my favourites",
+    favoriteLogin: "Log in to save your favourites"
   },
   infos: {
     title: "Info",
@@ -111,13 +116,15 @@ export const en: Dictionary = {
   },
   account: {
     title: "My account",
-    hello: "Hi",
+    hello: "Hello",
     profile: "My details",
     save: "Save",
     saved: "Changes saved.",
     deleteTitle: "Delete my account",
     deleteText: "You can ask for your account and data to be deleted at any time.",
-    deleteCta: "Request deletion"
+    deleteCta: "Request deletion",
+    favorites: "My favourites",
+    favoritesEmpty: "No favourite yet. Open an event page and tap the heart."
   },
   admin: {
     title: "Back office",

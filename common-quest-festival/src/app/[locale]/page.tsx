@@ -13,7 +13,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const dict = await getDict(locale);
   const events = await getEvents(locale);
   const ticker = await getSetting<TickerSetting>("ticker");
-  const tickerText = pickTicker(ticker, "home", locale, dict.home.ticker);
+  const tickerText = pickTicker(ticker, "home", locale);
   const tickerSpeed = ticker?.speed_home ?? 75;
   const highlights = events.filter((e) => e.is_highlight).slice(0, 3);
   const countByDay = [1, 2, 3, 4].map((day) => events.filter((e) => e.day_index === day).length);

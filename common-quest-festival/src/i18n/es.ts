@@ -54,7 +54,9 @@ export const es: Dictionary = {
     soon: "Pronto",
     noEvents: "Todavía no hay nada para este día. Vuelve pronto.",
     filterCategory: "Disciplina",
-    allCategories: "Todas"
+    allCategories: "Todas",
+    price: "Precio",
+    allPrices: "Todos los precios"
   },
   event: {
     back: "Volver al programa",
@@ -68,7 +70,10 @@ export const es: Dictionary = {
     ctaSoon: "Entradas disponibles pronto",
     ctaFree: "Entrada libre, sin reserva",
     ctaPwyw: "Pago lo que quiero",
-    share: "Compartir"
+    share: "Compartir",
+    favoriteAdd: "Añadir a mis favoritos",
+    favoriteRemove: "Quitar de mis favoritos",
+    favoriteLogin: "Inicia sesión para guardar tus favoritos"
   },
   infos: {
     title: "Info",
@@ -117,7 +122,9 @@ export const es: Dictionary = {
     saved: "Cambios guardados.",
     deleteTitle: "Eliminar mi cuenta",
     deleteText: "Puedes pedir la eliminacion de tu cuenta y de tus datos cuando quieras.",
-    deleteCta: "Pedir la eliminacion"
+    deleteCta: "Pedir la eliminación",
+    favorites: "Mis favoritos",
+    favoritesEmpty: "Todavía no hay favoritos. Abre una página de evento y pulsa el corazón."
   },
   admin: {
     title: "Back office",

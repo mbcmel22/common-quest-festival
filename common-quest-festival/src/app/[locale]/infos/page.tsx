@@ -17,7 +17,7 @@ export default async function InfosPage({ params }: { params: Promise<{ locale: 
     getSetting<TickerSetting>("ticker"),
     getSetting<Record<string, string>>("socials")
   ]);
-  const tickerText = pickTicker(ticker, "infos", locale, dict.home.ticker);
+  const tickerText = pickTicker(ticker, "infos", locale);
 
   const roleFor = (member: { role_fr: string | null; role_en: string | null; role_es: string | null }) =>
     locale === "en" ? member.role_en ?? member.role_fr : locale === "es" ? member.role_es ?? member.role_fr : member.role_fr;
