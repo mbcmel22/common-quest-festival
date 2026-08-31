@@ -7,6 +7,7 @@ import { getEvent, getDict } from "@/lib/queries";
 import { formatRange, formatTime, categoryLabels } from "@/lib/format";
 import VideoEmbed from "@/components/VideoEmbed";
 import CoverImage from "@/components/CoverImage";
+import SocialLinks from "@/components/SocialLinks";
 import FavoriteButton from "@/components/FavoriteButton";
 
 export const revalidate = 60;
@@ -33,6 +34,11 @@ export default async function EventPage({ params }: { params: Promise<{ locale: 
   if (!event) notFound();
 
   const time = formatRange(event.start_time, event.end_time, locale);
+  const videos = [
+    ...(Array.isArray(event.video_urls) ? (event.video_urls as string[]) : []),
+    ...(event.video_url && !(event.video_urls as string[] | null)?.length ? [event.video_url] : [])
+  ].filter((url) => typeof url === "string" && url.trim().length > 0);
+  const hasSocials = Object.values(event.social_links ?? {}).some((url) => !!url && String(url).trim().length > 0);
 
   return (
     <article>
@@ -60,10 +66,21 @@ export default async function EventPage({ params }: { params: Promise<{ locale: 
             <p className="mt-8 whitespace-pre-line text-lg leading-relaxed text-paper/85">{event.t.description}</p>
           )}
 
-          {event.video_url && (
-            <div className="mt-10">
-              <VideoEmbed url={event.video_url} title={event.t?.title ?? "Common Quest"} />
+          {videos.length > 0 && (
+            <div className="mt-10 space-y-5">
+              {videos.map((url, index) => (
+                <VideoEmbed key={`${url}-${index}`} url={url} title={`${event.t?.title ?? "Common Quest"} ${index + 1}`} />
+              ))}
             </div>
+          )}
+
+          {hasSocials && (
+            <section className="mt-10">
+              <h2 className="eyebrow">{dict.event.follow}</h2>
+              <div className="mt-3">
+                <SocialLinks socials={event.social_links} withDefaults={false} size="sm" />
+              </div>
+            </section>
           )}
 
           {event.artists?.length > 0 && (

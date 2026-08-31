@@ -70,6 +70,7 @@ export const fr = {
     ctaFree: "Entrée libre, sans réservation",
     ctaPwyw: "Je participe au prix libre",
     share: "Partager",
+    follow: "Suivre les artistes",
     favoriteAdd: "Ajouter à mes favoris",
     favoriteRemove: "Retirer de mes favoris",
     favoriteLogin: "Connectez-vous pour enregistrer vos favoris"

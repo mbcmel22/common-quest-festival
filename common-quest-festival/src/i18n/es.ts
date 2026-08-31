@@ -71,6 +71,7 @@ export const es: Dictionary = {
     ctaFree: "Entrada libre, sin reserva",
     ctaPwyw: "Pago lo que quiero",
     share: "Compartir",
+    follow: "Seguir a los artistas",
     favoriteAdd: "Añadir a mis favoritos",
     favoriteRemove: "Quitar de mis favoritos",
     favoriteLogin: "Inicia sesión para guardar tus favoritos"

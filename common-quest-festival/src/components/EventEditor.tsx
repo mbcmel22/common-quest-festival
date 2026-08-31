@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import ImageUploader from "./ImageUploader";
 import { locales, type Locale, type Dictionary } from "@/i18n";
+import { SOCIAL_KEYS, SOCIAL_LABELS } from "./SocialLinks";
 
 const CATEGORIES = ["danse", "rap", "graffiti", "dj", "atelier", "talk", "soiree", "autre"] as const;
 
@@ -27,6 +28,8 @@ export default function EventEditor({
   const [loading, setLoading] = useState(!isNew);
   const [tab, setTab] = useState<Locale>(locale);
   const [state, setState] = useState<"idle" | "saving" | "saved" | "error">("idle");
+  const [videos, setVideos] = useState<string[]>([""]);
+  const [socials, setSocials] = useState<Record<string, string>>({});
   const [translations, setTranslations] = useState<Translations>(emptyTranslations());
   const [event, setEvent] = useState({
     slug: "",
@@ -71,6 +74,11 @@ export default function EventEditor({
             ticket_url: rest.ticket_url ?? "",
             video_url: rest.video_url ?? ""
           });
+          const storedVideos = Array.isArray(rest.video_urls) ? (rest.video_urls as string[]) : [];
+          const legacy = rest.video_url ? [rest.video_url as string] : [];
+          setVideos(storedVideos.length > 0 ? storedVideos : legacy.length > 0 ? legacy : [""]);
+          setSocials((rest.social_links as Record<string, string>) ?? {});
+
           const next = emptyTranslations();
           (rows ?? []).forEach((row: any) => {
             next[row.locale] = {
@@ -115,7 +123,12 @@ export default function EventEditor({
       end_time: event.end_time || null,
       doors_time: event.doors_time || null,
       ticket_url: event.ticket_url || null,
-      video_url: event.video_url || null,
+      video_urls: videos.map((url) => url.trim()).filter(Boolean),
+      social_links: Object.fromEntries(
+        Object.entries(socials)
+          .map(([key, url]) => [key, url.trim()])
+          .filter(([, url]) => url.length > 0)
+      ),
       day_index: Number(event.day_index),
       sort_order: Number(event.sort_order)
     };
@@ -255,18 +268,63 @@ export default function EventEditor({
             <input id="ticket" type="url" className="field-light" value={event.ticket_url} onChange={(e) => setField("ticket_url", e.target.value)} placeholder="https://..." />
           </div>
           <div>
-            <label className="label" htmlFor="video">Lien YouTube</label>
-            <input
-              id="video"
-              type="url"
-              className="field-light"
-              value={event.video_url}
-              onChange={(e) => setField("video_url", e.target.value)}
-              placeholder="https://www.youtube.com/watch?v=..."
-            />
-            <p className="mt-1 text-xs text-ink/50">
-              Aftermovie, clip ou teaser. La vidéo s’affiche sous la description de l’événement.
+            <span className="label">Liens YouTube</span>
+            <p className="mb-2 text-xs text-ink/50">
+              Aftermovie, clip, teaser. Les vidéos s’affichent les unes sous les autres, dans cet ordre.
             </p>
+            <div className="space-y-2">
+              {videos.map((url, index) => (
+                <div key={index} className="flex gap-2">
+                  <input
+                    type="url"
+                    className="field-light"
+                    value={url}
+                    onChange={(e) => setVideos((list) => list.map((v, i) => (i === index ? e.target.value : v)))}
+                    placeholder="https://www.youtube.com/watch?v=..."
+                    aria-label={`Lien YouTube ${index + 1}`}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setVideos((list) => (list.length === 1 ? [""] : list.filter((_, i) => i !== index)))}
+                    className="shrink-0 rounded-full border border-ink/20 px-3 text-[13px] text-ink/60 transition-colors hover:border-red-500 hover:text-red-600"
+                    aria-label={`Retirer le lien ${index + 1}`}
+                  >
+                    Retirer
+                  </button>
+                </div>
+              ))}
+            </div>
+            <button
+              type="button"
+              onClick={() => setVideos((list) => [...list, ""])}
+              className="mt-2 rounded-full border border-ink/20 px-4 py-1.5 text-[13px] transition-colors hover:border-violet hover:text-violet"
+            >
+              Ajouter une vidéo
+            </button>
+          </div>
+
+          <div>
+            <span className="label">Réseaux sociaux de l’événement</span>
+            <p className="mb-2 text-xs text-ink/50">
+              Comptes des artistes ou du collectif invité. Chaque lien rempli devient une icône sur la fiche.
+            </p>
+            <div className="grid gap-2 sm:grid-cols-2">
+              {SOCIAL_KEYS.map((key) => (
+                <div key={key}>
+                  <label className="label" htmlFor={`event-social-${key}`}>
+                    {SOCIAL_LABELS[key]}
+                  </label>
+                  <input
+                    id={`event-social-${key}`}
+                    type="url"
+                    className="field-light"
+                    value={socials[key] ?? ""}
+                    onChange={(e) => setSocials((v) => ({ ...v, [key]: e.target.value }))}
+                    placeholder="https://..."
+                  />
+                </div>
+              ))}
+            </div>
           </div>
           <label className="flex items-center gap-3 text-sm">
             <input type="checkbox" checked={event.is_free} onChange={(e) => setField("is_free", e.target.checked)} className="h-4 w-4 accent-[#7E1AFF]" />
