@@ -21,8 +21,8 @@ export const es: Dictionary = {
   },
   hero: {
     eyebrow: "1ª edición",
-    question: "¿Qué tenemos en común?",
-    answer: "El hip hop.",
+    question: "What do we have in common?",
+    answer: "Hip hop.",
     dates: "1 > 4 de octubre de 2026",
     place: "Quartier de la Creation, isla de Nantes",
     cta: "Ver el programa",
@@ -42,7 +42,7 @@ export const es: Dictionary = {
     teamText:
       "Common Quest esta impulsado por PRISM, colectivo nantes mayoritariamente femenino surgido de la cultura hip hop, la comunicacion y el desarrollo de proyectos.",
     teamCta: "Conocer al equipo",
-    ticker: "¿Qué tenemos en común? El hip hop."
+    ticker: "What do we have in common? Hip hop."
   },
   programme: {
     title: "Programa",
@@ -155,7 +155,7 @@ export const es: Dictionary = {
     more: "Saber mas"
   },
   footer: {
-    baseline: "¿Qué tenemos en común? El hip hop.",
+    baseline: "What do we have in common? Hip hop.",
     legal: "Aviso legal",
     privacy: "Privacidad",
     contact: "Contacto",
