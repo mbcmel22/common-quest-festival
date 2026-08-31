@@ -122,6 +122,11 @@ export default function SiteHeader({ locale, dict, userEmail, isAdmin, logoUrl }
             <Link href={`/${locale}/programme`} className="py-3 font-display text-4xl uppercase text-acid">
               {dict.nav.billetterie}
             </Link>
+            {userEmail && (
+              <Link href={`/${locale}/compte`} className="py-3 font-display text-4xl uppercase">
+                {dict.nav.compte}
+              </Link>
+            )}
             {isAdmin && (
               <Link href={`/${locale}/admin`} className="py-3 font-display text-4xl uppercase text-violet">
                 {dict.nav.admin}
