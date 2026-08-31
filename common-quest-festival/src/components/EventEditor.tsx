@@ -60,7 +60,7 @@ export default function EventEditor({
       .from("events")
       .select("*, translations:event_translations(*)")
       .eq("id", eventId)
-      .single()
+      .maybeSingle()
       .then(({ data }) => {
         if (data) {
           const { translations: rows, id, created_at, updated_at, ...rest } = data as any;
@@ -140,18 +140,29 @@ export default function EventEditor({
       sort_order: Number(event.sort_order)
     };
 
-    const { data, error } = isNew
-      ? await supabase.from("events").insert(payload).select("id").single()
-      : await supabase.from("events").update(payload).eq("id", eventId).select("id").single();
+    // Sur une mise a jour, l identifiant est deja connu : inutile de demander
+    // a la base de renvoyer la ligne, ce retour peut etre filtre par les
+    // regles de securite et faire echouer l enregistrement pour rien.
+    let savedId = eventId;
 
-    if (error || !data) {
-      setErrorMessage(error?.message ?? "Enregistrement impossible.");
-      return setState("error");
+    if (isNew) {
+      const { data, error } = await supabase.from("events").insert(payload).select("id").single();
+      if (error || !data) {
+        setErrorMessage(error?.message ?? "Création impossible.");
+        return setState("error");
+      }
+      savedId = data.id;
+    } else {
+      const { error } = await supabase.from("events").update(payload).eq("id", eventId);
+      if (error) {
+        setErrorMessage(error.message);
+        return setState("error");
+      }
     }
 
     const rows = locales
       .filter((l) => translations[l].title.trim().length > 0)
-      .map((l) => ({ event_id: data.id, locale: l, ...translations[l] }));
+      .map((l) => ({ event_id: savedId, locale: l, ...translations[l] }));
 
     if (rows.length > 0) {
       const { error: tError } = await supabase.from("event_translations").upsert(rows, { onConflict: "event_id,locale" });
