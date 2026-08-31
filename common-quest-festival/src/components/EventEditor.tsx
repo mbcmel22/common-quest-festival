@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import ImageUploader from "./ImageUploader";
 import { locales, type Locale, type Dictionary } from "@/i18n";
-import { SOCIAL_KEYS, SOCIAL_LABELS } from "./SocialLinks";
+import { SOCIAL_KEYS, SOCIAL_LABELS, normalizeSocialGroups, type SocialGroup } from "./SocialLinks";
 
 const CATEGORIES = ["danse", "rap", "graffiti", "dj", "atelier", "talk", "soiree", "autre"] as const;
 
@@ -28,8 +28,9 @@ export default function EventEditor({
   const [loading, setLoading] = useState(!isNew);
   const [tab, setTab] = useState<Locale>(locale);
   const [state, setState] = useState<"idle" | "saving" | "saved" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [videos, setVideos] = useState<string[]>([""]);
-  const [socials, setSocials] = useState<Record<string, string>>({});
+  const [socialGroups, setSocialGroups] = useState<SocialGroup[]>([{ label: "", links: {} }]);
   const [translations, setTranslations] = useState<Translations>(emptyTranslations());
   const [event, setEvent] = useState({
     slug: "",
@@ -77,7 +78,7 @@ export default function EventEditor({
           const storedVideos = Array.isArray(rest.video_urls) ? (rest.video_urls as string[]) : [];
           const legacy = rest.video_url ? [rest.video_url as string] : [];
           setVideos(storedVideos.length > 0 ? storedVideos : legacy.length > 0 ? legacy : [""]);
-          setSocials((rest.social_links as Record<string, string>) ?? {});
+          setSocialGroups(normalizeSocialGroups(rest.social_links));
 
           const next = emptyTranslations();
           (rows ?? []).forEach((row: any) => {
@@ -105,6 +106,7 @@ export default function EventEditor({
   async function save(e: React.FormEvent) {
     e.preventDefault();
     setState("saving");
+    setErrorMessage(null);
     const supabase = createClient();
 
     const slug =
@@ -124,11 +126,16 @@ export default function EventEditor({
       doors_time: event.doors_time || null,
       ticket_url: event.ticket_url || null,
       video_urls: videos.map((url) => url.trim()).filter(Boolean),
-      social_links: Object.fromEntries(
-        Object.entries(socials)
-          .map(([key, url]) => [key, url.trim()])
-          .filter(([, url]) => url.length > 0)
-      ),
+      social_links: socialGroups
+        .map((group) => ({
+          label: group.label.trim(),
+          links: Object.fromEntries(
+            Object.entries(group.links)
+              .map(([key, url]) => [key, (url ?? "").trim()])
+              .filter(([, url]) => (url as string).length > 0)
+          )
+        }))
+        .filter((group) => Object.keys(group.links).length > 0),
       day_index: Number(event.day_index),
       sort_order: Number(event.sort_order)
     };
@@ -137,7 +144,10 @@ export default function EventEditor({
       ? await supabase.from("events").insert(payload).select("id").single()
       : await supabase.from("events").update(payload).eq("id", eventId).select("id").single();
 
-    if (error || !data) return setState("error");
+    if (error || !data) {
+      setErrorMessage(error?.message ?? "Enregistrement impossible.");
+      return setState("error");
+    }
 
     const rows = locales
       .filter((l) => translations[l].title.trim().length > 0)
@@ -145,7 +155,10 @@ export default function EventEditor({
 
     if (rows.length > 0) {
       const { error: tError } = await supabase.from("event_translations").upsert(rows, { onConflict: "event_id,locale" });
-      if (tError) return setState("error");
+      if (tError) {
+        setErrorMessage(tError.message);
+        return setState("error");
+      }
     }
 
     setState("saved");
@@ -305,26 +318,77 @@ export default function EventEditor({
 
           <div>
             <span className="label">Réseaux sociaux de l’événement</span>
-            <p className="mb-2 text-xs text-ink/50">
-              Comptes des artistes ou du collectif invité. Chaque lien rempli devient une icône sur la fiche.
+            <p className="mb-3 text-xs text-ink/50">
+              Un bloc par artiste. Le titre s’affiche au-dessus des icônes, par exemple « Suivez Factor X ». Seuls les
+              champs remplis apparaissent.
             </p>
-            <div className="grid gap-2 sm:grid-cols-2">
-              {SOCIAL_KEYS.map((key) => (
-                <div key={key}>
-                  <label className="label" htmlFor={`event-social-${key}`}>
-                    {SOCIAL_LABELS[key]}
-                  </label>
-                  <input
-                    id={`event-social-${key}`}
-                    type="url"
-                    className="field-light"
-                    value={socials[key] ?? ""}
-                    onChange={(e) => setSocials((v) => ({ ...v, [key]: e.target.value }))}
-                    placeholder="https://..."
-                  />
+
+            <div className="space-y-4">
+              {socialGroups.map((group, index) => (
+                <div key={index} className="rounded-xl border border-ink/15 p-4">
+                  <div className="flex items-end gap-2">
+                    <div className="flex-1">
+                      <label className="label" htmlFor={`social-label-${index}`}>
+                        Titre du bloc
+                      </label>
+                      <input
+                        id={`social-label-${index}`}
+                        className="field-light"
+                        value={group.label}
+                        onChange={(e) =>
+                          setSocialGroups((list) =>
+                            list.map((g, i) => (i === index ? { ...g, label: e.target.value } : g))
+                          )
+                        }
+                        placeholder="Suivez Factor X"
+                        maxLength={80}
+                      />
+                    </div>
+                    {socialGroups.length > 1 && (
+                      <button
+                        type="button"
+                        onClick={() => setSocialGroups((list) => list.filter((_, i) => i !== index))}
+                        className="mb-1 shrink-0 rounded-full border border-ink/20 px-3 py-2 text-[13px] text-ink/60 transition-colors hover:border-red-500 hover:text-red-600"
+                      >
+                        Retirer
+                      </button>
+                    )}
+                  </div>
+
+                  <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                    {SOCIAL_KEYS.map((key) => (
+                      <div key={key}>
+                        <label className="label" htmlFor={`social-${index}-${key}`}>
+                          {SOCIAL_LABELS[key]}
+                        </label>
+                        <input
+                          id={`social-${index}-${key}`}
+                          type="url"
+                          className="field-light"
+                          value={group.links[key] ?? ""}
+                          onChange={(e) =>
+                            setSocialGroups((list) =>
+                              list.map((g, i) =>
+                                i === index ? { ...g, links: { ...g.links, [key]: e.target.value } } : g
+                              )
+                            )
+                          }
+                          placeholder="https://..."
+                        />
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>
+
+            <button
+              type="button"
+              onClick={() => setSocialGroups((list) => [...list, { label: "", links: {} }])}
+              className="mt-3 rounded-full border border-ink/20 px-4 py-1.5 text-[13px] transition-colors hover:border-violet hover:text-violet"
+            >
+              Ajouter un artiste
+            </button>
           </div>
           <label className="flex items-center gap-3 text-sm">
             <input type="checkbox" checked={event.is_free} onChange={(e) => setField("is_free", e.target.checked)} className="h-4 w-4 accent-[#7E1AFF]" />
@@ -368,7 +432,11 @@ export default function EventEditor({
               {dict.admin.delete}
             </button>
           )}
-          {state === "error" && <span className="text-sm text-red-600">{dict.common.error}</span>}
+          {state === "error" && (
+            <span className="text-sm text-red-600">
+              {errorMessage ?? dict.common.error}
+            </span>
+          )}
         </div>
       </div>
     </form>

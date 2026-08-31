@@ -7,7 +7,7 @@ import { getEvent, getDict } from "@/lib/queries";
 import { formatRange, formatTime, categoryLabels } from "@/lib/format";
 import VideoEmbed from "@/components/VideoEmbed";
 import CoverImage from "@/components/CoverImage";
-import SocialLinks from "@/components/SocialLinks";
+import SocialLinks, { normalizeSocialGroups } from "@/components/SocialLinks";
 import FavoriteButton from "@/components/FavoriteButton";
 
 export const revalidate = 60;
@@ -38,7 +38,9 @@ export default async function EventPage({ params }: { params: Promise<{ locale: 
     ...(Array.isArray(event.video_urls) ? (event.video_urls as string[]) : []),
     ...(event.video_url && !(event.video_urls as string[] | null)?.length ? [event.video_url] : [])
   ].filter((url) => typeof url === "string" && url.trim().length > 0);
-  const hasSocials = Object.values(event.social_links ?? {}).some((url) => !!url && String(url).trim().length > 0);
+  const socialGroups = normalizeSocialGroups(event.social_links).filter((group) =>
+    Object.values(group.links).some((url) => !!url && String(url).trim().length > 0)
+  );
 
   return (
     <article>
@@ -74,12 +76,18 @@ export default async function EventPage({ params }: { params: Promise<{ locale: 
             </div>
           )}
 
-          {hasSocials && (
-            <section className="mt-10">
-              <h2 className="eyebrow">{dict.event.follow}</h2>
-              <div className="mt-3">
-                <SocialLinks socials={event.social_links} withDefaults={false} size="sm" />
-              </div>
+          {socialGroups.length > 0 && (
+            <section className="mt-10 space-y-6">
+              {socialGroups.map((group, index) => (
+                <div key={index}>
+                  <h2 className="font-display text-[16px] uppercase tracking-[0.04em] text-acid">
+                    {group.label?.trim() || dict.event.follow}
+                  </h2>
+                  <div className="mt-3">
+                    <SocialLinks socials={group.links} withDefaults={false} size="sm" />
+                  </div>
+                </div>
+              ))}
             </section>
           )}
 

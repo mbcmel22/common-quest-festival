@@ -8,6 +8,31 @@ export const DEFAULT_SOCIALS = {
 
 export type Socials = Record<string, string | undefined | null>;
 
+/** Un bloc de reseaux, avec son titre : "Suivez Factor X" par exemple. */
+export type SocialGroup = { label: string; links: Socials };
+
+/**
+ * Accepte l ancien format, un simple objet de liens, comme le nouveau,
+ * une liste de blocs titres. Renvoie toujours une liste de blocs.
+ */
+export function normalizeSocialGroups(value: unknown): SocialGroup[] {
+  if (Array.isArray(value)) {
+    const groups = value
+      .filter((item) => item && typeof item === "object")
+      .map((item) => {
+        const group = item as { label?: string; links?: Socials };
+        return { label: group.label ?? "", links: group.links ?? {} };
+      });
+    return groups.length > 0 ? groups : [{ label: "", links: {} }];
+  }
+  if (value && typeof value === "object") {
+    const links = value as Socials;
+    const hasLink = Object.values(links).some((url) => !!url && String(url).trim().length > 0);
+    if (hasLink) return [{ label: "", links }];
+  }
+  return [{ label: "", links: {} }];
+}
+
 /** Ordre d affichage des icones, commun au site et aux fiches evenement. */
 export const SOCIAL_KEYS = [
   "instagram",
