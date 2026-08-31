@@ -9,12 +9,14 @@ export default function SiteFooter({
   locale,
   dict,
   logoUrl,
-  socials
+  socials,
+  supportUrl
 }: {
   locale: Locale;
   dict: Dictionary;
   logoUrl?: string | null;
   socials?: Socials | null;
+  supportUrl?: string;
 }) {
   return (
     <footer className="relative mt-8 bg-[#170D1E]">
@@ -53,6 +55,11 @@ export default function SiteFooter({
               {dict.footer.baseline}
             </p>
             <p className="mt-4 text-[15px] text-smoke">{dict.footer.prism}</p>
+            {supportUrl && (
+              <a href={supportUrl} target="_blank" rel="noreferrer noopener" className="btn-violet btn-sm mt-6">
+                {dict.nav.soutien}
+              </a>
+            )}
           </div>
 
           <div className="space-y-2.5 text-[15px]">

@@ -9,6 +9,7 @@ export const fr = {
     infos: "Infos",
     équipe: "L’équipe",
     billetterie: "Billetterie",
+    soutien: "Soutenir le festival",
     compte: "Mon compte",
     connexion: "Se connecter",
     inscription: "Créer un compte",
@@ -19,7 +20,7 @@ export const fr = {
   },
   hero: {
     eyebrow: "1re édition",
-    question: "What do we have in common?",
+    question: "What do we have in common ?",
     answer: "Hip hop.",
     dates: "1 > 4 octobre 2026",
     place: "Quartier de la Création, île de Nantes",
@@ -40,7 +41,7 @@ export const fr = {
     teamText:
       "Common Quest est porté par PRISM, collectif nantais majoritairement féminin issu de la culture hip hop, de la communication et du développement de projets.",
     teamCta: "Rencontrer l’équipe",
-    ticker: "What do we have in common? Hip hop."
+    ticker: "What do we have in common ? Hip hop."
   },
   programme: {
     title: "Programme",
@@ -155,7 +156,7 @@ export const fr = {
     more: "En savoir plus"
   },
   footer: {
-    baseline: "What do we have in common? Hip hop.",
+    baseline: "What do we have in common ? Hip hop.",
     legal: "Mentions légales",
     privacy: "Confidentialité",
     contact: "Contact",

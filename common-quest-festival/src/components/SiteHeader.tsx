@@ -14,9 +14,10 @@ type Props = {
   userEmail: string | null;
   isAdmin: boolean;
   logoUrl: string | null;
+  supportUrl: string;
 };
 
-export default function SiteHeader({ locale, dict, userEmail, isAdmin, logoUrl }: Props) {
+export default function SiteHeader({ locale, dict, userEmail, isAdmin, logoUrl, supportUrl }: Props) {
   const [open, setOpen] = useState(false);
   const [solid, setSolid] = useState(false);
   const pathname = usePathname();
@@ -91,6 +92,9 @@ export default function SiteHeader({ locale, dict, userEmail, isAdmin, logoUrl }
               {dict.nav.connexion}
             </Link>
           )}
+          <a href={supportUrl} target="_blank" rel="noreferrer noopener" className="btn-violet btn-sm">
+            {dict.nav.soutien}
+          </a>
           <Link href={`/${locale}/programme`} className="btn-acid btn-sm">
             {dict.nav.billetterie}
           </Link>
@@ -122,6 +126,14 @@ export default function SiteHeader({ locale, dict, userEmail, isAdmin, logoUrl }
             <Link href={`/${locale}/programme`} className="py-3 font-display text-4xl uppercase text-acid">
               {dict.nav.billetterie}
             </Link>
+            <a
+              href={supportUrl}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="py-3 font-display text-4xl uppercase text-violet"
+            >
+              {dict.nav.soutien}
+            </a>
             {userEmail && (
               <Link href={`/${locale}/compte`} className="py-3 font-display text-4xl uppercase">
                 {dict.nav.compte}

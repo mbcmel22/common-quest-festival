@@ -4,7 +4,7 @@ import { getDictionary, type Locale } from "@/i18n";
 import { getEvents, getSetting, getDict } from "@/lib/queries";
 import EventCard from "@/components/EventCard";
 import Marquee from "@/components/Marquee";
-import { pickTicker, type TickerSetting } from "@/lib/ticker";
+import { pickTicker, DEFAULT_SUPPORT_URL, type TickerSetting } from "@/lib/ticker";
 
 export const revalidate = 60;
 
@@ -15,6 +15,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const ticker = await getSetting<TickerSetting>("ticker");
   const tickerText = pickTicker(ticker, "home", locale);
   const tickerSpeed = ticker?.speed_home ?? 75;
+  const support = await getSetting<{ url?: string }>("support");
+  const supportUrl = support?.url?.trim() || DEFAULT_SUPPORT_URL;
   const highlights = events.filter((e) => e.is_highlight).slice(0, 3);
   const countByDay = [1, 2, 3, 4].map((day) => events.filter((e) => e.day_index === day).length);
 
@@ -35,6 +37,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <Link href={`/${locale}/programme`} className="btn-acid">
               {dict.hero.cta}
             </Link>
+            <a href={supportUrl} target="_blank" rel="noreferrer noopener" className="btn-violet">
+              {dict.nav.soutien}
+            </a>
             <Link href={`/${locale}/infos`} className="btn-ghost">
               {dict.nav.infos}
             </Link>

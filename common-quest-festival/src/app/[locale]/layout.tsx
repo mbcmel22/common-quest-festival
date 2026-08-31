@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import "../globals.css";
 import { getDictionary, isLocale, locales, type Locale } from "@/i18n";
 import { getSessionContext, getSetting, getDict, getTypeScale } from "@/lib/queries";
+import { DEFAULT_SUPPORT_URL } from "@/lib/ticker";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -55,6 +56,8 @@ export default async function LocaleLayout({
   const brand = await getSetting<{ logo_url?: string }>("brand");
   const typeScale = await getTypeScale();
   const socials = await getSetting<Record<string, string>>("socials");
+  const support = await getSetting<{ url?: string }>("support");
+  const supportUrl = support?.url?.trim() || DEFAULT_SUPPORT_URL;
 
   return (
     <html lang={locale} className={`${display.variable} ${body.variable} ${mono.variable}`}>
@@ -65,11 +68,11 @@ export default async function LocaleLayout({
         >
           Aller au contenu
         </a>
-        <SiteHeader locale={locale as Locale} dict={dict} userEmail={user?.email ?? null} isAdmin={isAdmin} logoUrl={brand?.logo_url ?? null} />
+        <SiteHeader locale={locale as Locale} dict={dict} userEmail={user?.email ?? null} isAdmin={isAdmin} logoUrl={brand?.logo_url ?? null} supportUrl={supportUrl} />
         <main id="contenu" className="pt-20 md:pt-24">
           {children}
         </main>
-        <SiteFooter locale={locale as Locale} dict={dict} logoUrl={brand?.logo_url ?? null} socials={socials} />
+        <SiteFooter locale={locale as Locale} dict={dict} logoUrl={brand?.logo_url ?? null} socials={socials} supportUrl={supportUrl} />
         <ScrollToTop label={dict.common.backToTop} />
         <CookieBanner locale={locale as Locale} dict={dict} />
       </body>

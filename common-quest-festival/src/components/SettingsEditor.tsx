@@ -16,6 +16,7 @@ export default function SettingsEditor({ dict }: { dict: Dictionary }) {
   const [practical, setPractical] = useState<Practical>({ address: "", transport: "", accessibility: "" });
   const [socials, setSocials] = useState<Socials>({ instagram: "", tiktok: "", facebook: "", youtube: "", linkedin: "" });
   const [typeScale, setTypeScale] = useState(1);
+  const [supportUrl, setSupportUrl] = useState("");
   const [ticker, setTicker] = useState<Ticker>({ home: { ...emptyZone }, infos: { ...emptyZone }, speed_home: 75, speed_infos: 75 });
   const [logoUrl, setLogoUrl] = useState<string | null>(null);
   const [state, setState] = useState<"idle" | "saving" | "saved" | "error">("idle");
@@ -25,7 +26,7 @@ export default function SettingsEditor({ dict }: { dict: Dictionary }) {
     supabase
       .from("site_settings")
       .select("key, value")
-      .in("key", ["practical", "ticker", "brand", "socials", "typography"])
+      .in("key", ["practical", "ticker", "brand", "socials", "typography", "support"])
       .then(({ data }) => {
         (data ?? []).forEach((row: { key: string; value: Record<string, string> }) => {
           if (row.key === "practical") setPractical((v) => ({ ...v, ...row.value }));
@@ -41,6 +42,7 @@ export default function SettingsEditor({ dict }: { dict: Dictionary }) {
           if (row.key === "brand") setLogoUrl(row.value?.logo_url ?? null);
           if (row.key === "socials") setSocials((v) => ({ ...v, ...row.value }));
           if (row.key === "typography") setTypeScale(Number(row.value?.scale ?? 1));
+          if (row.key === "support") setSupportUrl(row.value?.url ?? "");
         });
       });
   }, []);
@@ -55,7 +57,8 @@ export default function SettingsEditor({ dict }: { dict: Dictionary }) {
         { key: "ticker", value: ticker },
         { key: "brand", value: { logo_url: logoUrl } },
         { key: "socials", value: socials },
-        { key: "typography", value: { scale: typeScale } }
+        { key: "typography", value: { scale: typeScale } },
+        { key: "support", value: { url: supportUrl } }
       ],
       { onConflict: "key" }
     );
@@ -160,6 +163,25 @@ export default function SettingsEditor({ dict }: { dict: Dictionary }) {
           value={typeScale}
           onChange={(e) => setTypeScale(Number(e.target.value))}
           className="w-full accent-[#7E1AFF]"
+        />
+      </div>
+
+      <div className="space-y-3 rounded-2xl border border-ink/12 bg-white p-6 lg:col-span-2">
+        <h2 className="display-m">Bouton Soutenir le festival</h2>
+        <p className="text-sm text-ink/60">
+          Lien de la cagnotte ou du don libre. Le bouton violet apparaît dans l’entête, sur l’accueil et dans le pied
+          de page. Laissez vide pour utiliser le lien Billetweb par défaut.
+        </p>
+        <label className="label" htmlFor="support-url">
+          Lien du don
+        </label>
+        <input
+          id="support-url"
+          type="url"
+          className="field-light"
+          value={supportUrl}
+          onChange={(e) => setSupportUrl(e.target.value)}
+          placeholder="https://www.billetweb.fr/..."
         />
       </div>
 

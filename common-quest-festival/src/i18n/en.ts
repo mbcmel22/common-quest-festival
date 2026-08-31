@@ -11,6 +11,7 @@ export const en: Dictionary = {
     infos: "Info",
     équipe: "The team",
     billetterie: "Tickets",
+    soutien: "Support the festival",
     compte: "My account",
     connexion: "Log in",
     inscription: "Create an account",
@@ -21,7 +22,7 @@ export const en: Dictionary = {
   },
   hero: {
     eyebrow: "First edition",
-    question: "What do we have in common?",
+    question: "What do we have in common ?",
     answer: "Hip hop.",
     dates: "1 > 4 October 2026",
     place: "Quartier de la Création, île de Nantes",
@@ -42,7 +43,7 @@ export const en: Dictionary = {
     teamText:
       "Common Quest is run by PRISM, a mostly female collective from Nantes rooted in hip hop culture, communication and project development.",
     teamCta: "Meet the team",
-    ticker: "What do we have in common? Hip hop."
+    ticker: "What do we have in common ? Hip hop."
   },
   programme: {
     title: "Line-up",
@@ -156,7 +157,7 @@ export const en: Dictionary = {
     more: "Learn more"
   },
   footer: {
-    baseline: "What do we have in common? Hip hop.",
+    baseline: "What do we have in common ? Hip hop.",
     legal: "Legal notice",
     privacy: "Privacy",
     contact: "Contact",
