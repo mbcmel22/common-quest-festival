@@ -24,7 +24,7 @@ export default function ImageUploader({
   async function upload(file: File) {
     setError(null);
     if (!ALLOWED.includes(file.type)) {
-      setError("Format accepte : JPG, PNG, WebP ou AVIF.");
+      setError("Format accepté : JPG, PNG, WebP ou AVIF.");
       return;
     }
     if (file.size > MAX_SIZE) {
@@ -40,7 +40,7 @@ export default function ImageUploader({
       .upload(path, file, { cacheControl: "3600", upsert: false, contentType: file.type });
     setBusy(false);
     if (uploadError) {
-      setError("L envoi a echoue. Reessayez.");
+      setError("L’envoi a échoué. Réessayez.");
       return;
     }
     const { data } = supabase.storage.from("media").getPublicUrl(path);

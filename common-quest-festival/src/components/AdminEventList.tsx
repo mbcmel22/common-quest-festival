@@ -82,7 +82,7 @@ export default function AdminEventList({
           type="search"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="Rechercher un événement, un lieu, une adresse de page"
+          placeholder="Rechercher un événement, un lieu ou une adresse de page"
           className="field-light"
           aria-label="Rechercher un événement"
         />

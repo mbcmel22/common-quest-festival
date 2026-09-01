@@ -89,7 +89,7 @@ export default async function InfosPage({ params }: { params: Promise<{ locale: 
           </ul>
         ) : (
           <p className="mt-10 text-smoke">
-            Les membres de l’équipe apparaitront ici des qu’ils seront ajoutes dans le back office.
+            Les membres de l’équipe apparaîtront ici dès qu’ils seront ajoutés dans le back office.
           </p>
         )}
       </section>

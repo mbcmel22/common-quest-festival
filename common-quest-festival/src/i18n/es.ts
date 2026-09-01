@@ -4,7 +4,7 @@ export const es: Dictionary = {
   meta: {
     title: "Common Quest, festival hip hop multidisciplinar en Nantes",
     description:
-      "Del 1 al 4 de octubre de 2026 en el Quartier de la Creation, isla de Nantes. Conciertos, battles, talleres, grafiti, DJ sets, charlas y encuentros."
+      "Del 1 al 4 de octubre de 2026 en el Quartier de la Création, isla de Nantes. Conciertos, battles, talleres, grafiti, DJ sets, charlas y encuentros."
   },
   nav: {
     programme: "Programa",
@@ -17,7 +17,7 @@ export const es: Dictionary = {
     inscription: "Crear una cuenta",
     deconnexion: "Cerrar sesión",
     admin: "Back office",
-    menu: "Menu",
+    menu: "Menú",
     fermer: "Cerrar"
   },
   hero: {
@@ -48,7 +48,7 @@ export const es: Dictionary = {
   },
   programme: {
     title: "Programa",
-    intro: "Cuatro días en el corazon del Quartier de la Creation. Se actualiza con cada anuncio.",
+    intro: "Cuatro días en el corazón del Quartier de la Création. Se actualiza con cada anuncio.",
     allDays: "Ver todo",
     free: "Gratis",
     pwyw: "Precio libre",
@@ -82,7 +82,7 @@ export const es: Dictionary = {
   },
   infos: {
     title: "Info",
-    intro: "Todo lo que hay que saber antes de venir y quien esta detras del festival.",
+    intro: "Todo lo que hay que saber antes de venir y quién está detrás del festival.",
     practicalTitle: "Info práctica",
     address: "Dirección",
     transport: "Cómo llegar",
@@ -90,7 +90,7 @@ export const es: Dictionary = {
     contact: "Contacto",
     teamTitle: "El equipo PRISM",
     teamIntro:
-      "PRISM es una asociacion nantesa dedicada a la cultura hip hop. Trayectorias e historias distintas con esta cultura, una misma ganas: un festival que deje sitio a todas las formas de vivirla.",
+      "PRISM es una asociación nantesa dedicada a la cultura hip hop. Trayectorias e historias distintas con esta cultura, unas mismas ganas: un festival que deje sitio a todas las formas de vivirla.",
     partnersTitle: "Construyen el festival con nosotros"
   },
   auth: {
@@ -98,11 +98,11 @@ export const es: Dictionary = {
     loginSubtitle: "Encuentra tus entradas, tus talleres y tus favoritos.",
     signupTitle: "Crear una cuenta",
     signupSubtitle: "Una cuenta para seguir el programa y recibir los anuncios antes que nadie.",
-    email: "Correo electronico",
+    email: "Correo electrónico",
     password: "Contraseña",
     passwordConfirm: "Confirmar contraseña",
     fullName: "Nombre y apellidos",
-    passwordHint: "12 caracteres minimo, con al menos una mayuscula, una minuscula y un numero.",
+    passwordHint: "12 caracteres mínimo, con al menos una mayúscula, una minúscula y un número.",
     newsletter: "Quiero recibir los anuncios del festival por correo",
     rgpd:
       "Al crear una cuenta aceptas nuestra política de privacidad. Tus datos se quedan con nosotros y nunca se venden.",
@@ -110,14 +110,14 @@ export const es: Dictionary = {
     submitSignup: "Crear mi cuenta",
     noAccount: "¿Todavía sin cuenta?",
     hasAccount: "¿Ya tienes cuenta?",
-    forgot: "Olvidaste tu contraseña?",
+    forgot: "¿Olvidaste tu contraseña?",
     resetTitle: "Restablecer contraseña",
-    resetSent: "Si existe una cuenta con esta direccion, acabamos de enviar un enlace.",
-    checkEmail: "Revisa tu correo: te espera un enlace de confirmacion.",
-    errorGeneric: "No se pudo iniciar sesion. Revisa tus datos e intentalo de nuevo.",
+    resetSent: "Si existe una cuenta con esta dirección, acabamos de enviar un enlace.",
+    checkEmail: "Revisa tu correo: te espera un enlace de confirmación.",
+    errorGeneric: "No se pudo iniciar sesión. Revisa tus datos e inténtalo de nuevo.",
     errorPasswordWeak: "Contraseña demasiado corta o simple. Sigue los criterios de arriba.",
     errorPasswordMatch: "Las dos contraseñas no coinciden.",
-    errorEmail: "Esta direccion de correo no es valida."
+    errorEmail: "Esta dirección de correo no es válida."
   },
   account: {
     title: "Mi cuenta",
@@ -126,14 +126,14 @@ export const es: Dictionary = {
     save: "Guardar",
     saved: "Cambios guardados.",
     deleteTitle: "Eliminar mi cuenta",
-    deleteText: "Puedes pedir la eliminacion de tu cuenta y de tus datos cuando quieras.",
+    deleteText: "Puedes pedir la eliminación de tu cuenta y de tus datos cuando quieras.",
     deleteCta: "Pedir la eliminación",
     favorites: "Mis favoritos",
     favoritesEmpty: "Todavía no hay favoritos. Abre una página de evento y pulsa el corazón."
   },
   admin: {
     title: "Back office",
-    subtitle: "Modifica el contenido del sitio sin tocar el codigo.",
+    subtitle: "Modifica el contenido del sitio sin tocar el código.",
     events: "Eventos",
     team: "Equipo",
     artists: "Artistas",
@@ -142,7 +142,7 @@ export const es: Dictionary = {
     newEvent: "Nuevo evento",
     edit: "Editar",
     delete: "Eliminar",
-    published: "En linea",
+    published: "En línea",
     draft: "Borrador",
     save: "Guardar",
     saving: "Guardando...",
@@ -155,9 +155,9 @@ export const es: Dictionary = {
   },
   cookies: {
     text:
-      "Este sitio solo usa las cookies necesarias para funcionar, sobre todo para mantener tu sesion abierta. Sin rastreadores publicitarios.",
+      "Este sitio solo usa las cookies necesarias para funcionar, sobre todo para mantener tu sesión abierta. Sin rastreadores publicitarios.",
     accept: "Entendido",
-    more: "Saber mas"
+    more: "Saber más"
   },
   footer: {
     baseline: "What do we have in common ? Hip hop.",
@@ -176,6 +176,6 @@ export const es: Dictionary = {
     next: "Momento siguiente",
     goTo: "Ir al momento",
     backToTop: "Volver arriba",
-    error: "Ha ocurrido un error. Intentalo de nuevo en un momento."
+    error: "Ha ocurrido un error. Inténtalo de nuevo en un momento."
   }
 };

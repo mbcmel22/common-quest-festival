@@ -12,17 +12,17 @@ export async function POST(request: Request) {
   const {
     data: { user }
   } = await supabase.auth.getUser();
-  if (!user) return NextResponse.json({ error: "non autorise" }, { status: 401 });
+  if (!user) return NextResponse.json({ error: "Non autorisé." }, { status: 401 });
 
   const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).maybeSingle();
   if (!profile || !["admin", "editor"].includes(profile.role)) {
-    return NextResponse.json({ error: "non autorise" }, { status: 403 });
+    return NextResponse.json({ error: "Non autorisé." }, { status: 403 });
   }
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
     return NextResponse.json(
-      { error: "Traduction automatique indisponible : la cle ANTHROPIC_API_KEY n’est pas configuree sur Vercel." },
+      { error: "Traduction automatique indisponible : la clé ANTHROPIC_API_KEY n’est pas configurée sur Vercel." },
       { status: 501 }
     );
   }
@@ -31,7 +31,7 @@ export async function POST(request: Request) {
   const text = (body.text ?? "").slice(0, 2000).trim();
   const source = LANGS[body.source ?? "fr"] ?? "francais";
   const targets = (body.targets ?? []).filter((code) => code in LANGS).slice(0, 2);
-  if (!text || targets.length === 0) return NextResponse.json({ error: "requete incomplete" }, { status: 400 });
+  if (!text || targets.length === 0) return NextResponse.json({ error: "Requête incomplète." }, { status: 400 });
 
   const instruction =
     `Traduis ce texte de ${source} vers ${targets.map((code) => LANGS[code]).join(" et ")}. ` +
@@ -52,7 +52,7 @@ export async function POST(request: Request) {
         messages: [{ role: "user", content: instruction }]
       })
     });
-    if (!response.ok) return NextResponse.json({ error: "service de traduction indisponible" }, { status: 502 });
+    if (!response.ok) return NextResponse.json({ error: "Service de traduction indisponible." }, { status: 502 });
 
     const data = await response.json();
     const raw = (data.content ?? [])
@@ -63,6 +63,6 @@ export async function POST(request: Request) {
       .trim();
     return NextResponse.json(JSON.parse(raw));
   } catch {
-    return NextResponse.json({ error: "traduction impossible" }, { status: 502 });
+    return NextResponse.json({ error: "Traduction impossible pour le moment." }, { status: 502 });
   }
 }
