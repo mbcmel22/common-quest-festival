@@ -5,7 +5,7 @@ import { getEvents } from "@/lib/queries";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
   const events = await getEvents("fr");
-  const staticPaths = ["", "/programme", "/infos", "/mentions-legales", "/confidentialite"];
+  const staticPaths = ["", "/programme", "/infos", "/mentions-legales", "/confidentialite", "/cookies"];
 
   const entries: MetadataRoute.Sitemap = [];
   for (const locale of locales) {

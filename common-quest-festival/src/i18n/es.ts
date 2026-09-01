@@ -163,6 +163,7 @@ export const es: Dictionary = {
     baseline: "What do we have in common ? Hip hop.",
     legal: "Aviso legal",
     privacy: "Privacidad",
+    cookies: "Cookies",
     contact: "Contacto",
     follow: "Sigue el festival",
     prism: "Un festival del colectivo PRISM, Nantes."

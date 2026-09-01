@@ -69,6 +69,7 @@ export default function SiteFooter({
             <Link href={`/${locale}/connexion`} className="block hover:text-acid">{dict.nav.compte}</Link>
             <Link href={`/${locale}/mentions-legales`} className="block text-smoke hover:text-paper">{dict.footer.legal}</Link>
             <Link href={`/${locale}/confidentialite`} className="block text-smoke hover:text-paper">{dict.footer.privacy}</Link>
+            <Link href={`/${locale}/cookies`} className="block text-smoke hover:text-paper">{dict.footer.cookies}</Link>
           </div>
 
           <div className="space-y-4">

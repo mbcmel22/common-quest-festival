@@ -69,6 +69,14 @@ export default function PrivacyPage() {
         </section>
 
         <section>
+          <h2 className="display-m text-paper">Cookies</h2>
+          <p className="mt-3">
+            Le détail des cookies déposés, leur rôle et leur durée de conservation figurent sur la page dédiée
+            Politique de cookies, accessible depuis le pied de page.
+          </p>
+        </section>
+
+        <section>
           <h2 className="display-m text-paper">Vidéos intégrées</h2>
           <p className="mt-3">
             Les vidéos présentes sur les pages d’événement sont intégrées via le mode sans cookie de YouTube. Aucune

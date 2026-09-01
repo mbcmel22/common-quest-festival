@@ -162,6 +162,7 @@ export const fr = {
     baseline: "What do we have in common ? Hip hop.",
     legal: "Mentions légales",
     privacy: "Confidentialité",
+    cookies: "Cookies",
     contact: "Contact",
     follow: "Suivre le festival",
     prism: "Un festival porté par le collectif PRISM, Nantes."
