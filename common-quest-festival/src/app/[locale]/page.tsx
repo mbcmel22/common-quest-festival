@@ -3,6 +3,7 @@ import Image from "next/image";
 import { getDictionary, type Locale } from "@/i18n";
 import { getEvents, getSetting, getDict } from "@/lib/queries";
 import EventCard from "@/components/EventCard";
+import HighlightsCarousel from "@/components/HighlightsCarousel";
 import Marquee from "@/components/Marquee";
 import { pickTicker, DEFAULT_SUPPORT_URL, type TickerSetting } from "@/lib/ticker";
 
@@ -17,7 +18,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const tickerSpeed = ticker?.speed_home ?? 75;
   const support = await getSetting<{ url?: string }>("support");
   const supportUrl = support?.url?.trim() || DEFAULT_SUPPORT_URL;
-  const highlights = events.filter((e) => e.is_highlight).slice(0, 3);
+  const highlights = events.filter((e) => e.is_highlight);
   const countByDay = [1, 2, 3, 4].map((day) => events.filter((e) => e.day_index === day).length);
 
   return (
@@ -98,10 +99,18 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {highlights.length > 0 && (
         <section className="shell py-20 md:py-28">
           <h2 className="display-l">{dict.home.highlightsTitle}</h2>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {highlights.map((event) => (
-              <EventCard key={event.id} event={event} locale={locale as Locale} dict={dict} />
-            ))}
+          <div className="mt-10">
+            <HighlightsCarousel
+              labels={{
+                previous: dict.common.previous,
+                next: dict.common.next,
+                goTo: dict.common.goTo
+              }}
+            >
+              {highlights.map((event) => (
+                <EventCard key={event.id} event={event} locale={locale as Locale} dict={dict} />
+              ))}
+            </HighlightsCarousel>
           </div>
         </section>
       )}

@@ -170,6 +170,9 @@ export const fr = {
     days: ["Jeudi 1er octobre", "Vendredi 2 octobre", "Samedi 3 octobre", "Dimanche 4 octobre"],
     daysShort: ["Jeu 01", "Ven 02", "Sam 03", "Dim 04"],
     loading: "Chargement...",
+    previous: "Temps fort précédent",
+    next: "Temps fort suivant",
+    goTo: "Aller au temps fort",
     backToTop: "Remonter en haut de la page",
     error: "Une erreur est survenue. Réessayez dans un instant."
   }

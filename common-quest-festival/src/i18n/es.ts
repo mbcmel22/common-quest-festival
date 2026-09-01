@@ -171,6 +171,9 @@ export const es: Dictionary = {
     days: ["Jueves 1 de octubre", "Viernes 2 de octubre", "Sábado 3 de octubre", "Domingo 4 de octubre"],
     daysShort: ["Jue 01", "Vie 02", "Sáb 03", "Dom 04"],
     loading: "Cargando...",
+    previous: "Momento anterior",
+    next: "Momento siguiente",
+    goTo: "Ir al momento",
     backToTop: "Volver arriba",
     error: "Ha ocurrido un error. Intentalo de nuevo en un momento."
   }

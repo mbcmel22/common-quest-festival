@@ -172,6 +172,9 @@ export const en: Dictionary = {
     days: ["Thursday 1 October", "Friday 2 October", "Saturday 3 October", "Sunday 4 October"],
     daysShort: ["Thu 01", "Fri 02", "Sat 03", "Sun 04"],
     loading: "Loading...",
+    previous: "Previous highlight",
+    next: "Next highlight",
+    goTo: "Go to highlight",
     backToTop: "Back to top",
     error: "Something went wrong. Try again in a moment."
   }
