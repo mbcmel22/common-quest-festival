@@ -22,31 +22,32 @@ export const fr = {
     eyebrow: "1re édition",
     question: "What do we have in common ?",
     answer: "Hip hop.",
-    dates: "1 > 4 octobre 2026",
-    place: "Quartier de la Création, île de Nantes",
+    dates: "01 > 04 octobre 2026",
+    place: "Quartier de la Création, île de Nantes (Magmaa, Askip, Halles 1&2, Halle 6 Ouest…)",
     cta: "Voir le programme",
     ctaTickets: "Prendre sa place",
     scroll: "Faire défiler"
   },
   home: {
-    introTitle: "Quatre jours, une quête commune",
+    introTitle: "Quatre jours, une quête commune.",
     introText:
-      "Les concerts de rap et les battles se multiplient, mais les rendez-vous qui réunissent les disciplines du hip hop se font rares. Common Quest remet autour de la même table celles et ceux qui font vivre le rap, la danse, le DJing et le graffiti, sans enfermer la culture dans une définition.",
+      "Les concerts de rap et les battles se multiplient. De notre côté, on trouve que les rendez-vous qui font se croiser les différentes disciplines du hip hop se font plus rares. C’est de cette envie qu’est né Common Quest : imaginer un rendez-vous où le rap, la danse, le DJing et le graffiti peuvent se retrouver, se répondre et partager un même espace.\n\nC’est une première édition. On la construit avec nos convictions, beaucoup de curiosité et assez d’humilité pour savoir qu’elle continuera d’évoluer au fil des rencontres, des échanges et de ce que l’on construira avec les autres activistes hip hop nantais·es.",
     disciplines: ["Rap", "Danse", "DJing", "Street art", "Workshops", "Battles", "Concerts", "Talks", "Ateliers"],
     programmeTitle: "Le parcours",
-    programmeText: "Quatre jours, quatre ambiances. Cliquez sur une journée pour voir le détail.",
+    programmeText: "4 jours. 4 façons de vivre Common Quest.",
+    programmeSubtitle: "Choisis ton jour pour voir le détail",
     programmeCta: "Programme complet",
     highlightsTitle: "Les temps forts",
-    teamTitle: "Derrière le festival",
+    teamTitle: "Derrière Common Quest, il y a PRISM",
     teamText:
-      "Common Quest est porté par PRISM, collectif nantais majoritairement féminin issu de la culture hip hop, de la communication et du développement de projets.",
+      "Une équipe nantaise. Des parcours différents. Des histoires différentes avec le hip hop. Et une envie commune : créer le festival dans lequel on aurait nous-mêmes envie de se retrouver.",
     teamCta: "Rencontrer l’équipe",
     ticker: "What do we have in common ? Hip hop."
   },
   programme: {
     title: "Programme",
     intro:
-      "Quatre jours au cœur du Quartier de la Création. Le programme est mis à jour au fil des annonces.",
+      "4 jours. Rap, danse, DJing, street art et quelques détours.\n\nDu jeudi au dimanche : concert, battle, workshop, graffiti, DJ set, talk ou juste l’envie de passer voir ce qu’il se passe.\n\nÀ toi de faire ton programme. La programmation se dévoile au fil des annonces.",
     allDays: "Tout voir",
     free: "Gratuit",
     pwyw: "Prix libre",
@@ -54,7 +55,7 @@ export const fr = {
     soon: "Bientôt",
     noEvents: "Rien à afficher pour cette journée pour le moment. Revenez bientôt.",
     filterCategory: "Discipline",
-    allCategories: "Toutes",
+    allCategories: "Événements",
     price: "Tarif",
     allPrices: "Tous les tarifs"
   },
@@ -65,6 +66,8 @@ export const fr = {
     tarifs: "Tarifs",
     lieu: "Lieu",
     lineup: "À l’affiche",
+    eventType: "Type d’événement",
+    photoCredit: "Photo",
     infosPratiques: "Bon à savoir",
     cta: "Je prends ma place",
     ctaSoon: "Billetterie bientôt ouverte",

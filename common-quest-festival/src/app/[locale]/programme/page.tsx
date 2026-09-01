@@ -53,7 +53,7 @@ export default async function ProgrammePage({
     <>
       <section className="shell pb-8 pt-12 md:pt-16">
         <h1 className="display-xl">{dict.programme.title}</h1>
-        <p className="mt-6 max-w-xl text-lg text-paper/75">{dict.programme.intro}</p>
+        <p className="mt-6 max-w-2xl whitespace-pre-line text-lg text-paper/75">{dict.programme.intro}</p>
       </section>
 
       {/* Filtres : journee puis discipline */}

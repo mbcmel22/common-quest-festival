@@ -1,4 +1,15 @@
-export type Category = "danse" | "rap" | "graffiti" | "dj" | "atelier" | "talk" | "soiree" | "autre";
+export type Category =
+  | "soiree"
+  | "atelier"
+  | "workshop"
+  | "dj"
+  | "graffiti"
+  | "rap"
+  | "danse"
+  | "talk"
+  | "projection"
+  | "scene_ouverte"
+  | "autre";
 
 export type EventRow = {
   id: string;
@@ -20,6 +31,7 @@ export type EventRow = {
   is_free: boolean;
   is_pwyw: boolean;
   cover_url: string | null;
+  photo_credit: string | null;
   is_published: boolean;
   is_highlight: boolean;
   sort_order: number;
@@ -32,6 +44,9 @@ export type EventTranslation = {
   tagline: string | null;
   description: string | null;
   practical_info: string | null;
+  event_type: string | null;
+  partner_note: string | null;
+  lineup_note: string | null;
 };
 
 export type EventWithTranslation = EventRow & { t: EventTranslation | null };

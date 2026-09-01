@@ -54,7 +54,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <div className="grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:gap-16">
           <h2 className="display-l">{dict.home.introTitle}</h2>
           <div>
-            <p className="text-lg leading-relaxed text-paper/80">{dict.home.introText}</p>
+            <p className="whitespace-pre-line text-lg leading-relaxed text-paper/80">{dict.home.introText}</p>
           </div>
         </div>
       </section>
@@ -63,7 +63,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <section className="bg-paper py-20 text-ink md:py-28">
         <div className="shell">
           <div className="flex flex-wrap items-end justify-between gap-4">
-            <h2 className="display-l max-w-2xl">{dict.home.programmeText}</h2>
+            <div>
+              <h2 className="display-l max-w-2xl">{dict.home.programmeText}</h2>
+              <p className="mt-3 text-lg text-ink/70">{dict.home.programmeSubtitle}</p>
+            </div>
             <Link href={`/${locale}/programme`} className="btn-ink">
               {dict.home.programmeCta}
             </Link>
@@ -107,9 +110,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <section className="border-t border-white/10 py-14 md:py-28">
         <div className="shell grid gap-6 md:grid-cols-[1fr_1fr] md:items-center md:gap-10">
           <div>
-            <p className="eyebrow">{dict.home.teamTitle}</p>
-            <h2 className="mt-4 display-l">PRISM</h2>
-            <p className="mt-6 max-w-lg text-lg text-paper/75">{dict.home.teamText}</p>
+            <h2 className="display-l max-w-xl">{dict.home.teamTitle}</h2>
+            <p className="mt-6 max-w-lg whitespace-pre-line text-lg text-paper/75">{dict.home.teamText}</p>
             <Link href={`/${locale}/infos#equipe`} className="btn-violet mt-8">
               {dict.home.teamCta}
             </Link>

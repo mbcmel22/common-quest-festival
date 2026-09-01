@@ -24,30 +24,32 @@ export const en: Dictionary = {
     eyebrow: "First edition",
     question: "What do we have in common ?",
     answer: "Hip hop.",
-    dates: "1 > 4 October 2026",
+    dates: "01 > 04 October 2026",
     place: "Quartier de la Création, île de Nantes",
     cta: "See the line-up",
     ctaTickets: "Get your ticket",
     scroll: "Scroll"
   },
   home: {
-    introTitle: "Four days, one common quest",
+    introTitle: "Four days, one common quest.",
     introText:
-      "Rap shows and battles are everywhere, but events that bring hip hop disciplines together are rare. Common Quest puts rap, dance, DJing and graffiti back around the same table, without locking the culture into a definition.",
+      "Rap shows and battles are everywhere. From where we stand, the events that let the different hip hop disciplines meet have become rare. That is where Common Quest comes from: a place where rap, dance, DJing and graffiti can gather, answer each other and share the same space.\n\nThis is a first edition. We are building it with our convictions, a lot of curiosity and enough humility to know it will keep evolving, through the encounters and everything we build with the other hip hop activists in Nantes.",
     disciplines: ["Rap", "Dance", "DJing", "Street art", "Workshops", "Battles", "Concerts", "Talks", "Sessions"],
     programmeTitle: "The route",
-    programmeText: "Four days, four moods. Pick a day to see the detail.",
+    programmeText: "4 days. 4 ways to live Common Quest.",
+    programmeSubtitle: "Pick your day to see the detail",
     programmeCta: "Full line-up",
     highlightsTitle: "Highlights",
-    teamTitle: "Behind the festival",
+    teamTitle: "Behind Common Quest, there is PRISM",
     teamText:
-      "Common Quest is run by PRISM, a mostly female collective from Nantes rooted in hip hop culture, communication and project development.",
+      "A team from Nantes. Different paths. Different stories with hip hop. And one shared wish: to build the festival we would want to end up in ourselves.",
     teamCta: "Meet the team",
     ticker: "What do we have in common ? Hip hop."
   },
   programme: {
     title: "Line-up",
-    intro: "Four days in the heart of the Quartier de la Creation. Updated as announcements come in.",
+    intro:
+      "4 days. Rap, dance, DJing, street art and a few detours.\n\nFrom Thursday to Sunday: a show, a battle, a workshop, graffiti, a DJ set, a talk, or simply the urge to drop by and see what is happening.\n\nBuild your own line-up. The programme is revealed as announcements come in.",
     allDays: "All days",
     free: "Free",
     pwyw: "Pay what you want",
@@ -55,7 +57,7 @@ export const en: Dictionary = {
     soon: "Soon",
     noEvents: "Nothing to show for this day yet. Come back soon.",
     filterCategory: "Discipline",
-    allCategories: "All",
+    allCategories: "Events",
     price: "Price",
     allPrices: "All prices"
   },
@@ -66,6 +68,8 @@ export const en: Dictionary = {
     tarifs: "Prices",
     lieu: "Venue",
     lineup: "Line-up",
+    eventType: "Type of event",
+    photoCredit: "Photo",
     infosPratiques: "Good to know",
     cta: "Get my ticket",
     ctaSoon: "Tickets on sale soon",

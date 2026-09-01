@@ -23,6 +23,7 @@ export default function TeamEditor({ dict }: { dict: Dictionary }) {
   const [draft, setDraft] = useState<Partial<TeamMember>>(blank());
   const [loading, setLoading] = useState(true);
   const [state, setState] = useState<"idle" | "saving" | "error">("idle");
+  const [errorText, setErrorText] = useState<string | null>(null);
 
   async function load() {
     const supabase = createClient();
@@ -44,7 +45,11 @@ export default function TeamEditor({ dict }: { dict: Dictionary }) {
     const { error } = draft.id
       ? await supabase.from("team_members").update(payload).eq("id", draft.id)
       : await supabase.from("team_members").insert(payload);
-    if (error) return setState("error");
+    if (error) {
+      setErrorText(error.message);
+      return setState("error");
+    }
+    setErrorText(null);
     setDraft(blank());
     setState("idle");
     load();
@@ -109,7 +114,7 @@ export default function TeamEditor({ dict }: { dict: Dictionary }) {
               Annuler
             </button>
           )}
-          {state === "error" && <span className="text-sm text-red-600">{dict.common.error}</span>}
+          {state === "error" && <span className="text-sm text-red-600">{errorText ?? dict.common.error}</span>}
         </div>
       </form>
 

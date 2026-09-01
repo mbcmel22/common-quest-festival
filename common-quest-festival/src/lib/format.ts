@@ -17,9 +17,45 @@ export function formatRange(start: string | null, end: string | null, locale: st
 }
 
 export const categoryLabels: Record<string, Record<string, string>> = {
-  fr: { danse: "Danse", rap: "Rap", graffiti: "Graffiti", dj: "DJing", atelier: "Atelier", talk: "Talk", soiree: "Soiree", autre: "Autre" },
-  en: { danse: "Dance", rap: "Rap", graffiti: "Graffiti", dj: "DJing", atelier: "Workshop", talk: "Talk", soiree: "Night", autre: "Other" },
-  es: { danse: "Danza", rap: "Rap", graffiti: "Grafiti", dj: "DJing", atelier: "Taller", talk: "Charla", soiree: "Noche", autre: "Otro" }
+  fr: {
+    soiree: "Soirées",
+    atelier: "Ateliers",
+    workshop: "Workshops",
+    dj: "DJ set",
+    graffiti: "Street art",
+    rap: "Rap",
+    danse: "Danse",
+    talk: "Talks",
+    projection: "Projection",
+    scene_ouverte: "Scène ouverte",
+    autre: "Autre"
+  },
+  en: {
+    soiree: "Nights",
+    atelier: "Sessions",
+    workshop: "Workshops",
+    dj: "DJ set",
+    graffiti: "Street art",
+    rap: "Rap",
+    danse: "Dance",
+    talk: "Talks",
+    projection: "Screening",
+    scene_ouverte: "Open mic",
+    autre: "Other"
+  },
+  es: {
+    soiree: "Fiestas",
+    atelier: "Talleres",
+    workshop: "Workshops",
+    dj: "DJ set",
+    graffiti: "Arte urbano",
+    rap: "Rap",
+    danse: "Danza",
+    talk: "Charlas",
+    projection: "Proyección",
+    scene_ouverte: "Micro abierto",
+    autre: "Otro"
+  }
 };
 
 /** Regles de robustesse du mot de passe, verifiees aussi cote Supabase. */

@@ -52,10 +52,21 @@ export default async function EventPage({ params }: { params: Promise<{ locale: 
           <div className="absolute inset-0 bg-gradient-to-br from-violet/60 via-ink to-ink" />
         )}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/55 to-ink/10" />
+        {event.photo_credit && (
+          <span className="absolute right-3 top-3 rounded-full bg-ink/70 px-3 py-1 text-[11px] text-paper/70">
+            {dict.event.photoCredit} : {event.photo_credit}
+          </span>
+        )}
         <div className="shell absolute inset-x-0 bottom-0 pb-10">
-          <span className="tag bg-acid text-ink">{categoryLabels[locale][event.category]}</span>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="tag border-acid bg-acid text-ink">{categoryLabels[locale][event.category]}</span>
+            {event.t?.event_type && <span className="tag text-paper/80">{event.t.event_type}</span>}
+          </div>
           <h1 className="mt-4 display-l max-w-3xl">{event.t?.title}</h1>
           {event.t?.tagline && <p className="mt-3 max-w-2xl text-lg text-paper/80">{event.t.tagline}</p>}
+          {event.t?.partner_note && (
+            <p className="mt-3 max-w-2xl text-[15px] text-acid">{event.t.partner_note}</p>
+          )}
         </div>
       </div>
 
@@ -115,6 +126,13 @@ export default async function EventPage({ params }: { params: Promise<{ locale: 
                   </li>
                 ))}
               </ul>
+            </section>
+          )}
+
+          {event.t?.lineup_note && (
+            <section className="mt-10">
+              <h2 className="display-m">{dict.event.lineup}</h2>
+              <p className="mt-3 whitespace-pre-line text-paper/80">{event.t.lineup_note}</p>
             </section>
           )}
 

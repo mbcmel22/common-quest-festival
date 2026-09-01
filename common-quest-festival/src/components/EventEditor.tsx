@@ -4,15 +4,42 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import ImageUploader from "./ImageUploader";
+import { categoryLabels } from "@/lib/format";
 import { locales, type Locale, type Dictionary } from "@/i18n";
 import { SOCIAL_KEYS, SOCIAL_LABELS, normalizeSocialGroups, type SocialGroup } from "./SocialLinks";
 
-const CATEGORIES = ["danse", "rap", "graffiti", "dj", "atelier", "talk", "soiree", "autre"] as const;
+const CATEGORIES = [
+  "soiree",
+  "atelier",
+  "workshop",
+  "dj",
+  "graffiti",
+  "rap",
+  "danse",
+  "talk",
+  "projection",
+  "scene_ouverte",
+  "autre"
+] as const;
 
-type Translations = Record<string, { title: string; tagline: string; description: string; practical_info: string }>;
+type TranslationFields = {
+  title: string;
+  tagline: string;
+  description: string;
+  practical_info: string;
+  event_type: string;
+  partner_note: string;
+  lineup_note: string;
+};
+type Translations = Record<string, TranslationFields>;
 
 const emptyTranslations = (): Translations =>
-  Object.fromEntries(locales.map((l) => [l, { title: "", tagline: "", description: "", practical_info: "" }])) as Translations;
+  Object.fromEntries(
+    locales.map((l) => [
+      l,
+      { title: "", tagline: "", description: "", practical_info: "", event_type: "", partner_note: "", lineup_note: "" }
+    ])
+  ) as Translations;
 
 export default function EventEditor({
   eventId,
@@ -48,6 +75,7 @@ export default function EventEditor({
     is_free: false,
     is_pwyw: false,
     cover_url: null as string | null,
+    photo_credit: "",
     is_published: false,
     is_highlight: false,
     sort_order: 0
@@ -70,6 +98,7 @@ export default function EventEditor({
             end_time: rest.end_time?.slice(0, 5) ?? "",
             doors_time: rest.doors_time?.slice(0, 5) ?? "",
             venue: rest.venue ?? "",
+            photo_credit: rest.photo_credit ?? "",
             address: rest.address ?? "",
             price_label: rest.price_label ?? "",
             ticket_url: rest.ticket_url ?? "",
@@ -86,7 +115,10 @@ export default function EventEditor({
               title: row.title ?? "",
               tagline: row.tagline ?? "",
               description: row.description ?? "",
-              practical_info: row.practical_info ?? ""
+              practical_info: row.practical_info ?? "",
+              event_type: row.event_type ?? "",
+              partner_note: row.partner_note ?? "",
+              lineup_note: row.lineup_note ?? ""
             };
           });
           setTranslations(next);
@@ -215,12 +247,46 @@ export default function EventEditor({
             <input id="title" className="field-light" value={translations[tab].title} onChange={(e) => setTranslation("title", e.target.value)} maxLength={120} />
           </div>
           <div>
+            <label className="label" htmlFor="event-type">Type d’événement</label>
+            <input
+              id="event-type"
+              className="field-light"
+              value={translations[tab].event_type}
+              onChange={(e) => setTranslation("event_type", e.target.value)}
+              placeholder="Battle de danse"
+              maxLength={60}
+            />
+          </div>
+          <div>
+            <label className="label" htmlFor="partner-note">Mention particulière</label>
+            <input
+              id="partner-note"
+              className="field-light"
+              value={translations[tab].partner_note}
+              onChange={(e) => setTranslation("partner_note", e.target.value)}
+              placeholder="Co-organisé par PRISM, la SAMOA et Nantes Université"
+              maxLength={160}
+            />
+          </div>
+          <div>
             <label className="label" htmlFor="tagline">Accroche</label>
             <input id="tagline" className="field-light" value={translations[tab].tagline} onChange={(e) => setTranslation("tagline", e.target.value)} maxLength={180} />
           </div>
           <div>
             <label className="label" htmlFor="description">Description</label>
             <textarea id="description" rows={7} className="field-light" value={translations[tab].description} onChange={(e) => setTranslation("description", e.target.value)} maxLength={4000} />
+          </div>
+          <div>
+            <label className="label" htmlFor="lineup-note">Line-up, texte libre</label>
+            <textarea
+              id="lineup-note"
+              rows={3}
+              className="field-light"
+              value={translations[tab].lineup_note}
+              onChange={(e) => setTranslation("lineup_note", e.target.value)}
+              placeholder="TBA"
+              maxLength={1000}
+            />
           </div>
           <div>
             <label className="label" htmlFor="practical">Bon à savoir</label>
@@ -238,6 +304,17 @@ export default function EventEditor({
             folder="evenements"
             onChange={(url) => setField("cover_url", url)}
           />
+          <div>
+            <label className="label" htmlFor="photo-credit">Crédit de la photo d’entête</label>
+            <input
+              id="photo-credit"
+              className="field-light"
+              value={event.photo_credit}
+              onChange={(e) => setField("photo_credit", e.target.value)}
+              placeholder="Prénom Nom"
+              maxLength={120}
+            />
+          </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="label" htmlFor="day">Journee</label>
@@ -251,7 +328,9 @@ export default function EventEditor({
               <label className="label" htmlFor="category">Discipline</label>
               <select id="category" className="field-light" value={event.category} onChange={(e) => setField("category", e.target.value)}>
                 {CATEGORIES.map((c) => (
-                  <option key={c} value={c}>{c}</option>
+                  <option key={c} value={c}>
+                    {categoryLabels[locale]?.[c] ?? c}
+                  </option>
                 ))}
               </select>
             </div>

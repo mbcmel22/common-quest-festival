@@ -20,6 +20,7 @@ export default function SettingsEditor({ dict }: { dict: Dictionary }) {
   const [ticker, setTicker] = useState<Ticker>({ home: { ...emptyZone }, infos: { ...emptyZone }, speed_home: 75, speed_infos: 75 });
   const [logoUrl, setLogoUrl] = useState<string | null>(null);
   const [state, setState] = useState<"idle" | "saving" | "saved" | "error">("idle");
+  const [errorText, setErrorText] = useState<string | null>(null);
 
   useEffect(() => {
     const supabase = createClient();
@@ -62,6 +63,7 @@ export default function SettingsEditor({ dict }: { dict: Dictionary }) {
       ],
       { onConflict: "key" }
     );
+    setErrorText(error?.message ?? null);
     setState(error ? "error" : "saved");
   }
 
@@ -232,7 +234,7 @@ export default function SettingsEditor({ dict }: { dict: Dictionary }) {
           {state === "saving" ? dict.admin.saving : dict.admin.save}
         </button>
         {state === "saved" && <span className="text-sm text-violet">{dict.admin.saved}</span>}
-        {state === "error" && <span className="text-sm text-red-600">{dict.common.error}</span>}
+        {state === "error" && <span className="text-sm text-red-600">{errorText ?? dict.common.error}</span>}
       </div>
     </form>
   );
