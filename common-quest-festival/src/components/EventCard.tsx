@@ -27,7 +27,12 @@ export default function EventCard({
     >
       <div className="relative aspect-[16/10] overflow-hidden bg-ink">
         {event.cover_url ? (
-          <CoverImage src={event.cover_url} alt={title} sizes="(max-width: 640px) 86vw, (max-width: 1024px) 45vw, 380px" />
+          <CoverImage
+            src={event.cover_url}
+            alt={title}
+            fit={event.cover_fit ?? "cover"}
+            sizes="(max-width: 640px) 86vw, (max-width: 1024px) 45vw, 380px"
+          />
         ) : (
           <div className="flex h-full items-center justify-center bg-gradient-to-br from-violet/70 to-ink">
             <Image src="/brand/picto-jaune.png" alt="" width={48} height={48} className="opacity-60" />

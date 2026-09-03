@@ -32,6 +32,7 @@ export type EventRow = {
   is_pwyw: boolean;
   cover_url: string | null;
   photo_credit: string | null;
+  cover_fit: "cover" | "contain";
   is_published: boolean;
   is_highlight: boolean;
   sort_order: number;

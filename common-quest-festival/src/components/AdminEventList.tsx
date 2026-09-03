@@ -2,7 +2,9 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import Image from "next/image";
 import { formatWhen, categoryLabels } from "@/lib/format";
+import { createClient } from "@/lib/supabase/client";
 import type { Dictionary } from "@/i18n";
 
 export type AdminEventRow = {
@@ -18,20 +20,76 @@ export type AdminEventRow = {
   is_pwyw: boolean;
   is_published: boolean;
   is_highlight: boolean;
+  cover_url: string | null;
   translations: { locale: string; title: string }[];
 };
 
 type Filters = { day: number | null; category: string | null; price: string | null; status: string | null };
 
+const ALLOWED = ["image/jpeg", "image/png", "image/webp", "image/avif"];
+const MAX_SIZE = 5 * 1024 * 1024;
+
 export default function AdminEventList({
   locale,
   dict,
-  events
+  events: initialEvents
 }: {
   locale: string;
   dict: Dictionary;
   events: AdminEventRow[];
 }) {
+  const [events, setEvents] = useState(initialEvents);
+  const [busyId, setBusyId] = useState<string | null>(null);
+  const [flash, setFlash] = useState<{ id: string; text: string; kind: "ok" | "ko" } | null>(null);
+
+  function notify(id: string, text: string, kind: "ok" | "ko") {
+    setFlash({ id, text, kind });
+    window.setTimeout(() => setFlash(null), 2600);
+  }
+
+  /** Publication basculee directement depuis la liste, sans ouvrir la fiche. */
+  async function togglePublished(event: AdminEventRow) {
+    const next = !event.is_published;
+    setBusyId(event.id);
+    setEvents((list) => list.map((e) => (e.id === event.id ? { ...e, is_published: next } : e)));
+    const supabase = createClient();
+    const { error } = await supabase.from("events").update({ is_published: next }).eq("id", event.id);
+    setBusyId(null);
+    if (error) {
+      setEvents((list) => list.map((e) => (e.id === event.id ? { ...e, is_published: !next } : e)));
+      notify(event.id, error.message, "ko");
+    } else {
+      notify(event.id, next ? "Publié" : "Masqué", "ok");
+    }
+  }
+
+  /** Remplacement du visuel a la volee, enregistre aussitot. */
+  async function changeCover(event: AdminEventRow, file: File) {
+    if (!ALLOWED.includes(file.type)) return notify(event.id, "Format accepté : JPG, PNG, WebP ou AVIF.", "ko");
+    if (file.size > MAX_SIZE) return notify(event.id, "Image trop lourde, 5 Mo maximum.", "ko");
+
+    setBusyId(event.id);
+    const supabase = createClient();
+    const ext = file.name.split(".").pop()?.toLowerCase().replace(/[^a-z0-9]/g, "") ?? "jpg";
+    const path = `evenements/${crypto.randomUUID()}.${ext}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from("media")
+      .upload(path, file, { cacheControl: "3600", upsert: false, contentType: file.type });
+    if (uploadError) {
+      setBusyId(null);
+      return notify(event.id, uploadError.message, "ko");
+    }
+
+    const { data } = supabase.storage.from("media").getPublicUrl(path);
+    const { error } = await supabase.from("events").update({ cover_url: data.publicUrl }).eq("id", event.id);
+    setBusyId(null);
+    if (error) return notify(event.id, error.message, "ko");
+
+    setEvents((list) => list.map((e) => (e.id === event.id ? { ...e, cover_url: data.publicUrl } : e)));
+    notify(event.id, "Visuel mis à jour", "ok");
+  }
+
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState<Filters>({ day: null, category: null, price: null, status: null });
   const [restored, setRestored] = useState(false);
@@ -177,22 +235,73 @@ export default function AdminEventList({
 
       <ul className="mt-6 divide-y divide-ink/10 rounded-2xl border border-ink/12 bg-white">
         {filtered.map((event) => (
-          <li key={event.id} className="flex flex-wrap items-center justify-between gap-4 p-5">
-            <div className="min-w-0">
+          <li key={event.id} className="flex flex-wrap items-center gap-4 p-4 sm:flex-nowrap sm:p-5">
+            {/* Vignette : survolez pour remplacer le visuel sans ouvrir la fiche */}
+            <label
+              className="group relative h-16 w-24 shrink-0 cursor-pointer overflow-hidden rounded-xl border border-ink/15 bg-ink/5"
+              title="Changer le visuel"
+            >
+              {event.cover_url ? (
+                <Image src={event.cover_url} alt="" fill sizes="96px" className="object-cover" />
+              ) : (
+                <span className="flex h-full items-center justify-center text-[11px] text-ink/40">Aucun</span>
+              )}
+              <span className="absolute inset-0 flex items-center justify-center bg-ink/70 text-[11px] font-medium uppercase tracking-[0.08em] text-acid opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
+                {busyId === event.id ? "..." : "Changer"}
+              </span>
+              <input
+                type="file"
+                accept={ALLOWED.join(",")}
+                className="sr-only"
+                disabled={busyId === event.id}
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) changeCover(event, file);
+                  e.target.value = "";
+                }}
+              />
+            </label>
+
+            <div className="min-w-0 flex-1">
               <p className="font-display text-lg uppercase">{titleOf(event)}</p>
               <p className="text-[14px] text-ink/60">
                 {formatWhen(event.event_date, event.start_time, event.end_time, locale)}
                 {event.venue ? `. Lieu : ${event.venue}` : ""}
               </p>
+              {flash?.id === event.id && (
+                <p className={`mt-1 text-[13px] ${flash.kind === "ok" ? "text-violet" : "text-red-600"}`} role="status">
+                  {flash.text}
+                </p>
+              )}
             </div>
-            <div className="flex items-center gap-3">
-              <span
-                className={`rounded-full px-3 py-1 text-[12px] ${
-                  event.is_published ? "bg-violet text-white" : "bg-ink/10 text-ink/60"
-                }`}
+
+            <div className="flex w-full items-center justify-between gap-3 sm:w-auto sm:justify-end">
+              {/* Interrupteur de publication, enregistre immediatement */}
+              <button
+                type="button"
+                role="switch"
+                aria-checked={event.is_published}
+                aria-label={event.is_published ? "Masquer cette page" : "Publier cette page"}
+                disabled={busyId === event.id}
+                onClick={() => togglePublished(event)}
+                className="flex items-center gap-2 disabled:opacity-50"
               >
-                {event.is_published ? dict.admin.published : dict.admin.draft}
-              </span>
+                <span
+                  className={`relative h-6 w-11 rounded-full transition-colors ${
+                    event.is_published ? "bg-violet" : "bg-ink/20"
+                  }`}
+                >
+                  <span
+                    className={`absolute top-0.5 h-5 w-5 rounded-full bg-white transition-all ${
+                      event.is_published ? "left-[22px]" : "left-0.5"
+                    }`}
+                  />
+                </span>
+                <span className="text-[13px] text-ink/70">
+                  {event.is_published ? dict.admin.published : "Masqué"}
+                </span>
+              </button>
+
               <Link href={`/${locale}/admin/evenements/${event.id}`} className="btn-ink btn-sm">
                 {dict.admin.edit}
               </Link>

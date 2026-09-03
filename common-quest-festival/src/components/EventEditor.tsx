@@ -76,6 +76,7 @@ export default function EventEditor({
     is_pwyw: false,
     cover_url: null as string | null,
     photo_credit: "",
+    cover_fit: "cover",
     is_published: false,
     is_highlight: false
   });
@@ -98,6 +99,7 @@ export default function EventEditor({
             doors_time: rest.doors_time?.slice(0, 5) ?? "",
             venue: rest.venue ?? "",
             photo_credit: rest.photo_credit ?? "",
+            cover_fit: rest.cover_fit ?? "cover",
             address: rest.address ?? "",
             price_label: rest.price_label ?? "",
             ticket_url: rest.ticket_url ?? "",
@@ -302,6 +304,22 @@ export default function EventEditor({
             folder="evenements"
             onChange={(url) => setField("cover_url", url)}
           />
+          <div>
+            <label className="label" htmlFor="cover-fit">Cadrage du visuel</label>
+            <select
+              id="cover-fit"
+              className="field-light"
+              value={event.cover_fit}
+              onChange={(e) => setField("cover_fit", e.target.value)}
+            >
+              <option value="cover">Remplir le cadre, l’image est recadrée</option>
+              <option value="contain">Image entière, fond flou sur les côtés</option>
+            </select>
+            <p className="mt-1 text-xs text-ink/50">
+              Choisissez Remplir pour un visuel large ou une photo, Image entière pour une affiche verticale dont
+              rien ne doit être coupé.
+            </p>
+          </div>
           <div>
             <label className="label" htmlFor="photo-credit">Crédit de la photo d’entête</label>
             <input

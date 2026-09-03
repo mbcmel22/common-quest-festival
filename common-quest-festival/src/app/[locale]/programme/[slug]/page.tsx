@@ -61,7 +61,13 @@ export default async function EventPage({
       {/* Visuel de tete : l affiche entiere, sans texte par-dessus */}
       <div className="relative aspect-[16/9] w-full overflow-hidden bg-ink-soft sm:aspect-[21/9] sm:max-h-[60vh]">
         {event.cover_url ? (
-          <CoverImage src={event.cover_url} alt={event.t?.title ?? ""} sizes="100vw" priority />
+          <CoverImage
+            src={event.cover_url}
+            alt={event.t?.title ?? ""}
+            fit={event.cover_fit ?? "cover"}
+            sizes="100vw"
+            priority
+          />
         ) : (
           <div className="absolute inset-0 bg-gradient-to-br from-violet/60 via-ink to-ink" />
         )}

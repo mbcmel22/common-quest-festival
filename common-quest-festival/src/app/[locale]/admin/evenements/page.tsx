@@ -11,7 +11,7 @@ export default async function AdminEvents({ params }: { params: Promise<{ locale
   const { data } = await supabase
     .from("events")
     .select(
-      "id, slug, day_index, event_date, start_time, end_time, venue, category, is_free, is_pwyw, is_published, is_highlight, translations:event_translations(locale, title)"
+      "id, slug, day_index, event_date, start_time, end_time, venue, category, is_free, is_pwyw, is_published, is_highlight, cover_url, translations:event_translations(locale, title)"
     )
     .order("event_date")
     .order("start_time", { nullsFirst: false });
