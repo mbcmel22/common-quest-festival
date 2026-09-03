@@ -72,7 +72,7 @@ export default async function LocaleLayout({
         <main id="contenu" className="pt-20 md:pt-24">
           {children}
         </main>
-        <SiteFooter locale={locale as Locale} dict={dict} logoUrl={brand?.logo_url ?? null} socials={socials} supportUrl={supportUrl} />
+        <SiteFooter locale={locale as Locale} dict={dict} logoUrl={brand?.logo_url ?? null} socials={socials} supportUrl={supportUrl} isLoggedIn={!!user} />
         <ScrollToTop label={dict.common.backToTop} />
         <CookieBanner locale={locale as Locale} dict={dict} />
       </body>

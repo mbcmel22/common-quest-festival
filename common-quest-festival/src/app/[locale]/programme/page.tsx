@@ -37,6 +37,15 @@ export default async function ProgrammePage({
     (e) => (!activeDay || e.day_index === activeDay) && (!activeCategory || e.category === activeCategory) && matchPrice(e)
   );
 
+  // Filtres actifs, reportes sur les liens des cartes puis sur le bouton de retour
+  const currentQuery = (() => {
+    const p = new URLSearchParams();
+    if (activeDay) p.set("jour", String(activeDay));
+    if (activeCategory) p.set("discipline", activeCategory);
+    if (activePrice) p.set("tarif", activePrice);
+    return p.toString();
+  })();
+
   const buildHref = (next: { jour?: number | null; discipline?: string | null; tarif?: string | null }) => {
     const p = new URLSearchParams();
     const day = next.jour === undefined ? activeDay : next.jour;
@@ -135,7 +144,7 @@ export default async function ProgrammePage({
                   {filtered
                     .filter((e) => e.day_index === day)
                     .map((event) => (
-                      <EventCard key={event.id} event={event} locale={locale as Locale} dict={dict} />
+                      <EventCard key={event.id} event={event} locale={locale as Locale} dict={dict} query={currentQuery} />
                     ))}
                 </div>
               </div>

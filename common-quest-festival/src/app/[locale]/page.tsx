@@ -60,6 +60,24 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </div>
       </section>
 
+      {/* BOIRE ET MANGER : le village se vit aussi a table */}
+      <section className="border-t border-white/10 py-14 md:py-20">
+        <div className="shell grid gap-8 md:grid-cols-[0.9fr_1.1fr] md:items-center md:gap-16">
+          <h2 className="display-l">{dict.home.magmaaTitle}</h2>
+          <div>
+            <p className="text-lg leading-relaxed text-paper/80">{dict.home.magmaaText}</p>
+            <a
+              href="https://www.magmaa-nantes.fr/"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="btn-ghost btn-sm mt-6"
+            >
+              {dict.home.magmaaCta}
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* LE PARCOURS : quatre journees reliees par le fil de la quete */}
       <section className="bg-paper py-20 text-ink md:py-28">
         <div className="shell">

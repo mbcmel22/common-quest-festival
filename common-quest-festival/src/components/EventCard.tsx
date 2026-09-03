@@ -8,17 +8,23 @@ import type { Locale, Dictionary } from "@/i18n";
 export default function EventCard({
   event,
   locale,
-  dict
+  dict,
+  /** Filtres actifs, transmis pour pouvoir revenir exactement au meme endroit. */
+  query
 }: {
   event: EventWithTranslation;
   locale: Locale;
   dict: Dictionary;
+  query?: string;
 }) {
   const title = event.t?.title ?? event.slug;
   const when = formatWhen(event.event_date, event.start_time, event.end_time, locale);
 
   return (
-    <Link href={`/${locale}/programme/${event.slug}`} className="event-card group focus:outline-none">
+    <Link
+      href={`/${locale}/programme/${event.slug}${query ? `?${query}` : ""}`}
+      className="event-card group focus:outline-none"
+    >
       <div className="relative aspect-[16/10] overflow-hidden bg-ink">
         {event.cover_url ? (
           <CoverImage src={event.cover_url} alt={title} />

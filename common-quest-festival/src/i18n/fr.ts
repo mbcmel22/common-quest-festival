@@ -41,6 +41,10 @@ export const fr = {
     teamTitle: "Derrière Common Quest, il y a PRISM",
     teamText:
       "Une équipe nantaise. Des parcours différents. Des histoires différentes avec le hip hop. Et une envie commune : créer le festival dans lequel on aurait nous-mêmes envie de se retrouver.",
+    magmaaTitle: "Boire un verre et manger sur place",
+    magmaaText:
+      "Le festival prend ses quartiers autour de Magmaa, le food hall de l’île de Nantes. Une dizaine de cuisines du monde, un bar, une grande terrasse et de longues tables où l’on s’installe sans réserver. De quoi faire une pause entre deux battles, dîner avant un concert ou simplement prolonger la soirée. La restauration reste ouverte pendant les événements accueillis sur place.",
+    magmaaCta: "Découvrir Magmaa",
     teamCta: "Rencontrer l’équipe",
     ticker: "What do we have in common ? Hip hop."
   },

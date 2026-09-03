@@ -10,13 +10,15 @@ export default function SiteFooter({
   dict,
   logoUrl,
   socials,
-  supportUrl
+  supportUrl,
+  isLoggedIn = false
 }: {
   locale: Locale;
   dict: Dictionary;
   logoUrl?: string | null;
   socials?: Socials | null;
   supportUrl?: string;
+  isLoggedIn?: boolean;
 }) {
   return (
     <footer className="relative mt-8 bg-[#170D1E]">
@@ -66,7 +68,9 @@ export default function SiteFooter({
             <p className="mb-4 font-display text-[15px] uppercase tracking-[0.05em] text-acid">Navigation</p>
             <Link href={`/${locale}/programme`} className="block hover:text-acid">{dict.nav.programme}</Link>
             <Link href={`/${locale}/infos`} className="block hover:text-acid">{dict.nav.infos}</Link>
-            <Link href={`/${locale}/connexion`} className="block hover:text-acid">{dict.nav.compte}</Link>
+            <Link href={isLoggedIn ? `/${locale}/compte` : `/${locale}/connexion`} className="block hover:text-acid">
+              {isLoggedIn ? dict.nav.compte : dict.nav.connexion}
+            </Link>
             <Link href={`/${locale}/mentions-legales`} className="block text-smoke hover:text-paper">{dict.footer.legal}</Link>
             <Link href={`/${locale}/confidentialite`} className="block text-smoke hover:text-paper">{dict.footer.privacy}</Link>
             <Link href={`/${locale}/cookies`} className="block text-smoke hover:text-paper">{dict.footer.cookies}</Link>

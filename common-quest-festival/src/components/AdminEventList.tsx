@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { formatWhen, categoryLabels } from "@/lib/format";
 import type { Dictionary } from "@/i18n";
 
@@ -34,6 +34,32 @@ export default function AdminEventList({
 }) {
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState<Filters>({ day: null, category: null, price: null, status: null });
+  const [restored, setRestored] = useState(false);
+
+  // Les filtres sont conserves le temps de la session : on revient
+  // d une fiche evenement exactement la ou on etait.
+  useEffect(() => {
+    try {
+      const saved = window.sessionStorage.getItem("cq_admin_filtres");
+      if (saved) {
+        const parsed = JSON.parse(saved) as { search?: string; filters?: Filters };
+        if (parsed.filters) setFilters(parsed.filters);
+        if (parsed.search) setSearch(parsed.search);
+      }
+    } catch {
+      // stockage indisponible : on repart des filtres par defaut
+    }
+    setRestored(true);
+  }, []);
+
+  useEffect(() => {
+    if (!restored) return;
+    try {
+      window.sessionStorage.setItem("cq_admin_filtres", JSON.stringify({ search, filters }));
+    } catch {
+      // rien a faire, les filtres ne seront simplement pas memorises
+    }
+  }, [search, filters, restored]);
 
   const titleOf = (event: AdminEventRow) =>
     event.translations?.find((t) => t.locale === locale)?.title ?? event.translations?.[0]?.title ?? event.slug;
@@ -130,9 +156,23 @@ export default function AdminEventList({
             Mis en avant
           </button>
         </div>
-        <p className="text-[13px] text-ink/50">
-          {filtered.length} événement{filtered.length > 1 ? "s" : ""} sur {events.length}
-        </p>
+        <div className="flex flex-wrap items-center gap-3">
+          <p className="text-[13px] text-ink/50">
+            {filtered.length} événement{filtered.length > 1 ? "s" : ""} sur {events.length}
+          </p>
+          {(search || filters.day || filters.category || filters.price || filters.status) && (
+            <button
+              type="button"
+              onClick={() => {
+                setSearch("");
+                setFilters({ day: null, category: null, price: null, status: null });
+              }}
+              className="text-[13px] text-violet underline underline-offset-4"
+            >
+              Réinitialiser les filtres
+            </button>
+          )}
+        </div>
       </div>
 
       <ul className="mt-6 divide-y divide-ink/10 rounded-2xl border border-ink/12 bg-white">

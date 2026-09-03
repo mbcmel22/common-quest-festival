@@ -27,13 +27,27 @@ export async function generateMetadata({
   };
 }
 
-export default async function EventPage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
+export default async function EventPage({
+  params,
+  searchParams
+}: {
+  params: Promise<{ locale: string; slug: string }>;
+  searchParams: Promise<{ jour?: string; discipline?: string; tarif?: string }>;
+}) {
   const { locale, slug } = await params;
+  const filters = await searchParams;
   const dict = await getDict(locale);
   const event = await getEvent(slug, locale);
   if (!event) notFound();
 
   const time = formatRange(event.start_time, event.end_time, locale);
+
+  // On revient au programme avec les memes filtres qu a l aller
+  const backQuery = new URLSearchParams();
+  if (filters.jour) backQuery.set("jour", filters.jour);
+  if (filters.discipline) backQuery.set("discipline", filters.discipline);
+  if (filters.tarif) backQuery.set("tarif", filters.tarif);
+  const backHref = `/${locale}/programme${backQuery.toString() ? `?${backQuery}` : ""}`;
   const videos = [
     ...(Array.isArray(event.video_urls) ? (event.video_urls as string[]) : []),
     ...(event.video_url && !(event.video_urls as string[] | null)?.length ? [event.video_url] : [])
@@ -44,35 +58,34 @@ export default async function EventPage({ params }: { params: Promise<{ locale: 
 
   return (
     <article>
-      {/* Visuel de tete */}
-      <div className="relative h-[46vh] min-h-[300px] w-full overflow-hidden bg-ink-soft md:h-[52vh]">
+      {/* Visuel de tete : l affiche entiere, sans texte par-dessus */}
+      <div className="relative aspect-[16/9] w-full overflow-hidden bg-ink-soft sm:aspect-[21/9] sm:max-h-[60vh]">
         {event.cover_url ? (
           <CoverImage src={event.cover_url} alt={event.t?.title ?? ""} sizes="100vw" priority />
         ) : (
           <div className="absolute inset-0 bg-gradient-to-br from-violet/60 via-ink to-ink" />
         )}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/55 to-ink/10" />
         {event.photo_credit && (
-          <span className="absolute right-3 top-3 rounded-full bg-ink/70 px-3 py-1 text-[11px] text-paper/70">
+          <span className="absolute bottom-3 right-3 z-10 rounded-full bg-ink/70 px-3 py-1 text-[11px] text-paper/70 backdrop-blur">
             {dict.event.photoCredit} : {event.photo_credit}
           </span>
         )}
-        <div className="shell absolute inset-x-0 bottom-0 pb-10">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="tag border-acid bg-acid text-ink">{categoryLabels[locale][event.category]}</span>
-            {event.t?.event_type && <span className="tag text-paper/80">{event.t.event_type}</span>}
-          </div>
-          <h1 className="mt-4 display-l max-w-3xl">{event.t?.title}</h1>
-          {event.t?.tagline && <p className="mt-3 max-w-2xl text-lg text-paper/80">{event.t.tagline}</p>}
-          {event.t?.partner_note && (
-            <p className="mt-3 max-w-2xl text-[15px] text-acid">{event.t.partner_note}</p>
-          )}
-        </div>
       </div>
 
-      <div className="shell grid gap-12 py-14 md:grid-cols-[1.4fr_1fr] md:py-20">
+      {/* Titre : sur fond plein, toujours lisible */}
+      <header className="shell border-b border-white/10 py-8 md:py-10">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="tag border-acid bg-acid text-ink">{categoryLabels[locale][event.category]}</span>
+          {event.t?.event_type && <span className="tag text-paper/80">{event.t.event_type}</span>}
+        </div>
+        <h1 className="mt-4 display-l max-w-4xl">{event.t?.title}</h1>
+        {event.t?.tagline && <p className="mt-3 max-w-2xl text-lg text-paper/80">{event.t.tagline}</p>}
+        {event.t?.partner_note && <p className="mt-3 max-w-2xl text-[15px] text-acid">{event.t.partner_note}</p>}
+      </header>
+
+      <div className="shell grid gap-12 py-12 md:grid-cols-[1.4fr_1fr] md:py-16">
         <div>
-          <Link href={`/${locale}/programme`} className="eyebrow hover:text-acid">
+          <Link href={backHref} className="eyebrow hover:text-acid">
             &larr; {dict.event.back}
           </Link>
           {event.t?.description && (

@@ -43,6 +43,10 @@ export const es: Dictionary = {
     teamTitle: "Detrás de Common Quest está PRISM",
     teamText:
       "Un equipo de Nantes. Trayectorias distintas. Historias distintas con el hip hop. Y unas ganas comunes: crear el festival en el que nosotros mismos querríamos encontrarnos.",
+    magmaaTitle: "Tomar algo y comer allí mismo",
+    magmaaText:
+      "El festival se instala alrededor de Magmaa, el food hall de la isla de Nantes. Una decena de cocinas del mundo, un bar, una gran terraza y mesas largas donde sentarse sin reservar. Ideal para hacer una pausa entre dos battles, cenar antes de un concierto o alargar la noche. La restauración sigue abierta durante los eventos que se celebran allí.",
+    magmaaCta: "Descubrir Magmaa",
     teamCta: "Conocer al equipo",
     ticker: "What do we have in common ? Hip hop."
   },

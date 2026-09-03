@@ -43,6 +43,10 @@ export const en: Dictionary = {
     teamTitle: "Behind Common Quest, there is PRISM",
     teamText:
       "A team from Nantes. Different paths. Different stories with hip hop. And one shared wish: to build the festival we would want to end up in ourselves.",
+    magmaaTitle: "Grab a drink and something to eat",
+    magmaaText:
+      "The festival gathers around Magmaa, the food hall on the île de Nantes. Around ten kitchens from all over the world, a bar, a large terrace and long shared tables where you sit down without booking. A place to take a break between two battles, have dinner before a show or simply stretch the night out. Food service stays open during the events hosted there.",
+    magmaaCta: "Discover Magmaa",
     teamCta: "Meet the team",
     ticker: "What do we have in common ? Hip hop."
   },
