@@ -70,22 +70,59 @@ export default async function InfosPage({ params }: { params: Promise<{ locale: 
 
         {team.length > 0 ? (
           <ul className="mt-14 grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-5">
-            {team.map((member) => (
-              <li key={member.id} className="group text-center">
-                <div className="relative mx-auto aspect-square w-full overflow-hidden rounded-full border-2 border-transparent bg-ink-soft transition-all duration-300 group-hover:-translate-y-1 group-hover:border-acid">
-                  {member.photo_url ? (
-                    <Image src={member.photo_url} alt={member.name} fill sizes="180px" className="object-cover grayscale transition-all duration-500 group-hover:grayscale-0" />
-                  ) : (
-                    <span className="flex h-full items-center justify-center font-display text-4xl text-violet">
-                      {member.name.slice(0, 1)}
-                    </span>
+            {team.map((member) => {
+              const card = (
+                <>
+                  <div className="relative mx-auto aspect-square w-full overflow-hidden rounded-full border-2 border-transparent bg-ink-soft transition-all duration-300 group-hover:-translate-y-1 group-hover:border-acid">
+                    {member.photo_url ? (
+                      <Image
+                        src={member.photo_url}
+                        alt={member.name}
+                        fill
+                        quality={88}
+                        sizes="(max-width: 640px) 44vw, (max-width: 1024px) 28vw, 230px"
+                        className="object-cover grayscale transition-all duration-500 group-hover:grayscale-0"
+                      />
+                    ) : (
+                      <span className="flex h-full items-center justify-center font-display text-4xl text-violet">
+                        {member.name.slice(0, 1)}
+                      </span>
+                    )}
+
+                    {/* Au survol, l enveloppe invite a ecrire directement */}
+                    {member.email && (
+                      <span className="absolute inset-0 flex items-center justify-center bg-ink/70 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
+                        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#E7FF36" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                          <rect x="2.5" y="5" width="19" height="14" rx="2.5" />
+                          <path d="M3 7l9 6 9-6" />
+                        </svg>
+                      </span>
+                    )}
+                  </div>
+                  <p className="mt-4 font-display text-xl">{member.name}</p>
+                  {member.nickname && (
+                    <p className="text-[12px] font-medium uppercase tracking-[0.16em] text-acid">aka {member.nickname}</p>
                   )}
-                </div>
-                <p className="mt-4 font-display text-xl">{member.name}</p>
-                {member.nickname && <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-acid">aka {member.nickname}</p>}
-                <p className="mt-1 text-sm text-smoke">{roleFor(member)}</p>
-              </li>
-            ))}
+                  <p className="mt-1 text-sm text-smoke">{roleFor(member)}</p>
+                </>
+              );
+
+              return (
+                <li key={member.id} className="group text-center">
+                  {member.email ? (
+                    <a
+                      href={`mailto:${member.email}`}
+                      className="block rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-acid"
+                      aria-label={`Écrire à ${member.name}`}
+                    >
+                      {card}
+                    </a>
+                  ) : (
+                    card
+                  )}
+                </li>
+              );
+            })}
           </ul>
         ) : (
           <p className="mt-10 text-smoke">

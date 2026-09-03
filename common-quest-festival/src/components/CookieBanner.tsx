@@ -26,7 +26,7 @@ export default function CookieBanner({ locale, dict }: { locale: Locale; dict: D
         >
           {dict.cookies.accept}
         </button>
-        <Link href={`/${locale}/cookies`} className="font-mono text-[11px] uppercase tracking-[0.14em] text-smoke hover:text-paper">
+        <Link href={`/${locale}/cookies`} className="text-[12px] font-medium uppercase tracking-[0.14em] text-smoke hover:text-paper">
           {dict.cookies.more}
         </Link>
       </div>

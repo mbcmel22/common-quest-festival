@@ -13,7 +13,7 @@ const blank = (): Partial<TeamMember> => ({
   role_en: "",
   role_es: "",
   photo_url: null,
-  instagram_url: "",
+  email: "",
   sort_order: 0,
   is_published: true
 });
@@ -93,8 +93,16 @@ export default function TeamEditor({ dict }: { dict: Dictionary }) {
         </div>
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="label" htmlFor="m-insta">Instagram</label>
-            <input id="m-insta" type="url" className="field-light" value={draft.instagram_url ?? ""} onChange={(e) => setDraft((d) => ({ ...d, instagram_url: e.target.value }))} />
+            <label className="label" htmlFor="m-email">Adresse email</label>
+            <input
+              id="m-email"
+              type="email"
+              className="field-light"
+              value={draft.email ?? ""}
+              onChange={(e) => setDraft((d) => ({ ...d, email: e.target.value }))}
+              placeholder="prenom@common-quest.fr"
+              maxLength={120}
+            />
           </div>
           <div>
             <label className="label" htmlFor="m-order">Ordre</label>

@@ -23,12 +23,13 @@ export default function CoverImage({
         alt=""
         aria-hidden
         fill
-        sizes={sizes}
+        sizes="40vw"
+        quality={35}
         priority={priority}
         className="scale-110 object-cover blur-xl saturate-150"
       />
       <div className="absolute inset-0 bg-ink/35" aria-hidden />
-      <Image src={src} alt={alt} fill sizes={sizes} priority={priority} className="relative object-contain" />
+      <Image src={src} alt={alt} fill sizes={sizes} quality={85} priority={priority} className="relative object-contain" />
     </>
   );
 }

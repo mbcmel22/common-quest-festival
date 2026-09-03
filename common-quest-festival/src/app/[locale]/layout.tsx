@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Anton, Inter_Tight, Space_Mono } from "next/font/google";
+import { Anton, Inter_Tight } from "next/font/google";
 import { notFound } from "next/navigation";
 import "../globals.css";
 import { getDictionary, isLocale, locales, type Locale } from "@/i18n";
@@ -12,7 +12,6 @@ import CookieBanner from "@/components/CookieBanner";
 
 const display = Anton({ subsets: ["latin"], weight: "400", variable: "--font-display", display: "swap" });
 const body = Inter_Tight({ subsets: ["latin"], variable: "--font-body", display: "swap" });
-const mono = Space_Mono({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-mono", display: "swap" });
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -35,9 +34,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       type: "website",
       locale,
       siteName: "Common Quest",
-      images: [{ url: "/brand/og.png", width: 1200, height: 630, alt: "Common Quest, festival hip hop, 1 au 4 octobre 2026 a Nantes" }]
+      images: [{ url: "/brand/og.jpg", width: 1200, height: 630, alt: "Common Quest, festival hip hop, 1 au 4 octobre 2026 a Nantes" }]
     },
-    twitter: { card: "summary_large_image", images: ["/brand/og.png"] },
+    twitter: { card: "summary_large_image", images: ["/brand/og.jpg"] },
     robots: { index: true, follow: true }
   };
 }
@@ -60,7 +59,7 @@ export default async function LocaleLayout({
   const supportUrl = support?.url?.trim() || DEFAULT_SUPPORT_URL;
 
   return (
-    <html lang={locale} className={`${display.variable} ${body.variable} ${mono.variable}`}>
+    <html lang={locale} className={`${display.variable} ${body.variable}`}>
       <body className="min-h-screen" style={{ "--type-scale": typeScale } as React.CSSProperties}>
         <a
           href="#contenu"

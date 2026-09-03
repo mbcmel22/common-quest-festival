@@ -132,7 +132,7 @@ export default async function EventPage({
                     </div>
                     <div>
                       <p className="font-display text-xl">{artist.name}</p>
-                      <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-smoke">
+                      <p className="text-[13px] text-smoke">
                         {[artist.discipline, artist.country].filter(Boolean).join(" . ")}
                       </p>
                     </div>
@@ -170,7 +170,7 @@ export default async function EventPage({
             {event.doors_time && (
               <div>
                 <dt className="eyebrow">{dict.event.doors}</dt>
-                <dd className="mt-1 font-mono">{formatTime(event.doors_time, locale)}</dd>
+                <dd className="mt-1 text-[16px]">{formatTime(event.doors_time, locale)}</dd>
               </div>
             )}
             <div>

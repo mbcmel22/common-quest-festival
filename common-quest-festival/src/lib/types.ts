@@ -74,6 +74,7 @@ export type TeamMember = {
   quote_es: string | null;
   photo_url: string | null;
   instagram_url: string | null;
+  email: string | null;
   sort_order: number;
   is_published: boolean;
 };
