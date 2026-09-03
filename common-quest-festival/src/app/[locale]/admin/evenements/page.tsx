@@ -13,8 +13,8 @@ export default async function AdminEvents({ params }: { params: Promise<{ locale
     .select(
       "id, slug, day_index, event_date, start_time, end_time, venue, category, is_free, is_pwyw, is_published, is_highlight, translations:event_translations(locale, title)"
     )
-    .order("day_index")
-    .order("sort_order");
+    .order("event_date")
+    .order("start_time", { nullsFirst: false });
 
   return <AdminEventList locale={locale} dict={dict} events={(data ?? []) as AdminEventRow[]} />;
 }

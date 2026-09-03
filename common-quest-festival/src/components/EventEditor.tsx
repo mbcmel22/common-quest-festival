@@ -77,8 +77,7 @@ export default function EventEditor({
     cover_url: null as string | null,
     photo_credit: "",
     is_published: false,
-    is_highlight: false,
-    sort_order: 0
+    is_highlight: false
   });
 
   useEffect(() => {
@@ -168,8 +167,7 @@ export default function EventEditor({
           )
         }))
         .filter((group) => Object.keys(group.links).length > 0),
-      day_index: Number(event.day_index),
-      sort_order: Number(event.sort_order)
+      day_index: Number(event.day_index)
     };
 
     // Sur une mise a jour, l identifiant est deja connu : inutile de demander
@@ -501,15 +499,18 @@ export default function EventEditor({
             <input type="checkbox" checked={event.is_published} onChange={(e) => setField("is_published", e.target.checked)} className="h-4 w-4 accent-[#7E1AFF]" />
             Publier sur le site
           </label>
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="label" htmlFor="slug">Adresse de la page</label>
-              <input id="slug" className="field-light" value={event.slug} onChange={(e) => setField("slug", e.target.value)} placeholder="genere depuis le titre" />
-            </div>
-            <div>
-              <label className="label" htmlFor="order">Ordre d’affichage</label>
-              <input id="order" type="number" className="field-light" value={event.sort_order} onChange={(e) => setField("sort_order", Number(e.target.value))} />
-            </div>
+          <div>
+            <label className="label" htmlFor="slug">Adresse de la page</label>
+            <input
+              id="slug"
+              className="field-light"
+              value={event.slug}
+              onChange={(e) => setField("slug", e.target.value)}
+              placeholder="généré depuis le titre"
+            />
+            <p className="mt-1 text-xs text-ink/50">
+              Les événements se classent automatiquement par date puis par heure de début.
+            </p>
           </div>
         </div>
 

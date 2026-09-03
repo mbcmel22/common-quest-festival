@@ -17,8 +17,8 @@ export async function getEvents(locale: string, options?: { onlyHighlights?: boo
     .from("events")
     .select("*, translations:event_translations(*)")
     .eq("is_published", true)
-    .order("day_index", { ascending: true })
-    .order("sort_order", { ascending: true });
+    .order("event_date", { ascending: true })
+    .order("start_time", { ascending: true, nullsFirst: false });
 
   if (options?.onlyHighlights) query = query.eq("is_highlight", true);
 
