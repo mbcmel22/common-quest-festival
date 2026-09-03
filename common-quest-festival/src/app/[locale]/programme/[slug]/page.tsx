@@ -59,12 +59,12 @@ export default async function EventPage({
   return (
     <article>
       {/* Visuel de tete : l affiche entiere, sans texte par-dessus */}
-      <div className="relative aspect-[16/9] w-full overflow-hidden bg-ink-soft sm:aspect-[21/9] sm:max-h-[60vh]">
+      <div className="relative aspect-[16/9] w-full overflow-hidden bg-ink-soft md:aspect-[2/1] md:max-h-[62vh]">
         {event.cover_url ? (
           <CoverImage
             src={event.cover_url}
             alt={event.t?.title ?? ""}
-            fit={event.cover_fit ?? "cover"}
+            fit={event.cover_fit === "contain" ? "contain" : "hero"}
             sizes="100vw"
             priority
           />
