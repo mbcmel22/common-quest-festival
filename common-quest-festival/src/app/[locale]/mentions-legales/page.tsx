@@ -12,8 +12,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
  * Laisser la chaine vide masque proprement la mention correspondante.
  */
 const NB = "\u00a0";
-const RNA = "";
-const SIRET = "";
+const RNA = "W442031292";
+const SIRET = "99937289900016";
 
 export default function LegalPage() {
   return (
