@@ -3,8 +3,14 @@ import { getDictionary, type Locale } from "@/i18n";
 import { getEvents, getDict } from "@/lib/queries";
 import EventCard from "@/components/EventCard";
 import { categoryLabels } from "@/lib/format";
+import { alternatesFor } from "@/lib/seo";
 
 export const revalidate = 60;
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  return { alternates: alternatesFor(locale, "/programme") };
+}
 
 export default async function ProgrammePage({
   params,

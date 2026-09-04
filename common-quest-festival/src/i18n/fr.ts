@@ -23,7 +23,7 @@ export const fr = {
     question: "What do we have in common ?",
     answer: "Hip hop.",
     dates: "01 > 04 octobre 2026",
-    place: "Quartier de la Création, île de Nantes (Magmaa, Askip, Halles 1&2, Halle 6 Ouest…)",
+    place: "Quartier de la Création, île de Nantes (Magmaa, Askip, Halles 1&2…)",
     cta: "Voir le programme",
     ctaTickets: "Prendre sa place",
     scroll: "Faire défiler"
@@ -43,8 +43,9 @@ export const fr = {
       "Une équipe nantaise. Des parcours différents. Des histoires différentes avec le hip hop. Et une envie commune : créer le festival dans lequel on aurait nous-mêmes envie de se retrouver.",
     magmaaTitle: "Boire un verre et manger sur place",
     magmaaText:
-      "Le festival prend ses quartiers autour de Magmaa, le food hall de l’île de Nantes. Une dizaine de cuisines du monde, un bar, une grande terrasse et de longues tables où l’on s’installe sans réserver. De quoi faire une pause entre deux battles, dîner avant un concert ou simplement prolonger la soirée. La restauration reste ouverte pendant les événements accueillis sur place.",
+      "Deux lieux voisins pour faire une pause. Magmaa, le food hall de l’île de Nantes, réunit une dizaine de cuisines du monde, un bar, une grande terrasse et de longues tables où l’on s’installe sans réserver. La restauration reste ouverte pendant les événements accueillis sur place.\n\nÀ quelques pas, le bar associatif Askip occupe le rez-de-chaussée de l’École des Beaux-Arts, avec son espace d’exposition et sa grande terrasse couverte. L’accès est réservé aux adhérent·es : l’adhésion est à prix libre et se prend sur place.",
     magmaaCta: "Découvrir Magmaa",
+    askipCta: "Découvrir Askip",
     teamCta: "Rencontrer l’équipe",
     ticker: "What do we have in common ? Hip hop."
   },
@@ -91,6 +92,9 @@ export const fr = {
     transport: "Y aller",
     accessibility: "Accessibilité",
     contact: "Contact",
+    imageTitle: "Photos et vidéos",
+    imageText:
+      "Le festival fait l’objet de captations photo et vidéo destinées à la communication de l’association PRISM. En venant sur le site, vous êtes susceptible d’être photographié·e ou filmé·e. Si vous ne souhaitez pas apparaître, signalez-le à l’équipe sur place ou écrivez à associationprism.hello@gmail.com pour demander le retrait d’une image vous concernant.",
     teamTitle: "L’équipe PRISM",
     teamIntro:
       "PRISM est une association nantaise dédiée à la culture hip hop. Des parcours et des histoires différentes avec cette culture, une même envie : imaginer un festival qui laisse une place à toutes les façons de la vivre.",

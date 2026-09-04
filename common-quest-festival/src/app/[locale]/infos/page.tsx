@@ -4,8 +4,14 @@ import { getTeam, getPartners, getSetting, getDict } from "@/lib/queries";
 import Marquee from "@/components/Marquee";
 import SocialLinks from "@/components/SocialLinks";
 import { pickTicker, type TickerSetting } from "@/lib/ticker";
+import { alternatesFor } from "@/lib/seo";
 
 export const revalidate = 120;
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  return { alternates: alternatesFor(locale, "/infos") };
+}
 
 export default async function InfosPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -58,6 +64,12 @@ export default async function InfosPage({ params }: { params: Promise<{ locale: 
               </dd>
             </div>
           </dl>
+
+          {/* DROIT A L IMAGE : information prealable exigee par le RGPD, a doubler par un affichage sur site. */}
+          <div className="mt-12 border-t border-ink/15 pt-8 md:mt-16">
+            <h3 className="eyebrow text-ink/50">{dict.infos.imageTitle}</h3>
+            <p className="mt-3 max-w-3xl text-base leading-relaxed text-ink/75">{dict.infos.imageText}</p>
+          </div>
         </div>
       </section>
 

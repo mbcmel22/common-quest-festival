@@ -3,7 +3,12 @@ import { getDict } from "@/lib/queries";
 import { getDictionary, type Locale } from "@/i18n";
 import AuthForm from "@/components/AuthForm";
 
-export const metadata = { title: "Se connecter . Common Quest" };
+import { alternatesFor } from "@/lib/seo";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  return { title: "Se connecter . Common Quest", alternates: alternatesFor(locale, "/connexion") };
+}
 
 export default async function LoginPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

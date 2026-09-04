@@ -25,7 +25,7 @@ export const en: Dictionary = {
     question: "What do we have in common ?",
     answer: "Hip hop.",
     dates: "01 > 04 October 2026",
-    place: "Quartier de la Création, île de Nantes",
+    place: "Quartier de la Création, île de Nantes (Magmaa, Askip, Halles 1&2…)",
     cta: "See the line-up",
     ctaTickets: "Get your ticket",
     scroll: "Scroll"
@@ -45,8 +45,9 @@ export const en: Dictionary = {
       "A team from Nantes. Different paths. Different stories with hip hop. And one shared wish: to build the festival we would want to end up in ourselves.",
     magmaaTitle: "Grab a drink and something to eat",
     magmaaText:
-      "The festival gathers around Magmaa, the food hall on the île de Nantes. Around ten kitchens from all over the world, a bar, a large terrace and long shared tables where you sit down without booking. A place to take a break between two battles, have dinner before a show or simply stretch the night out. Food service stays open during the events hosted there.",
+      "Two neighbouring spots to take a break. Magmaa, the food hall on the île de Nantes, brings together around ten kitchens from all over the world, a bar, a large terrace and long shared tables where you sit down without booking. Food service stays open during the events hosted there.\n\nA short walk away, the Askip associative bar occupies the ground floor of the École des Beaux-Arts, with its exhibition space and its large covered terrace. Access is for members only: membership is pay what you want and can be taken on the spot.",
     magmaaCta: "Discover Magmaa",
+    askipCta: "Discover Askip",
     teamCta: "Meet the team",
     ticker: "What do we have in common ? Hip hop."
   },
@@ -93,6 +94,9 @@ export const en: Dictionary = {
     transport: "Getting there",
     accessibility: "Accessibility",
     contact: "Contact",
+    imageTitle: "Photos and videos",
+    imageText:
+      "The festival is photographed and filmed for the communication of the PRISM association. By coming on site, you may be photographed or filmed. If you would rather not appear, tell the team on site or write to associationprism.hello@gmail.com to ask for an image of you to be removed.",
     teamTitle: "The PRISM team",
     teamIntro:
       "PRISM is a Nantes association dedicated to hip hop culture. Different paths and different stories with this culture, one shared wish: a festival that makes room for every way of living it.",

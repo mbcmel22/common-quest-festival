@@ -1,4 +1,19 @@
-export const metadata = { title: "Mentions légales . Common Quest" };
+import { alternatesFor } from "@/lib/seo";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  return { title: "Mentions légales . Common Quest", alternates: alternatesFor(locale, "/mentions-legales") };
+}
+
+/**
+ * A COMPLETER par l association.
+ * RNA : numero figurant sur le recepissé de declaration en prefecture, format W44XXXXXXX.
+ * SIRET : uniquement si l association en possede un.
+ * Laisser la chaine vide masque proprement la mention correspondante.
+ */
+const NB = "\u00a0";
+const RNA = "";
+const SIRET = "";
 
 export default function LegalPage() {
   return (
@@ -9,16 +24,20 @@ export default function LegalPage() {
           <h2 className="display-m text-paper">Éditeur du site</h2>
           <p className="mt-3">
             Festival Common Quest, édité par l’association PRISM, association régie par la loi du 1er juillet 1901,
-            dont le siège social est situé 31 avenue Arthur Benoit, 44100 Nantes. Directrice de la publication :
-            Shirlène Sandemoy, présidente. Contact : associationprism.hello@gmail.com
+            dont le siège social est situé 31 avenue Arthur Benoit, 44100 Nantes.
+            {RNA ? ` Numéro RNA${NB}: ${RNA}.` : ""}
+            {SIRET ? ` Numéro SIRET${NB}: ${SIRET}.` : ""}
+            {" "}Directrice de la publication{NB}: Shirlène Sandemoy, présidente.
+            Contact{NB}: associationprism.hello@gmail.com
           </p>
         </section>
 
         <section>
           <h2 className="display-m text-paper">Hébergement</h2>
           <p className="mt-3">
-            Le site est hébergé par Vercel Inc. La base de données et l’authentification sont assurées par Supabase,
-            avec un stockage des données sur des serveurs situés dans l’Union européenne.
+            Le site est hébergé par Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis,
+            téléphone +1{NB}559{NB}288{NB}7060. La base de données et l’authentification sont assurées par
+            Supabase Inc., avec un stockage des données sur des serveurs situés dans l’Union européenne.
           </p>
         </section>
 

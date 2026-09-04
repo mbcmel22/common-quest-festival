@@ -1,4 +1,9 @@
-export const metadata = { title: "Politique de confidentialité . Common Quest" };
+import { alternatesFor } from "@/lib/seo";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  return { title: "Politique de confidentialité . Common Quest", alternates: alternatesFor(locale, "/confidentialite") };
+}
 
 export default function PrivacyPage() {
   return (
@@ -56,6 +61,10 @@ export default function PrivacyPage() {
             portabilité de vos données. Écrivez à associationprism.hello@gmail.com : nous répondons sous un mois. Vous
             pouvez également saisir la CNIL, 3 place de Fontenoy, 75007 Paris, www.cnil.fr.
           </p>
+          <p className="mt-3">
+            Vous pouvez également définir des directives relatives au sort de vos données après votre décès,
+            conformément à l’article 85 de la loi Informatique et Libertés.
+          </p>
         </section>
 
         <section>
@@ -65,6 +74,36 @@ export default function PrivacyPage() {
             stockage en Union européenne. Les billetteries et les dons sont opérés par des services tiers disposant de
             leurs propres politiques de confidentialité : en cliquant sur un lien de billetterie ou de soutien, vous
             quittez notre site.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="display-m text-paper">Transferts hors Union européenne</h2>
+          <p className="mt-3">
+            L’hébergement du site est assuré par Vercel Inc., société établie aux États-Unis. Des données techniques
+            comme votre adresse IP et les journaux de connexion peuvent être traitées hors de l’Union européenne. Ces
+            transferts sont encadrés par les clauses contractuelles types adoptées par la Commission européenne. Les
+            données de compte et les contenus du site sont stockés sur des serveurs situés dans l’Union européenne.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="display-m text-paper">Sécurité</h2>
+          <p className="mt-3">
+            Les échanges avec le site sont chiffrés de bout en bout (HTTPS). Les mots de passe ne sont jamais stockés
+            en clair. L’accès à l’espace d’administration est réservé aux membres habilités de l’association et
+            contrôlé au niveau de la base de données elle-même, et non seulement dans l’interface. En cas de violation
+            de données susceptible d’engendrer un risque pour vos droits, nous vous en informerions et notifierions la
+            CNIL dans les délais prévus par le règlement.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="display-m text-paper">Délégué à la protection des données</h2>
+          <p className="mt-3">
+            Compte tenu de la taille de l’association et de la nature des traitements réalisés, PRISM n’est pas tenue
+            de désigner un délégué à la protection des données. Vos demandes sont traitées directement par la
+            présidence, à l’adresse associationprism.hello@gmail.com.
           </p>
         </section>
 

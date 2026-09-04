@@ -9,6 +9,7 @@ import VideoEmbed from "@/components/VideoEmbed";
 import CoverImage from "@/components/CoverImage";
 import SocialLinks, { normalizeSocialGroups } from "@/components/SocialLinks";
 import FavoriteButton from "@/components/FavoriteButton";
+import { alternatesFor } from "@/lib/seo";
 
 export const revalidate = 60;
 
@@ -23,6 +24,7 @@ export async function generateMetadata({
   return {
     title: `${event.t?.title} . Common Quest`,
     description: event.t?.tagline ?? undefined,
+    alternates: alternatesFor(locale, `/programme/${slug}`),
     openGraph: { images: event.cover_url ? [event.cover_url] : undefined }
   };
 }

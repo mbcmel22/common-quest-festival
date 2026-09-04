@@ -6,8 +6,14 @@ import EventCard from "@/components/EventCard";
 import HighlightsCarousel from "@/components/HighlightsCarousel";
 import Marquee from "@/components/Marquee";
 import { pickTicker, DEFAULT_SUPPORT_URL, type TickerSetting } from "@/lib/ticker";
+import { alternatesFor } from "@/lib/seo";
 
 export const revalidate = 60;
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  return { alternates: alternatesFor(locale, "") };
+}
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -65,15 +71,26 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <div className="shell grid gap-8 md:grid-cols-[0.9fr_1.1fr] md:items-center md:gap-16">
           <h2 className="display-l">{dict.home.magmaaTitle}</h2>
           <div>
-            <p className="text-lg leading-relaxed text-paper/80">{dict.home.magmaaText}</p>
-            <a
-              href="https://www.magmaa-nantes.fr/"
-              target="_blank"
-              rel="noreferrer noopener"
-              className="btn-ghost btn-sm mt-6"
-            >
-              {dict.home.magmaaCta}
-            </a>
+            <p className="whitespace-pre-line text-lg leading-relaxed text-paper/80">{dict.home.magmaaText}</p>
+            {/* Deux liens de meme poids : pleine largeur empilee sur mobile, en ligne des 640px. */}
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <a
+                href="https://www.magmaa-nantes.fr/"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="btn-ghost btn-sm min-h-11 w-full sm:w-auto"
+              >
+                {dict.home.magmaaCta}
+              </a>
+              <a
+                href="https://askipaskipaskip.com/"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="btn-ghost btn-sm min-h-11 w-full sm:w-auto"
+              >
+                {dict.home.askipCta}
+              </a>
+            </div>
           </div>
         </div>
       </section>
