@@ -1,0 +1,200 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --ink: #1e1e1e;
+    --paper: #efefef;
+    --acid: #e7ff36;
+    --violet: #7e1aff;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-ink text-paper font-body antialiased;
+    font-size: calc(18px * var(--type-scale, 1));
+    line-height: 1.65;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display uppercase;
+    font-weight: 400;
+    line-height: 1.16;
+    letter-spacing: 0.005em;
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background: var(--acid);
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--acid);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  a, button {
+    touch-action: manipulation;
+  }
+}
+
+@layer components {
+  .shell {
+    @apply mx-auto w-full max-w-shell px-5 sm:px-8;
+  }
+
+  /* Titres de section : la question du festival revient partout */
+  .display-xl {
+    font-size: calc(clamp(2.7rem, 8.4vw, 6.2rem) * var(--type-scale, 1));
+    line-height: 1.14;
+  }
+  .display-l {
+    font-size: calc(clamp(2.1rem, 4.8vw, 3.5rem) * var(--type-scale, 1));
+    line-height: 1.35;
+  }
+  .display-m {
+    font-size: calc(clamp(1.45rem, 2.6vw, 2.05rem) * var(--type-scale, 1));
+    line-height: 1.24;
+  }
+
+  .eyebrow {
+    @apply font-body text-[12px] font-medium uppercase tracking-[0.18em] text-smoke;
+  }
+
+  /* Boutons pastille : gros, pleins, avec un decalage a la pression */
+  .btn {
+    @apply relative inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 font-display text-[15px] uppercase leading-none tracking-[0.04em];
+    transition: transform 0.18s cubic-bezier(0.2, 0.7, 0.3, 1), box-shadow 0.18s, background-color 0.18s, color 0.18s;
+  }
+  .btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: none !important;
+  }
+  .btn-acid {
+    @apply btn bg-acid text-ink;
+  }
+  .btn-acid:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 0 #7e1aff;
+  }
+  .btn-violet {
+    @apply btn bg-violet text-white;
+  }
+  .btn-violet:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 0 #e7ff36;
+  }
+  .btn-ghost {
+    @apply btn border-2 border-white/30 text-paper;
+  }
+  .btn-ghost:hover {
+    @apply border-acid text-acid;
+    transform: translate(-2px, -2px);
+  }
+  .btn-ink {
+    @apply btn bg-ink text-paper;
+  }
+  .btn-ink:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 0 #7e1aff;
+  }
+  .btn-sm {
+    @apply px-5 py-2.5 text-[14px];
+  }
+
+  .field {
+    @apply w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-paper outline-none transition-colors placeholder:text-smoke focus:border-acid;
+  }
+  .field-light {
+    @apply w-full rounded-xl border border-ink/15 bg-white px-4 py-3 text-ink outline-none transition-colors placeholder:text-ink/40 focus:border-violet;
+  }
+  .label {
+    @apply mb-1.5 block font-body text-[12px] font-medium uppercase tracking-[0.14em] text-smoke;
+  }
+
+  /* Signature : le fil de la quete qui relie les journees */
+  .trail {
+    position: relative;
+  }
+  .trail::before {
+    content: "";
+    position: absolute;
+    left: 11px;
+    top: 12px;
+    bottom: 12px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--acid), var(--violet));
+    opacity: 0.55;
+  }
+  @media (min-width: 768px) {
+    .trail::before {
+      left: 15px;
+    }
+  }
+
+  .marker {
+    @apply relative z-10 flex h-6 w-6 shrink-0 items-center justify-center bg-acid text-[10px] font-bold text-ink md:h-8 md:w-8;
+    border-radius: 42% 58% 46% 54% / 54% 46% 58% 42%;
+  }
+
+  /* Carte evenement : bascule au survol, sobre au repos */
+  .event-card {
+    @apply relative block overflow-hidden rounded-2xl border border-white/12 bg-ink-soft transition-all duration-300;
+  }
+  .event-card:hover,
+  .event-card:focus-within {
+    @apply -translate-y-1 border-acid/70;
+    box-shadow: 10px 10px 0 0 rgba(126, 26, 255, 0.9);
+  }
+  .event-card img {
+    @apply transition-transform duration-500;
+  }
+  .event-card:hover img {
+    transform: scale(1.06);
+  }
+
+  .tag {
+    @apply inline-block rounded-full border-2 border-white/25 px-3.5 py-1 font-display text-[12px] uppercase leading-none tracking-[0.05em] transition-colors;
+  }
+  /* Le survol ne s applique jamais a l onglet actif, sinon le texte disparait */
+  a.tag:not([data-active="true"]):hover {
+    @apply border-acid text-acid;
+  }
+}
+
+@layer utilities {
+  .text-stroke {
+    -webkit-text-stroke: 1.5px var(--acid);
+    color: transparent;
+  }
+  .marquee-track {
+    animation: marquee var(--marquee-duration, 75s) linear infinite;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .reveal {
+    animation: reveal 0.7s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+  }
+  @keyframes reveal {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: none; }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
