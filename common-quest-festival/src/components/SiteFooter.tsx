@@ -95,21 +95,22 @@ export default function SiteFooter({
         </div>
 
         {visiblePartners.length > 0 && (
-          <div className="shell mt-12 border-t border-white/10 pt-8">
+          <div className="shell mt-12 border-t border-white/10 pb-2 pt-8">
             <p className="font-display text-[15px] uppercase tracking-[0.05em] text-acid">{dict.footer.partners}</p>
             {/*
-              Les logos sont normalises en blanc sur fond transparent et alignes
-              sur une hauteur commune : la largeur s adapte, jamais l inverse.
+              Les fichiers sont exportes sur une toile commune 360x180, chaque logo
+              occupant la meme aire visible. L equilibre optique est donc dans l image :
+              ici on se contente d une hauteur unique, sans contrainte de largeur.
             */}
-            <ul className="mt-6 flex flex-wrap items-center gap-x-8 gap-y-6 sm:gap-x-10 md:gap-x-12">
+            <ul className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 sm:gap-x-4">
               {visiblePartners.map((partner) => {
                 const logo = (
                   <Image
                     src={partner.logo_url as string}
                     alt={partner.name}
-                    width={460}
-                    height={200}
-                    className="h-8 w-auto max-w-[130px] object-contain opacity-70 transition-opacity sm:h-10 sm:max-w-[160px]"
+                    width={360}
+                    height={180}
+                    className="h-16 w-auto object-contain opacity-80 transition-opacity sm:h-20"
                   />
                 );
                 return (
@@ -133,10 +134,6 @@ export default function SiteFooter({
             </ul>
           </div>
         )}
-
-        <div className="shell mt-10 border-t border-white/10 pt-6 text-[12px] uppercase tracking-[0.14em] text-smoke">
-          Common Quest, Nantes
-        </div>
       </div>
     </footer>
   );

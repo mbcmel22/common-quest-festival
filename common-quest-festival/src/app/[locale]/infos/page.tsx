@@ -149,15 +149,15 @@ export default async function InfosPage({ params }: { params: Promise<{ locale: 
         <section className="border-t border-white/10 py-16">
           <div className="shell">
             <h2 className="display-m">{dict.infos.partnersTitle}</h2>
-            <ul className="mt-10 flex flex-wrap items-center gap-x-10 gap-y-8 md:gap-x-14">
+            <ul className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 md:gap-x-5">
               {visiblePartners.map((partner) => {
                 const logo = partner.logo_url ? (
                   <Image
                     src={partner.logo_url}
                     alt={partner.name}
-                    width={460}
-                    height={200}
-                    className="h-10 w-auto max-w-[150px] object-contain opacity-75 transition-opacity sm:h-12 sm:max-w-[190px]"
+                    width={360}
+                    height={180}
+                    className="h-20 w-auto object-contain opacity-80 transition-opacity sm:h-24"
                   />
                 ) : (
                   <span className="tag text-paper/70">{partner.name}</span>

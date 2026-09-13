@@ -7,6 +7,17 @@ import { Fragment } from "react";
  */
 const PATTERN = /((?:https?:\/\/|www\.)[^\s<>()[\]{}"']+|[^\s<>()[\]{}"',;:]+@[^\s<>()[\]{}"',;:]+\.[a-z]{2,})/gi;
 
+/**
+ * Une URL de formulaire peut depasser 90 caracteres sans espace ni tiret :
+ * sans point de coupure, elle sort de la colonne. On raccourcit l affichage
+ * par le milieu, le lien complet reste dans href et dans title.
+ */
+const MAX_AFFICHE = 52;
+function raccourcir(url: string): string {
+  if (url.length <= MAX_AFFICHE) return url;
+  return `${url.slice(0, 34)}…${url.slice(-10)}`;
+}
+
 // La ponctuation finale ne doit pas etre avalee par le lien.
 function splitTrailing(raw: string): [string, string] {
   const m = raw.match(/[.,;:!?»)\]]+$/);
@@ -30,10 +41,11 @@ export default function RichText({ text, className }: { text: string; className?
           <Fragment key={index}>
             <a
               href={href}
+              title={target}
               {...(isMail ? {} : { target: "_blank", rel: "noreferrer noopener" })}
-              className="underline decoration-acid decoration-2 underline-offset-4 transition-colors hover:text-acid"
+              className="text-acid underline decoration-acid/50 decoration-2 underline-offset-4 transition-colors [overflow-wrap:anywhere] hover:decoration-acid"
             >
-              {target.replace(/^https?:\/\//, "")}
+              {raccourcir(target.replace(/^https?:\/\//, ""))}
             </a>
             {trailing}
           </Fragment>

@@ -109,7 +109,8 @@ export default async function EventPage({
         lieu et billetterie sont ce que l on vient chercher en premier.
       */}
       <div className="shell grid gap-10 py-8 lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-14 lg:py-12">
-        <div className="order-2 max-w-[70ch] lg:order-1">
+        {/* min-w-0 : sans lui, un mot insecable (une longue URL) elargit la colonne et pousse la carte. */}
+        <div className="order-2 min-w-0 max-w-[70ch] lg:order-1">
           {event.t?.description && (
             <RichText
               text={event.t.description}
@@ -183,7 +184,7 @@ export default async function EventPage({
         </div>
 
         {/* Bloc pratique, colle en haut sur grand ecran */}
-        <aside className="order-1 h-max rounded-2xl border border-white/12 bg-ink-soft p-5 sm:p-6 lg:order-2 lg:sticky lg:top-28">
+        <aside className="order-1 h-max min-w-0 rounded-2xl border border-white/12 bg-ink-soft p-5 sm:p-6 lg:order-2 lg:sticky lg:top-28">
           <dl className="space-y-5">
             <div>
               <dt className="eyebrow">{dict.event.horaires}</dt>
