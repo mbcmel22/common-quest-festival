@@ -149,7 +149,7 @@ export default async function InfosPage({ params }: { params: Promise<{ locale: 
         <section className="border-t border-white/10 py-16">
           <div className="shell">
             <h2 className="display-m">{dict.infos.partnersTitle}</h2>
-            <ul className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 md:gap-x-5">
+            <ul className="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-4 sm:justify-start md:gap-x-8">
               {visiblePartners.map((partner) => {
                 const logo = partner.logo_url ? (
                   <Image
@@ -157,25 +157,25 @@ export default async function InfosPage({ params }: { params: Promise<{ locale: 
                     alt={partner.name}
                     width={360}
                     height={180}
-                    className="h-20 w-auto object-contain opacity-80 transition-opacity sm:h-24"
+                    className="h-auto w-full object-contain opacity-80 transition-opacity"
                   />
                 ) : (
                   <span className="tag text-paper/70">{partner.name}</span>
                 );
                 return (
-                  <li key={partner.id} className="shrink-0">
+                  <li key={partner.id} className="flex w-[42%] justify-center sm:w-[170px] lg:w-[200px]">
                     {partner.website_url ? (
                       <a
                         href={partner.website_url}
                         target="_blank"
                         rel="noreferrer noopener"
                         title={partner.name}
-                        className="inline-flex min-h-11 items-center hover:[&_img]:opacity-100"
+                        className="inline-flex w-full min-h-11 items-center justify-center hover:[&_img]:opacity-100"
                       >
                         {logo}
                       </a>
                     ) : (
-                      <span className="inline-flex min-h-11 items-center">{logo}</span>
+                      <span className="inline-flex w-full min-h-11 items-center justify-center">{logo}</span>
                     )}
                   </li>
                 );

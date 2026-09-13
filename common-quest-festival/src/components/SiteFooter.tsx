@@ -102,7 +102,12 @@ export default function SiteFooter({
               occupant la meme aire visible. L equilibre optique est donc dans l image :
               ici on se contente d une hauteur unique, sans contrainte de largeur.
             */}
-            <ul className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 sm:gap-x-4">
+            {/*
+              Cellules de largeur egale : les lignes s alignent au lieu de se decaler.
+              justify-center sur mobile pour que le dernier logo d une ligne incomplete
+              soit centre, et non colle a gauche avec un vide a droite.
+            */}
+            <ul className="mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-3 sm:justify-start sm:gap-x-6">
               {visiblePartners.map((partner) => {
                 const logo = (
                   <Image
@@ -110,23 +115,23 @@ export default function SiteFooter({
                     alt={partner.name}
                     width={360}
                     height={180}
-                    className="h-16 w-auto object-contain opacity-80 transition-opacity sm:h-20"
+                    className="h-auto w-full object-contain opacity-80 transition-opacity"
                   />
                 );
                 return (
-                  <li key={partner.id} className="shrink-0">
+                  <li key={partner.id} className="flex w-[42%] justify-center sm:w-[148px] lg:w-[168px]">
                     {partner.website_url ? (
                       <a
                         href={partner.website_url}
                         target="_blank"
                         rel="noreferrer noopener"
                         title={partner.name}
-                        className="inline-flex min-h-11 items-center hover:[&_img]:opacity-100"
+                        className="inline-flex w-full min-h-11 items-center justify-center hover:[&_img]:opacity-100"
                       >
                         {logo}
                       </a>
                     ) : (
-                      <span className="inline-flex min-h-11 items-center">{logo}</span>
+                      <span className="inline-flex w-full min-h-11 items-center justify-center">{logo}</span>
                     )}
                   </li>
                 );
