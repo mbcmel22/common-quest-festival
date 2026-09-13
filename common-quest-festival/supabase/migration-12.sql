@@ -39,5 +39,5 @@ insert into public.partners (name, logo_url, website_url, kind, sort_order) valu
   ('Magmaa',                     '/partners/magmaa.png',             'https://www.magmaa-nantes.fr',       'lieu',        70),
   ('Askip',                      '/partners/askip.png',              'https://askipaskipaskip.com',        'lieu',        80),
   ('Culture Bar-Bars',           '/partners/culture-bar-bars.png',   'https://www.bar-bars.com',           'partenaire',  90),
-  ('DMP',                        '/partners/dmp.png',                null,                                 'partenaire', 100)
+  ('Douze Mille Prod',           '/partners/dmp.png',                null,                                 'partenaire', 100)
 on conflict (name) do nothing;
