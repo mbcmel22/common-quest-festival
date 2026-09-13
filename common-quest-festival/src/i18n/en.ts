@@ -164,7 +164,7 @@ export const en: Dictionary = {
   },
   cookies: {
     text:
-      "This site only uses the cookies it needs to work, mainly to keep your session open. No advertising trackers.",
+      "This site only uses the cookies it needs to work, mainly to keep your session open. No advertising trackers, and cookieless traffic measurement.",
     accept: "Got it",
     more: "Learn more"
   },

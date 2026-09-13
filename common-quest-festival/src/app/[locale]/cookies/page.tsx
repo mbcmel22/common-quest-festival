@@ -25,11 +25,14 @@ export default function CookiesPage() {
         <section>
           <h2 className="display-m text-paper">Notre choix</h2>
           <p className="mt-3">
-            Ce site n’utilise que des cookies strictement nécessaires à son fonctionnement. Nous n’avons installé
-            aucun outil de mesure d’audience, aucun traceur publicitaire, aucun bouton de partage qui déposerait un
-            cookie tiers. C’est pourquoi aucun consentement ne vous est demandé : la réglementation en dispense les
-            cookies indispensables au service. Le bandeau que vous voyez à votre première visite est informatif, pas
-            un formulaire de consentement.
+            Ce site n’utilise que des cookies strictement nécessaires à son fonctionnement. Aucun traceur
+            publicitaire, aucun bouton de partage déposant un cookie tiers, aucune revente de données.
+          </p>
+          <p className="mt-3">
+            Nous mesurons en revanche la fréquentation du site, avec un outil qui ne dépose aucun cookie et n’écrit
+            aucun identifiant sur votre appareil. Rien n’étant ni lu ni écrit sur votre terminal, l’article 82 ne
+            s’applique pas et aucun consentement ne vous est demandé. Le détail de cette mesure figure plus bas. Le
+            bandeau affiché à votre première visite est informatif, pas un formulaire de consentement.
           </p>
         </section>
 
@@ -79,6 +82,22 @@ export default function CookiesPage() {
           <p className="mt-4 text-[15px] text-smoke">
             Les deux premiers ne sont déposés que si vous créez un compte et vous connectez. En simple visite, seuls
             les deux derniers existent.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="display-m text-paper">Mesure d’audience</h2>
+          <p className="mt-3">
+            Nous utilisons Vercel Web Analytics pour savoir combien de personnes visitent le site et quelles pages
+            sont consultées. Cet outil ne dépose aucun cookie et ne conserve aucun identifiant sur votre appareil.
+          </p>
+          <p className="mt-3">
+            Sont enregistrés : la page consultée, la page d’où vous arrivez, le type d’appareil, le navigateur et le
+            pays. Le pays est déduit de votre adresse IP, qui n’est pas conservée. Les visites sont distinguées grâce
+            à une empreinte technique recalculée chaque jour, qui ne permet ni de vous suivre d’un jour à l’autre, ni
+            de vous reconnaître sur un autre site. Ces données sont agrégées, conservées un an au maximum, et servent
+            uniquement à comprendre la fréquentation du festival. Aucun profil publicitaire n’est constitué, aucune
+            donnée n’est revendue.
           </p>
         </section>
 

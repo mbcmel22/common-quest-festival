@@ -162,7 +162,7 @@ export const fr = {
   },
   cookies: {
     text:
-      "Ce site n’utilise que les cookies nécessaires à son fonctionnement, notamment pour garder votre session ouverte. Aucun traceur publicitaire.",
+      "Ce site n’utilise que les cookies nécessaires à son fonctionnement, notamment pour garder votre session ouverte. Aucun traceur publicitaire, et une mesure de fréquentation sans cookie.",
     accept: "J’ai compris",
     more: "En savoir plus"
   },

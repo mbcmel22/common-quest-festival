@@ -9,6 +9,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import ScrollToTop from "@/components/ScrollToTop";
 import CookieBanner from "@/components/CookieBanner";
+import { Analytics } from "@vercel/analytics/next";
 
 const display = Anton({ subsets: ["latin"], weight: "400", variable: "--font-display", display: "swap" });
 const body = Inter_Tight({ subsets: ["latin"], variable: "--font-body", display: "swap" });
@@ -70,6 +71,12 @@ export default async function LocaleLayout({
         <SiteFooter locale={locale as Locale} dict={dict} logoUrl={brand?.logo_url ?? null} socials={socials} supportUrl={supportUrl} isLoggedIn={!!user} />
         <ScrollToTop label={dict.common.backToTop} />
         <CookieBanner locale={locale as Locale} dict={dict} />
+        {/*
+          Mesure d audience Vercel : sans cookie et sans identifiant persistant sur l appareil.
+          L article 82 de la loi Informatique et Libertes ne s applique donc pas et aucun
+          consentement n est requis. Le traitement reste declare dans la politique de confidentialite.
+        */}
+        <Analytics />
       </body>
     </html>
   );

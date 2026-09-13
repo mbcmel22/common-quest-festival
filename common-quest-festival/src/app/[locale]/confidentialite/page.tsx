@@ -41,6 +41,10 @@ export default function PrivacyPage() {
               Fonctionnement du site : un cookie de session et un cookie de langue. Aucun traceur publicitaire, aucune
               revente de données.
             </li>
+            <li>
+              Mesure d’audience : page consultée, page d’origine, type d’appareil, navigateur et pays. Sans cookie et
+              sans identifiant conservé sur votre appareil. Voir la section dédiée plus bas.
+            </li>
           </ul>
         </section>
 
@@ -70,10 +74,26 @@ export default function PrivacyPage() {
         <section>
           <h2 className="display-m text-paper">Sous-traitants</h2>
           <p className="mt-3">
-            Vercel pour l’hébergement du site et Supabase pour la base de données et l’authentification, avec un
-            stockage en Union européenne. Les billetteries et les dons sont opérés par des services tiers disposant de
+            Vercel pour l’hébergement du site et la mesure d’audience, et Supabase pour la base de données et
+            l’authentification, avec un stockage en Union européenne. Les billetteries et les dons sont opérés par des services tiers disposant de
             leurs propres politiques de confidentialité : en cliquant sur un lien de billetterie ou de soutien, vous
             quittez notre site.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="display-m text-paper">Mesure d’audience</h2>
+          <p className="mt-3">
+            Nous mesurons la fréquentation du site avec Vercel Web Analytics, un outil sans cookie. Sont enregistrés
+            la page consultée, la page d’origine, le type d’appareil, le navigateur et le pays. Votre adresse IP sert
+            uniquement à déduire le pays et n’est pas conservée. Les visites sont distinguées par une empreinte
+            technique recalculée chaque jour, qui ne permet aucun suivi d’un jour à l’autre ni d’un site à l’autre.
+          </p>
+          <p className="mt-3">
+            La base légale est notre intérêt légitime à comprendre la fréquentation du site afin de préparer le
+            festival et d’en rendre compte à nos partenaires. Les données sont agrégées et conservées un an au
+            maximum. Vous pouvez vous opposer à cette mesure en écrivant à associationprism.hello@gmail.com, ou en
+            activant le signal « Do Not Track » ou un bloqueur dans votre navigateur.
           </p>
         </section>
 

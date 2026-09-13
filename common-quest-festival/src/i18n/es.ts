@@ -163,7 +163,7 @@ export const es: Dictionary = {
   },
   cookies: {
     text:
-      "Este sitio solo usa las cookies necesarias para funcionar, sobre todo para mantener tu sesión abierta. Sin rastreadores publicitarios.",
+      "Este sitio solo usa las cookies necesarias para funcionar, sobre todo para mantener tu sesión abierta. Sin rastreadores publicitarios y con una medición de audiencia sin cookies.",
     accept: "Entendido",
     more: "Saber más"
   },
