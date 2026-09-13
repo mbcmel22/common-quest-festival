@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import CoverImage from "./CoverImage";
 import type { EventWithTranslation } from "@/lib/types";
-import { formatWhen, categoryLabels } from "@/lib/format";
+import { formatWhen, categoryLabels, eventCategories } from "@/lib/format";
 import type { Locale, Dictionary } from "@/i18n";
 
 export default function EventCard({
@@ -38,8 +38,13 @@ export default function EventCard({
             <Image src="/brand/picto-jaune.png" alt="" width={48} height={48} className="opacity-60" />
           </div>
         )}
-        <span className="absolute left-3 top-3 tag bg-ink/80 text-acid">
-          {categoryLabels[locale][event.category]}
+        {/* Deux disciplines au maximum sur la carte, le reste est sur la fiche. */}
+        <span className="absolute left-3 top-3 flex max-w-[62%] flex-wrap gap-1.5">
+          {eventCategories(event).slice(0, 2).map((cat) => (
+            <span key={cat} className="tag bg-ink/80 text-acid">
+              {categoryLabels[locale]?.[cat] ?? cat}
+            </span>
+          ))}
         </span>
         <span
           className={`absolute right-3 top-3 tag ${

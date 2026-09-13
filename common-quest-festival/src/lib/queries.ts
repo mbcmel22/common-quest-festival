@@ -74,7 +74,10 @@ export async function getTeam() {
 export async function getPartners() {
   try {
     const supabase = await createClient();
-    const { data } = await supabase.from("partners").select("*").order("sort_order", { ascending: true });
+    const { data } = await supabase
+      .from("partners")
+      .select("*")
+      .order("sort_order", { ascending: true });
     return (data ?? []) as Partner[];
   } catch {
     return [] as Partner[];

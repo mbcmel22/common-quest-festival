@@ -95,3 +95,12 @@ export function formatWhen(eventDate: string, start: string | null, end: string 
   if (s) return `${head} ${words.from} ${s.toUpperCase()}`;
   return head;
 }
+
+/**
+ * Disciplines d un evenement. On retombe sur la discipline principale
+ * tant que la colonne "categories" n a pas ete alimentee.
+ */
+export function eventCategories(event: { category: string; categories?: string[] | null }): string[] {
+  const list = Array.isArray(event.categories) ? event.categories.filter(Boolean) : [];
+  return list.length > 0 ? list : [event.category];
+}

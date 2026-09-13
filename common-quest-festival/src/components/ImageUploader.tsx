@@ -11,12 +11,15 @@ export default function ImageUploader({
   value,
   onChange,
   folder = "divers",
-  label
+  label,
+  preview = "photo"
 }: {
   value: string | null;
   onChange: (url: string | null) => void;
   folder?: string;
   label: string;
+  /** "logo" : fond sombre et image entiere, pour les logos blancs des partenaires. */
+  preview?: "photo" | "logo";
 }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -51,11 +54,21 @@ export default function ImageUploader({
     <div>
       <span className="label">{label}</span>
       <div className="flex items-start gap-4">
-        <div className="relative h-24 w-32 shrink-0 overflow-hidden rounded-xl border border-ink/15 bg-white">
+        <div
+          className={`relative h-24 w-32 shrink-0 overflow-hidden rounded-xl border border-ink/15 ${
+            preview === "logo" ? "bg-[#170D1E] p-3" : "bg-white"
+          }`}
+        >
           {value ? (
-            <Image src={value} alt="" fill sizes="128px" className="object-cover" />
+            <Image
+              src={value}
+              alt=""
+              fill
+              sizes="128px"
+              className={preview === "logo" ? "object-contain p-2" : "object-cover"}
+            />
           ) : (
-            <span className="flex h-full items-center justify-center font-mono text-[10px] uppercase text-ink/40">
+            <span className={`flex h-full items-center justify-center font-mono text-[10px] uppercase ${preview === "logo" ? "text-paper/40" : "text-ink/40"}`}>
               vide
             </span>
           )}

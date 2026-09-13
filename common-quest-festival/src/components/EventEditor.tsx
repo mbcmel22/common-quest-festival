@@ -67,6 +67,7 @@ export default function EventEditor({
     end_time: "",
     doors_time: "",
     category: "autre",
+    categories: ["autre"] as string[],
     venue: "",
     address: "",
     price_label: "",
@@ -98,6 +99,10 @@ export default function EventEditor({
             end_time: rest.end_time?.slice(0, 5) ?? "",
             doors_time: rest.doors_time?.slice(0, 5) ?? "",
             venue: rest.venue ?? "",
+            categories:
+              Array.isArray(rest.categories) && rest.categories.length > 0
+                ? (rest.categories as string[])
+                : [rest.category],
             photo_credit: rest.photo_credit ?? "",
             cover_fit: rest.cover_fit ?? "cover",
             address: rest.address ?? "",
@@ -151,9 +156,15 @@ export default function EventEditor({
         .replace(/[^a-z0-9]+/g, "-")
         .replace(/(^-|-$)/g, "");
 
+    // Au moins une discipline, et "category" reste synchronisee sur la premiere
+    // pour que la carte du programme et les anciens filtres continuent de fonctionner.
+    const categories = event.categories.length > 0 ? event.categories : ["autre"];
+
     const payload = {
       ...event,
       slug,
+      categories,
+      category: categories[0],
       start_time: event.start_time || null,
       end_time: event.end_time || null,
       doors_time: event.doors_time || null,
@@ -340,15 +351,39 @@ export default function EventEditor({
                 ))}
               </select>
             </div>
-            <div>
-              <label className="label" htmlFor="category">Discipline</label>
-              <select id="category" className="field-light" value={event.category} onChange={(e) => setField("category", e.target.value)}>
-                {CATEGORIES.map((c) => (
-                  <option key={c} value={c}>
-                    {categoryLabels[locale]?.[c] ?? c}
-                  </option>
-                ))}
-              </select>
+            <div className="sm:col-span-2">
+              <span className="label">Disciplines</span>
+              <p className="-mt-1 mb-2 text-[12px] text-ink/50">
+                Plusieurs choix possibles. La première cochée sert de pastille sur la carte du programme.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {CATEGORIES.map((c) => {
+                  const on = event.categories.includes(c);
+                  const first = event.categories[0] === c;
+                  return (
+                    <button
+                      key={c}
+                      type="button"
+                      aria-pressed={on}
+                      onClick={() =>
+                        setField(
+                          "categories",
+                          on ? event.categories.filter((x) => x !== c) : [...event.categories, c]
+                        )
+                      }
+                      className={`min-h-11 rounded-full border px-4 py-2 font-mono text-[11px] uppercase tracking-[0.12em] transition-colors ${
+                        on ? "border-ink bg-ink text-paper" : "border-ink/20 text-ink/60 hover:border-ink/50"
+                      }`}
+                    >
+                      {categoryLabels[locale]?.[c] ?? c}
+                      {first && <span className="ml-2 text-acid">principale</span>}
+                    </button>
+                  );
+                })}
+              </div>
+              {event.categories.length === 0 && (
+                <p className="mt-2 text-[12px] text-red-600">Cochez au moins une discipline.</p>
+              )}
             </div>
             <div>
               <label className="label" htmlFor="start">Début</label>

@@ -19,7 +19,8 @@ export type EventRow = {
   start_time: string | null;
   end_time: string | null;
   doors_time: string | null;
-  category: Category;
+  category: Category;          // discipline principale, affichee sur la carte
+  categories: string[] | null; // toutes les disciplines, utilisees par les filtres
   venue: string | null;
   address: string | null;
   price_label: string | null;
@@ -87,4 +88,5 @@ export type Partner = {
   website_url: string | null;
   kind: string;
   sort_order: number;
+  is_published?: boolean;
 };

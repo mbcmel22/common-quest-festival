@@ -2,7 +2,7 @@ import Link from "next/link";
 import { getDictionary, type Locale } from "@/i18n";
 import { getEvents, getDict } from "@/lib/queries";
 import EventCard from "@/components/EventCard";
-import { categoryLabels } from "@/lib/format";
+import { categoryLabels, eventCategories } from "@/lib/format";
 import { alternatesFor } from "@/lib/seo";
 
 export const revalidate = 60;
@@ -25,8 +25,8 @@ export default async function ProgrammePage({
   const events = await getEvents(locale);
 
   const activeDay = jour && ["1", "2", "3", "4"].includes(jour) ? Number(jour) : null;
-  const categories = Array.from(new Set(events.map((e) => e.category)));
-  const activeCategory = discipline && categories.includes(discipline as never) ? discipline : null;
+  const categories = Array.from(new Set(events.flatMap(eventCategories)));
+  const activeCategory = discipline && categories.includes(discipline) ? discipline : null;
   const priceOptions = [
     { key: "gratuit", label: dict.programme.free },
     { key: "libre", label: dict.programme.pwyw },
@@ -40,7 +40,9 @@ export default async function ProgrammePage({
     (activePrice === "payant" && !event.is_free && !event.is_pwyw);
 
   const filtered = events.filter(
-    (e) => (!activeDay || e.day_index === activeDay) && (!activeCategory || e.category === activeCategory) && matchPrice(e)
+    (e) => (!activeDay || e.day_index === activeDay) &&
+      (!activeCategory || eventCategories(e).includes(activeCategory)) &&
+      matchPrice(e)
   );
 
   // Filtres actifs, reportes sur les liens des cartes puis sur le bouton de retour
@@ -108,7 +110,7 @@ export default async function ProgrammePage({
                 data-active={activeCategory === cat}
                 className={`tag whitespace-nowrap ${activeCategory === cat ? "border-violet bg-violet text-white" : "text-smoke"}`}
               >
-                {categoryLabels[locale][cat]}
+                {categoryLabels[locale]?.[cat] ?? cat}
               </Link>
             ))}
           </div>

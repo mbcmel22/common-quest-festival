@@ -23,6 +23,7 @@ export default async function InfosPage({ params }: { params: Promise<{ locale: 
     getSetting<TickerSetting>("ticker"),
     getSetting<Record<string, string>>("socials")
   ]);
+  const visiblePartners = partners.filter((p) => p.is_published !== false);
   const tickerText = pickTicker(ticker, "infos", locale);
 
   const roleFor = (member: { role_fr: string | null; role_en: string | null; role_es: string | null }) =>
@@ -143,23 +144,42 @@ export default async function InfosPage({ params }: { params: Promise<{ locale: 
         )}
       </section>
 
-      {/* PARTENAIRES */}
-      {partners.length > 0 && (
+      {/* PARTENAIRES : meme traitement que le bandeau du bas de page, en plus grand */}
+      {visiblePartners.length > 0 && (
         <section className="border-t border-white/10 py-16">
           <div className="shell">
             <h2 className="display-m">{dict.infos.partnersTitle}</h2>
-            <ul className="mt-8 flex flex-wrap items-center gap-8">
-              {partners.map((partner) => (
-                <li key={partner.id}>
-                  {partner.logo_url ? (
-                    <a href={partner.website_url ?? "#"} target="_blank" rel="noreferrer noopener">
-                      <Image src={partner.logo_url} alt={partner.name} width={120} height={60} className="opacity-70 transition-opacity hover:opacity-100" />
-                    </a>
-                  ) : (
-                    <span className="tag text-paper/70">{partner.name}</span>
-                  )}
-                </li>
-              ))}
+            <ul className="mt-10 flex flex-wrap items-center gap-x-10 gap-y-8 md:gap-x-14">
+              {visiblePartners.map((partner) => {
+                const logo = partner.logo_url ? (
+                  <Image
+                    src={partner.logo_url}
+                    alt={partner.name}
+                    width={460}
+                    height={200}
+                    className="h-10 w-auto max-w-[150px] object-contain opacity-75 transition-opacity sm:h-12 sm:max-w-[190px]"
+                  />
+                ) : (
+                  <span className="tag text-paper/70">{partner.name}</span>
+                );
+                return (
+                  <li key={partner.id} className="shrink-0">
+                    {partner.website_url ? (
+                      <a
+                        href={partner.website_url}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        title={partner.name}
+                        className="inline-flex min-h-11 items-center hover:[&_img]:opacity-100"
+                      >
+                        {logo}
+                      </a>
+                    ) : (
+                      <span className="inline-flex min-h-11 items-center">{logo}</span>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </section>

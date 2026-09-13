@@ -4,12 +4,13 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getDictionary } from "@/i18n";
 import { getEvent, getDict } from "@/lib/queries";
-import { formatRange, formatTime, categoryLabels } from "@/lib/format";
+import { formatRange, formatTime, categoryLabels, eventCategories } from "@/lib/format";
 import VideoEmbed from "@/components/VideoEmbed";
 import CoverImage from "@/components/CoverImage";
 import SocialLinks, { normalizeSocialGroups } from "@/components/SocialLinks";
 import FavoriteButton from "@/components/FavoriteButton";
 import { alternatesFor } from "@/lib/seo";
+import RichText from "@/components/RichText";
 
 export const revalidate = 60;
 
@@ -83,7 +84,11 @@ export default async function EventPage({
       {/* Titre : sur fond plein, toujours lisible */}
       <header className="shell border-b border-white/10 py-8 md:py-10">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="tag border-acid bg-acid text-ink">{categoryLabels[locale][event.category]}</span>
+          {eventCategories(event).map((cat) => (
+            <span key={cat} className="tag border-acid bg-acid text-ink">
+              {categoryLabels[locale]?.[cat] ?? cat}
+            </span>
+          ))}
           {event.t?.event_type && <span className="tag text-paper/80">{event.t.event_type}</span>}
         </div>
         <h1 className="mt-4 display-l max-w-4xl">{event.t?.title}</h1>
@@ -91,13 +96,25 @@ export default async function EventPage({
         {event.t?.partner_note && <p className="mt-3 max-w-2xl text-[15px] text-acid">{event.t.partner_note}</p>}
       </header>
 
-      <div className="shell grid gap-12 py-12 md:grid-cols-[1.4fr_1fr] md:py-16">
-        <div>
-          <Link href={backHref} className="eyebrow hover:text-acid">
-            &larr; {dict.event.back}
-          </Link>
+      <div className="shell pt-8 md:pt-10">
+        <Link href={backHref} className="eyebrow hover:text-acid">
+          &larr; {dict.event.back}
+        </Link>
+      </div>
+
+      {/*
+        Colonne de lecture bornee a 70 caracteres : au-dela, l oeil perd la ligne.
+        La carte pratique passe a une largeur fixe pour que le lieu et les tarifs
+        ne se coupent plus. Sur mobile elle remonte avant le texte : horaires,
+        lieu et billetterie sont ce que l on vient chercher en premier.
+      */}
+      <div className="shell grid gap-10 py-8 lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-14 lg:py-12">
+        <div className="order-2 max-w-[70ch] lg:order-1">
           {event.t?.description && (
-            <p className="mt-8 whitespace-pre-line text-lg leading-relaxed text-paper/85">{event.t.description}</p>
+            <RichText
+              text={event.t.description}
+              className="whitespace-pre-line text-lg leading-relaxed text-paper/85"
+            />
           )}
 
           {videos.length > 0 && (
@@ -153,20 +170,20 @@ export default async function EventPage({
           {event.t?.lineup_note && (
             <section className="mt-10">
               <h2 className="display-m">{dict.event.lineup}</h2>
-              <p className="mt-3 whitespace-pre-line text-paper/80">{event.t.lineup_note}</p>
+              <RichText text={event.t.lineup_note} className="mt-3 whitespace-pre-line text-paper/80" />
             </section>
           )}
 
           {event.t?.practical_info && (
             <section className="mt-12">
               <h2 className="display-m">{dict.event.infosPratiques}</h2>
-              <p className="mt-4 whitespace-pre-line text-paper/80">{event.t.practical_info}</p>
+              <RichText text={event.t.practical_info} className="mt-4 whitespace-pre-line text-paper/80" />
             </section>
           )}
         </div>
 
         {/* Bloc pratique, colle en haut sur grand ecran */}
-        <aside className="h-max rounded-2xl border border-white/12 bg-ink-soft p-6 md:sticky md:top-28">
+        <aside className="order-1 h-max rounded-2xl border border-white/12 bg-ink-soft p-5 sm:p-6 lg:order-2 lg:sticky lg:top-28">
           <dl className="space-y-5">
             <div>
               <dt className="eyebrow">{dict.event.horaires}</dt>

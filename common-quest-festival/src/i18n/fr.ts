@@ -173,6 +173,7 @@ export const fr = {
     cookies: "Cookies",
     contact: "Contact",
     follow: "Suivre le festival",
+    partners: "Ils soutiennent le festival",
     prism: "Un festival porté par le collectif PRISM, Nantes."
   },
   common: {

@@ -175,6 +175,7 @@ export const en: Dictionary = {
     cookies: "Cookies",
     contact: "Contact",
     follow: "Follow the festival",
+    partners: "They support the festival",
     prism: "A festival run by the PRISM collective, Nantes."
   },
   common: {

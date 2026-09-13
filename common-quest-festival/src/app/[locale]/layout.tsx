@@ -3,7 +3,7 @@ import { Anton, Inter_Tight } from "next/font/google";
 import { notFound } from "next/navigation";
 import "../globals.css";
 import { getDictionary, isLocale, locales, type Locale } from "@/i18n";
-import { getSessionContext, getSetting, getDict, getTypeScale } from "@/lib/queries";
+import { getSessionContext, getSetting, getDict, getTypeScale, getPartners } from "@/lib/queries";
 import { DEFAULT_SUPPORT_URL } from "@/lib/ticker";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
@@ -52,6 +52,7 @@ export default async function LocaleLayout({
   const brand = await getSetting<{ logo_url?: string }>("brand");
   const typeScale = await getTypeScale();
   const socials = await getSetting<Record<string, string>>("socials");
+  const partners = await getPartners();
   const support = await getSetting<{ url?: string }>("support");
   const supportUrl = support?.url?.trim() || DEFAULT_SUPPORT_URL;
 
@@ -68,7 +69,7 @@ export default async function LocaleLayout({
         <main id="contenu" className="pt-20 md:pt-24">
           {children}
         </main>
-        <SiteFooter locale={locale as Locale} dict={dict} logoUrl={brand?.logo_url ?? null} socials={socials} supportUrl={supportUrl} isLoggedIn={!!user} />
+        <SiteFooter locale={locale as Locale} dict={dict} logoUrl={brand?.logo_url ?? null} socials={socials} supportUrl={supportUrl} isLoggedIn={!!user} partners={partners} />
         <ScrollToTop label={dict.common.backToTop} />
         <CookieBanner locale={locale as Locale} dict={dict} />
         {/*
