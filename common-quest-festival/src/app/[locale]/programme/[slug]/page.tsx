@@ -11,6 +11,7 @@ import SocialLinks, { normalizeSocialGroups } from "@/components/SocialLinks";
 import FavoriteButton from "@/components/FavoriteButton";
 import { alternatesFor } from "@/lib/seo";
 import RichText from "@/components/RichText";
+import { JsonLd, eventJsonLd, ficheArianeJsonLd } from "@/lib/jsonld";
 
 export const revalidate = 60;
 
@@ -61,6 +62,15 @@ export default async function EventPage({
 
   return (
     <article>
+      <JsonLd
+        data={[
+          eventJsonLd(event, locale, process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.common-quest.fr"),
+          ficheArianeJsonLd(process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.common-quest.fr", locale, [
+            { nom: dict.nav.programme, chemin: "/programme" },
+            { nom: event.t?.title ?? event.slug, chemin: `/programme/${event.slug}` }
+          ])
+        ]}
+      />
       {/* Visuel de tete : l affiche entiere, sans texte par-dessus */}
       <div className="relative aspect-[16/9] w-full overflow-hidden bg-ink-soft md:aspect-[2/1] md:max-h-[62vh]">
         {event.cover_url ? (

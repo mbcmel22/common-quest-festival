@@ -4,12 +4,19 @@ import { getEvents, getDict } from "@/lib/queries";
 import EventCard from "@/components/EventCard";
 import { categoryLabels, eventCategories } from "@/lib/format";
 import { alternatesFor } from "@/lib/seo";
+import { JsonLd, ficheArianeJsonLd } from "@/lib/jsonld";
 
 export const revalidate = 60;
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  return { alternates: alternatesFor(locale, "/programme") };
+  const dict = getDictionary(locale);
+  return {
+    title: dict.meta.programmeTitle,
+    description: dict.meta.programmeDescription,
+    alternates: alternatesFor(locale, "/programme"),
+    openGraph: { title: dict.meta.programmeTitle, description: dict.meta.programmeDescription }
+  };
 }
 
 export default async function ProgrammePage({
@@ -68,6 +75,11 @@ export default async function ProgrammePage({
 
   return (
     <>
+      <JsonLd
+        data={ficheArianeJsonLd(process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.common-quest.fr", locale, [
+          { nom: dict.nav.programme, chemin: "/programme" }
+        ])}
+      />
       <section className="shell pb-8 pt-12 md:pt-16">
         <h1 className="display-xl">{dict.programme.title}</h1>
         <p className="mt-6 max-w-2xl whitespace-pre-line text-lg text-paper/75">{dict.programme.intro}</p>

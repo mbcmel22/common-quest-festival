@@ -5,12 +5,19 @@ import Marquee from "@/components/Marquee";
 import SocialLinks from "@/components/SocialLinks";
 import { pickTicker, type TickerSetting } from "@/lib/ticker";
 import { alternatesFor } from "@/lib/seo";
+import { JsonLd, ficheArianeJsonLd } from "@/lib/jsonld";
 
 export const revalidate = 120;
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  return { alternates: alternatesFor(locale, "/infos") };
+  const dict = getDictionary(locale);
+  return {
+    title: dict.meta.infosTitle,
+    description: dict.meta.infosDescription,
+    alternates: alternatesFor(locale, "/infos"),
+    openGraph: { title: dict.meta.infosTitle, description: dict.meta.infosDescription }
+  };
 }
 
 export default async function InfosPage({ params }: { params: Promise<{ locale: string }> }) {
@@ -31,6 +38,11 @@ export default async function InfosPage({ params }: { params: Promise<{ locale: 
 
   return (
     <>
+      <JsonLd
+        data={ficheArianeJsonLd(process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.common-quest.fr", locale, [
+          { nom: dict.nav.infos, chemin: "/infos" }
+        ])}
+      />
       <section className="shell pb-10 pt-12 md:pt-16">
         <h1 className="display-xl">{dict.infos.title}</h1>
         <p className="mt-6 max-w-xl text-lg text-paper/75">{dict.infos.intro}</p>

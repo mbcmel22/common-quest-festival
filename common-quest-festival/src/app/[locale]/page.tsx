@@ -7,6 +7,7 @@ import HighlightsCarousel from "@/components/HighlightsCarousel";
 import Marquee from "@/components/Marquee";
 import { pickTicker, DEFAULT_SUPPORT_URL, type TickerSetting } from "@/lib/ticker";
 import { alternatesFor } from "@/lib/seo";
+import { JsonLd, festivalJsonLd, organisationJsonLd } from "@/lib/jsonld";
 
 export const revalidate = 60;
 
@@ -24,11 +25,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const tickerSpeed = ticker?.speed_home ?? 75;
   const support = await getSetting<{ url?: string }>("support");
   const supportUrl = support?.url?.trim() || DEFAULT_SUPPORT_URL;
+  const socials = await getSetting<Record<string, string>>("socials");
+  const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.common-quest.fr";
   const highlights = events.filter((e) => e.is_highlight);
   const countByDay = [1, 2, 3, 4].map((day) => events.filter((e) => e.day_index === day).length);
 
   return (
     <>
+      <JsonLd data={[festivalJsonLd(events, locale, base), organisationJsonLd(base, socials)]} />
       {/* HERO : la question du festival, en grand */}
       <section className="relative overflow-hidden border-b border-white/10">
         <div className="shell relative py-20 md:py-28">

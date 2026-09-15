@@ -2,9 +2,15 @@ import type { Dictionary } from "./fr";
 
 export const en: Dictionary = {
   meta: {
-    title: "Common Quest, multidisciplinary hip hop festival in Nantes",
+    title: "Common Quest, hip hop festival in Nantes, 1 to 4 October 2026",
     description:
-      "1 to 4 October 2026 at the Quartier de la Création, île de Nantes. Concerts, battles, workshops, graffiti, DJ sets, talks and encounters."
+      "Multidisciplinary hip hop festival in Nantes, 1 to 4 October 2026 at the Quartier de la Création. Dance battles, rap concerts, DJ sets, workshops, graffiti and talks.",
+    programmeTitle: "Line-up of the Common Quest hip hop festival 2026 in Nantes",
+    programmeDescription:
+      "The full four-day line-up: international dance battles, rap concerts, beat battle, DJ sets, workshops and screenings, 1 to 4 October 2026 in Nantes, France.",
+    infosTitle: "Practical information, access and tickets, Common Quest Nantes",
+    infosDescription:
+      "Opening times, access to the Quartier de la Création on the île de Nantes, prices, tickets, accessibility and food on site at the Common Quest hip hop festival."
   },
   nav: {
     programme: "Line-up",

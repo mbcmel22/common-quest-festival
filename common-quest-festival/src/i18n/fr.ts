@@ -1,8 +1,14 @@
 export const fr = {
   meta: {
-    title: "Common Quest, festival hip hop pluridisciplinaire à Nantes",
+    title: "Common Quest, festival hip hop à Nantes, 1er au 4 octobre 2026",
     description:
-      "Du 1er au 4 octobre 2026 au Quartier de la Création, île de Nantes. Concerts, battles, workshops, graffiti, DJ sets, talks et rencontres."
+      "Festival hip hop pluridisciplinaire à Nantes, du 1er au 4 octobre 2026 au Quartier de la Création. Battles de danse, concerts rap, DJ sets, workshops, graffiti et rencontres.",
+    programmeTitle: "Programme du festival hip hop Common Quest 2026 à Nantes",
+    programmeDescription:
+      "Le programme complet des quatre jours : battles de danse internationaux, concerts rap, beat battle, DJ sets, workshops et projections, du 1er au 4 octobre 2026 à Nantes.",
+    infosTitle: "Infos pratiques, accès et billetterie, festival Common Quest Nantes",
+    infosDescription:
+      "Horaires, accès au Quartier de la Création sur l’île de Nantes, tarifs, billetterie, accessibilité et restauration sur place du festival hip hop Common Quest."
   },
   nav: {
     programme: "Programme",

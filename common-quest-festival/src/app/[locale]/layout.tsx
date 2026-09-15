@@ -25,6 +25,16 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     title: dict.meta.title,
     description: dict.meta.description,
     metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+    keywords: [
+      "festival hip hop Nantes",
+      "festival hip hop Pays de la Loire",
+      "festival Nantes 2026",
+      "battle de danse Nantes",
+      "concert rap Nantes",
+      "culture hip hop Nantes",
+      "Common Quest",
+      "PRISM Nantes"
+    ],
     openGraph: {
       title: dict.meta.title,
       description: dict.meta.description,
