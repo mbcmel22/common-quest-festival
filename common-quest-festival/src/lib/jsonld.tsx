@@ -108,12 +108,25 @@ export function eventJsonLd(event: EventWithTranslation, locale: string, base: s
     eventStatus: "https://schema.org/EventScheduled",
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
     location: lieu(event),
-    image: event.cover_url ? [event.cover_url] : undefined,
+    image: [event.cover_url || `${base}/brand/og.jpg`],
     url,
     isAccessibleForFree: event.is_free,
     inLanguage: locale,
     organizer: ORGANISATEUR,
-    superEvent: { "@type": "Festival", name: FESTIVAL.nom, url: `${base}/${locale}` },
+    // Google valide le superEvent comme un evenement a part entiere :
+    // il lui faut donc ses propres startDate et location, sinon deux erreurs critiques.
+    superEvent: {
+      "@type": "Festival",
+      name: FESTIVAL.nom,
+      url: `${base}/${locale}`,
+      startDate: `${FESTIVAL.debut}T18:00:00${TZ}`,
+      endDate: `${FESTIVAL.fin}T23:00:00${TZ}`,
+      location: lieu(),
+      eventStatus: "https://schema.org/EventScheduled",
+      eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+      organizer: ORGANISATEUR,
+      image: [`${base}/brand/og.jpg`]
+    },
     offers: offre(event, url)
   };
 }
@@ -144,10 +157,15 @@ export function festivalJsonLd(events: EventWithTranslation[], locale: string, b
       return {
         "@type": typeSchema(categories),
         name: event.t?.title ?? event.slug,
+        description: event.t?.tagline ?? undefined,
         startDate: horodatage(event.event_date, event.start_time, "18:00"),
         endDate: event.end_time ? horodatage(event.event_date, event.end_time, "23:00") : undefined,
+        eventStatus: "https://schema.org/EventScheduled",
+        eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
         location: lieu(event),
+        image: [event.cover_url || `${base}/brand/og.jpg`],
         url,
+        organizer: ORGANISATEUR,
         isAccessibleForFree: event.is_free,
         offers: offre(event, url)
       };
