@@ -27,3 +27,6 @@ export function pickTicker(
 /** Lien de don libre, remplacable dans Reglages. */
 export const DEFAULT_SUPPORT_URL =
   "https://www.billetweb.fr/don-libre-soutien-a-la-premiere-edition-du-festival-common-quest?multi=u289326&margin=no_margin&ref=u289326&color=635BFF&parent=1";
+
+/** Billetterie generale du festival, remplacable dans Reglages. */
+export const DEFAULT_TICKET_URL = "https://www.billetweb.fr/multi_event.php?multi=u289326";

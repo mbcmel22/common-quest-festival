@@ -14,9 +14,10 @@ type Props = {
   isAdmin: boolean;
   logoUrl: string | null;
   supportUrl: string;
+  ticketUrl: string;
 };
 
-export default function SiteHeader({ locale, dict, userEmail, isAdmin, logoUrl, supportUrl }: Props) {
+export default function SiteHeader({ locale, dict, userEmail, isAdmin, logoUrl, supportUrl, ticketUrl }: Props) {
   const [open, setOpen] = useState(false);
   const [solid, setSolid] = useState(false);
   const pathname = usePathname();
@@ -94,9 +95,9 @@ export default function SiteHeader({ locale, dict, userEmail, isAdmin, logoUrl, 
           <a href={supportUrl} target="_blank" rel="noreferrer noopener" className="btn-violet btn-sm">
             {dict.nav.soutien}
           </a>
-          <Link href={`/${locale}/programme`} className="btn-acid btn-sm">
+          <a href={ticketUrl} target="_blank" rel="noreferrer noopener" className="btn-acid btn-sm">
             {dict.nav.billetterie}
-          </Link>
+          </a>
         </nav>
 
         <button
@@ -122,9 +123,15 @@ export default function SiteHeader({ locale, dict, userEmail, isAdmin, logoUrl, 
                 {l.label}
               </Link>
             ))}
-            <Link href={`/${locale}/programme`} className="py-3 font-display text-4xl uppercase text-acid">
+            <a
+              href={ticketUrl}
+              target="_blank"
+              rel="noreferrer noopener"
+              onClick={() => setOpen(false)}
+              className="py-3 font-display text-4xl uppercase text-acid"
+            >
               {dict.nav.billetterie}
-            </Link>
+            </a>
             <a
               href={supportUrl}
               target="_blank"

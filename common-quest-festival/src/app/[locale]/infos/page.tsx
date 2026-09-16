@@ -156,6 +156,28 @@ export default async function InfosPage({ params }: { params: Promise<{ locale: 
         )}
       </section>
 
+      {/*
+        BENEVOLAT : encart pose apres l equipe, ou l on vient de voir des visages.
+        Sur mobile le bouton passe en pleine largeur, hauteur 44px minimum pour la cible tactile ;
+        a partir de 768px le texte et le bouton se placent cote a cote.
+      */}
+      <section className="border-t border-white/10 py-14 md:py-16">
+        <div className="shell">
+          <div className="rounded-2xl border border-white/12 bg-ink-soft p-6 sm:p-8 md:flex md:items-center md:justify-between md:gap-10">
+            <div className="md:max-w-2xl">
+              <h2 className="display-m">{dict.infos.volunteerTitle}</h2>
+              <p className="mt-3 text-base leading-relaxed text-paper/80">{dict.infos.volunteerText}</p>
+            </div>
+            <a
+              href="mailto:admin.asso.prism@gmail.com?subject=Candidature%20b%C3%A9n%C3%A9vole%20Common%20Quest%202026"
+              className="btn-acid mt-6 flex min-h-11 w-full items-center justify-center whitespace-nowrap md:mt-0 md:w-auto md:shrink-0"
+            >
+              {dict.infos.volunteerCta}
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* PARTENAIRES : meme traitement que le bandeau du bas de page, en plus grand */}
       {visiblePartners.length > 0 && (
         <section className="border-t border-white/10 py-16">

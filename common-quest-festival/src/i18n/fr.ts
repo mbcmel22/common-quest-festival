@@ -98,6 +98,10 @@ export const fr = {
     transport: "Y aller",
     accessibility: "Accessibilité",
     contact: "Contact",
+    volunteerTitle: "Donner un coup de main",
+    volunteerText:
+      "Le festival se construit avec des bénévoles : accueil du public, bar, montage, accompagnement des artistes, captation. Quelques heures sur un créneau ou les quatre jours, on s’adapte à vos disponibilités. Aucune expérience n’est demandée, juste l’envie d’y être.",
+    volunteerCta: "Devenir bénévole",
     imageTitle: "Photos et vidéos",
     imageText:
       "Le festival fait l’objet de captations photo et vidéo destinées à la communication de l’association PRISM. En venant sur le site, vous êtes susceptible d’être photographié·e ou filmé·e. Si vous ne souhaitez pas apparaître, signalez-le à l’équipe sur place ou écrivez à associationprism.hello@gmail.com pour demander le retrait d’une image vous concernant.",

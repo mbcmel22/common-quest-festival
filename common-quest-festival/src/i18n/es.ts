@@ -99,6 +99,10 @@ export const es: Dictionary = {
     transport: "Cómo llegar",
     accessibility: "Accesibilidad",
     contact: "Contacto",
+    volunteerTitle: "Echar una mano",
+    volunteerText:
+      "El festival se construye con personas voluntarias: acogida del público, barra, montaje, acompañamiento de artistas, grabación. Unas horas en un turno o los cuatro días, nos adaptamos a tu disponibilidad. No hace falta experiencia, solo ganas de estar.",
+    volunteerCta: "Hazte voluntario/a",
     imageTitle: "Fotos y vídeos",
     imageText:
       "El festival es objeto de grabaciones fotográficas y de vídeo destinadas a la comunicación de la asociación PRISM. Al acudir al recinto, es posible que aparezca en una foto o un vídeo. Si prefiere no aparecer, comuníquelo al equipo in situ o escriba a associationprism.hello@gmail.com para solicitar la retirada de una imagen que le concierna.",

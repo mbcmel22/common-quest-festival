@@ -12,6 +12,8 @@ import FavoriteButton from "@/components/FavoriteButton";
 import { alternatesFor } from "@/lib/seo";
 import RichText from "@/components/RichText";
 import { JsonLd, eventJsonLd, ficheArianeJsonLd } from "@/lib/jsonld";
+import { getSetting } from "@/lib/queries";
+import { DEFAULT_TICKET_URL } from "@/lib/ticker";
 
 export const revalidate = 60;
 
@@ -44,6 +46,11 @@ export default async function EventPage({
   const event = await getEvent(slug, locale);
   if (!event) notFound();
 
+  // Une fiche sans lien propre retombe sur la billetterie generale du festival,
+  // pour qu aucun bouton ne reste mort a l approche de l evenement.
+  const ticketing = await getSetting<{ url?: string }>("ticketing");
+  const ticketUrl = event.ticket_url?.trim() || ticketing?.url?.trim() || DEFAULT_TICKET_URL;
+
   const time = formatRange(event.start_time, event.end_time, locale);
 
   // On revient au programme avec les memes filtres qu a l aller
@@ -64,7 +71,7 @@ export default async function EventPage({
     <article>
       <JsonLd
         data={[
-          eventJsonLd(event, locale, process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.common-quest.fr"),
+          eventJsonLd({ ...event, ticket_url: ticketUrl }, locale, process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.common-quest.fr"),
           ficheArianeJsonLd(process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.common-quest.fr", locale, [
             { nom: dict.nav.programme, chemin: "/programme" },
             { nom: event.t?.title ?? event.slug, chemin: `/programme/${event.slug}` }
@@ -234,14 +241,10 @@ export default async function EventPage({
               <p className="rounded-full border-2 border-acid/40 px-5 py-3.5 text-center font-display text-[16px] uppercase tracking-[0.04em] text-acid">
                 {dict.event.ctaFree}
               </p>
-            ) : event.ticket_url ? (
-              <a href={event.ticket_url} target="_blank" rel="noreferrer noopener" className="btn-acid w-full">
+            ) : (
+              <a href={ticketUrl} target="_blank" rel="noreferrer noopener" className="btn-acid w-full">
                 {event.is_pwyw ? dict.event.ctaPwyw : dict.event.cta}
               </a>
-            ) : (
-              <p className="rounded-full border-2 border-white/20 px-5 py-3.5 text-center font-display text-[16px] uppercase tracking-[0.04em] text-smoke">
-                {dict.event.ctaSoon}
-              </p>
             )}
           </div>
         </aside>

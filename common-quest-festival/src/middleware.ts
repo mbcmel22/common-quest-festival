@@ -23,7 +23,25 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith("/auth") ||
     PUBLIC_FILE.test(pathname)
   ) {
-    return NextResponse.next();
+    // Ces chemins sortent avant la CSP a nonce, mais certains renvoient quand meme
+    // du HTML (la page 404 d un fichier inexistant). On leur pose une CSP statique
+    // et restrictive : aucun script tiers, aucune mise en cadre possible.
+    const passthrough = NextResponse.next();
+    passthrough.headers.set(
+      "content-security-policy",
+      [
+        "default-src 'self'",
+        "script-src 'self'",
+        "style-src 'self' 'unsafe-inline'",
+        "img-src 'self' data: blob: https:",
+        "font-src 'self' data:",
+        "object-src 'none'",
+        "base-uri 'self'",
+        "form-action 'self'",
+        "frame-ancestors 'none'"
+      ].join("; ")
+    );
+    return passthrough;
   }
 
   // 1. Redirection vers la langue si elle est absente de l URL

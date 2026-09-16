@@ -100,6 +100,10 @@ export const en: Dictionary = {
     transport: "Getting there",
     accessibility: "Accessibility",
     contact: "Contact",
+    volunteerTitle: "Lend a hand",
+    volunteerText:
+      "The festival runs on volunteers: welcoming the public, the bar, set-up, looking after artists, filming. A few hours on one shift or all four days, we work around what you can give. No experience needed, just the wish to be part of it.",
+    volunteerCta: "Become a volunteer",
     imageTitle: "Photos and videos",
     imageText:
       "The festival is photographed and filmed for the communication of the PRISM association. By coming on site, you may be photographed or filmed. If you would rather not appear, tell the team on site or write to associationprism.hello@gmail.com to ask for an image of you to be removed.",

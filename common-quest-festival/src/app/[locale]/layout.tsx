@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import "../globals.css";
 import { getDictionary, isLocale, locales, type Locale } from "@/i18n";
 import { getSessionContext, getSetting, getDict, getTypeScale, getPartners } from "@/lib/queries";
-import { DEFAULT_SUPPORT_URL } from "@/lib/ticker";
+import { DEFAULT_SUPPORT_URL, DEFAULT_TICKET_URL } from "@/lib/ticker";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -65,6 +65,8 @@ export default async function LocaleLayout({
   const partners = await getPartners();
   const support = await getSetting<{ url?: string }>("support");
   const supportUrl = support?.url?.trim() || DEFAULT_SUPPORT_URL;
+  const ticketing = await getSetting<{ url?: string }>("ticketing");
+  const ticketUrl = ticketing?.url?.trim() || DEFAULT_TICKET_URL;
 
   return (
     <html lang={locale} className={`${display.variable} ${body.variable}`}>
@@ -75,7 +77,7 @@ export default async function LocaleLayout({
         >
           Aller au contenu
         </a>
-        <SiteHeader locale={locale as Locale} dict={dict} userEmail={user?.email ?? null} isAdmin={isAdmin} logoUrl={brand?.logo_url ?? null} supportUrl={supportUrl} />
+        <SiteHeader locale={locale as Locale} dict={dict} userEmail={user?.email ?? null} isAdmin={isAdmin} logoUrl={brand?.logo_url ?? null} supportUrl={supportUrl} ticketUrl={ticketUrl} />
         <main id="contenu" className="pt-20 md:pt-24">
           {children}
         </main>
