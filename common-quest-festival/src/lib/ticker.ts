@@ -30,3 +30,22 @@ export const DEFAULT_SUPPORT_URL =
 
 /** Billetterie generale du festival, remplacable dans Reglages. */
 export const DEFAULT_TICKET_URL = "https://www.billetweb.fr/multi_event.php?multi=u289326";
+
+/**
+ * Ajoute le parametre de suivi Billetweb ("event_src") a une URL de billetterie.
+ * Le nom transmis doit correspondre EXACTEMENT (casse comprise) a un promoteur
+ * cree dans Billetweb : Options > Suivi organisateur > Mes promoteurs.
+ * Une source non enregistree ne casse rien : la vente est simplement comptee
+ * sans source identifiee, comme avant.
+ */
+export function withTicketSource(url: string, source: string): string {
+  if (!url) return url;
+  try {
+    const u = new URL(url);
+    u.searchParams.set("event_src", source);
+    return u.toString();
+  } catch {
+    const sep = url.includes("?") ? "&" : "?";
+    return `${url}${sep}event_src=${encodeURIComponent(source)}`;
+  }
+}

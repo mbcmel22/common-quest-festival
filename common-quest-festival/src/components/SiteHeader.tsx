@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import LanguageSwitcher from "./LanguageSwitcher";
 import type { Locale, Dictionary } from "@/i18n";
+import { withTicketSource } from "@/lib/ticker";
 
 type Props = {
   locale: Locale;
@@ -95,7 +96,7 @@ export default function SiteHeader({ locale, dict, userEmail, isAdmin, logoUrl, 
           <a href={supportUrl} target="_blank" rel="noreferrer noopener" className="btn-violet btn-sm">
             {dict.nav.soutien}
           </a>
-          <a href={ticketUrl} target="_blank" rel="noreferrer noopener" className="btn-acid btn-sm">
+          <a href={withTicketSource(ticketUrl, "entete")} target="_blank" rel="noreferrer noopener" className="btn-acid btn-sm">
             {dict.nav.billetterie}
           </a>
         </nav>
@@ -124,7 +125,7 @@ export default function SiteHeader({ locale, dict, userEmail, isAdmin, logoUrl, 
               </Link>
             ))}
             <a
-              href={ticketUrl}
+              href={withTicketSource(ticketUrl, "menu-mobile")}
               target="_blank"
               rel="noreferrer noopener"
               onClick={() => setOpen(false)}

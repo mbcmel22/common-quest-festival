@@ -104,3 +104,20 @@ export function eventCategories(event: { category: string; categories?: string[]
   const list = Array.isArray(event.categories) ? event.categories.filter(Boolean) : [];
   return list.length > 0 ? list : [event.category];
 }
+
+/**
+ * Normalise une adresse de page.
+ * Les accents sont retires et tout caractere hors a-z 0-9 devient un tiret :
+ * une URL accentuee est encodable de deux manieres differentes en Unicode
+ * (le "e" accentue d un seul tenant, ou "e" suivi d un accent combinant).
+ * Les deux s affichent pareil mais ne sont pas egales pour la base, ce qui
+ * rend la fiche introuvable. On interdit donc les accents a la source.
+ */
+export function slugify(input: string): string {
+  return input
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}

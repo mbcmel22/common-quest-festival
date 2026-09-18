@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import ImageUploader from "./ImageUploader";
-import { categoryLabels } from "@/lib/format";
+import { categoryLabels, slugify } from "@/lib/format";
 import { locales, type Locale, type Dictionary } from "@/i18n";
 import { SOCIAL_KEYS, SOCIAL_LABELS, normalizeSocialGroups, type SocialGroup } from "./SocialLinks";
 
@@ -147,14 +147,9 @@ export default function EventEditor({
     setErrorMessage(null);
     const supabase = createClient();
 
-    const slug =
-      event.slug.trim() ||
-      translations.fr.title
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .replace(/[^a-z0-9]+/g, "-")
-        .replace(/(^-|-$)/g, "");
+    // La normalisation s applique AUSSI a une adresse saisie a la main :
+    // sinon un accent tape au clavier part en base et la page renvoie 404.
+    const slug = slugify(event.slug.trim()) || slugify(translations.fr.title);
 
     // Au moins une discipline, et "category" reste synchronisee sur la premiere
     // pour que la carte du programme et les anciens filtres continuent de fonctionner.
@@ -558,11 +553,12 @@ export default function EventEditor({
               id="slug"
               className="field-light"
               value={event.slug}
-              onChange={(e) => setField("slug", e.target.value)}
+              onChange={(e) => setField("slug", e.target.value.toLowerCase().replace(/\s+/g, "-"))}
+              onBlur={(e) => setField("slug", slugify(e.target.value))}
               placeholder="généré depuis le titre"
             />
             <p className="mt-1 text-xs text-ink/50">
-              Les événements se classent automatiquement par date puis par heure de début.
+              Sans accent ni espace. Laissez vide pour la générer depuis le titre.
             </p>
           </div>
         </div>

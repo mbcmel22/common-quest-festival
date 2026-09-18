@@ -13,7 +13,7 @@ import { alternatesFor } from "@/lib/seo";
 import RichText from "@/components/RichText";
 import { JsonLd, eventJsonLd, ficheArianeJsonLd } from "@/lib/jsonld";
 import { getSetting } from "@/lib/queries";
-import { DEFAULT_TICKET_URL } from "@/lib/ticker";
+import { DEFAULT_TICKET_URL, withTicketSource } from "@/lib/ticker";
 
 export const revalidate = 60;
 
@@ -242,7 +242,15 @@ export default async function EventPage({
                 {dict.event.ctaFree}
               </p>
             ) : (
-              <a href={ticketUrl} target="_blank" rel="noreferrer noopener" className="btn-acid w-full">
+              // Source par fiche : cree un promoteur du meme nom dans Billetweb
+              // (Options > Suivi organisateur > Mes promoteurs) pour voir quelle
+              // fiche convertit le mieux, dans les statistiques "Origine".
+              <a
+                href={withTicketSource(ticketUrl, `fiche-${event.slug}`)}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="btn-acid w-full"
+              >
                 {event.is_pwyw ? dict.event.ctaPwyw : dict.event.cta}
               </a>
             )}
