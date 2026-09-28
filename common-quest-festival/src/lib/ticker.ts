@@ -49,3 +49,12 @@ export function withTicketSource(url: string, source: string): string {
     return `${url}${sep}event_src=${encodeURIComponent(source)}`;
   }
 }
+
+/**
+ * Lien du bouton benevolat, remplacable dans Reglages.
+ * Accepte une adresse mail (mailto:) comme un formulaire en ligne :
+ * l association pourra basculer vers HelloAsso ou un Google Form
+ * sans passer par une nouvelle version du site.
+ */
+export const DEFAULT_VOLUNTEER_URL =
+  "mailto:admin.asso.prism@gmail.com?subject=Candidature%20b%C3%A9n%C3%A9vole%20Common%20Quest%202026";

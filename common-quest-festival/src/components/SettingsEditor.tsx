@@ -18,6 +18,7 @@ export default function SettingsEditor({ dict }: { dict: Dictionary }) {
   const [typeScale, setTypeScale] = useState(1);
   const [supportUrl, setSupportUrl] = useState("");
   const [ticketUrl, setTicketUrl] = useState("");
+  const [volunteerUrl, setVolunteerUrl] = useState("");
   const [ticker, setTicker] = useState<Ticker>({ home: { ...emptyZone }, infos: { ...emptyZone }, speed_home: 75, speed_infos: 75 });
   const [logoUrl, setLogoUrl] = useState<string | null>(null);
   const [state, setState] = useState<"idle" | "saving" | "saved" | "error">("idle");
@@ -28,7 +29,7 @@ export default function SettingsEditor({ dict }: { dict: Dictionary }) {
     supabase
       .from("site_settings")
       .select("key, value")
-      .in("key", ["practical", "ticker", "brand", "socials", "typography", "support", "ticketing"])
+      .in("key", ["practical", "ticker", "brand", "socials", "typography", "support", "ticketing", "volunteer"])
       .then(({ data }) => {
         (data ?? []).forEach((row: { key: string; value: Record<string, string> }) => {
           if (row.key === "practical") setPractical((v) => ({ ...v, ...row.value }));
@@ -46,6 +47,7 @@ export default function SettingsEditor({ dict }: { dict: Dictionary }) {
           if (row.key === "typography") setTypeScale(Number(row.value?.scale ?? 1));
           if (row.key === "support") setSupportUrl(row.value?.url ?? "");
           if (row.key === "ticketing") setTicketUrl(row.value?.url ?? "");
+          if (row.key === "volunteer") setVolunteerUrl(row.value?.url ?? "");
         });
       });
   }, []);
@@ -62,7 +64,8 @@ export default function SettingsEditor({ dict }: { dict: Dictionary }) {
         { key: "socials", value: socials },
         { key: "typography", value: { scale: typeScale } },
         { key: "support", value: { url: supportUrl } },
-        { key: "ticketing", value: { url: ticketUrl } }
+        { key: "ticketing", value: { url: ticketUrl } },
+        { key: "volunteer", value: { url: volunteerUrl } }
       ],
       { onConflict: "key" }
     );
@@ -207,6 +210,26 @@ export default function SettingsEditor({ dict }: { dict: Dictionary }) {
           value={ticketUrl}
           onChange={(e) => setTicketUrl(e.target.value)}
           placeholder="https://www.billetweb.fr/..."
+        />
+      </div>
+
+      <div className="space-y-3 rounded-2xl border border-ink/12 bg-white p-6 lg:col-span-2">
+        <h2 className="display-m">Bouton Devenir bénévole</h2>
+        <p className="text-sm text-ink/60">
+          Destination du bouton de l’encart bénévolat, sur la page Infos. Une adresse e-mail
+          (commencez par <code>mailto:</code>) ou l’adresse d’un formulaire en ligne. Laissez vide
+          pour utiliser l’adresse par défaut de l’association.
+        </p>
+        <label className="label" htmlFor="volunteer-url">
+          Lien du bouton bénévolat
+        </label>
+        <input
+          id="volunteer-url"
+          type="text"
+          className="field-light"
+          value={volunteerUrl}
+          onChange={(e) => setVolunteerUrl(e.target.value)}
+          placeholder="mailto:benevoles@common-quest.fr"
         />
       </div>
 

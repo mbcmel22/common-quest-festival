@@ -3,7 +3,7 @@ import { getDictionary } from "@/i18n";
 import { getTeam, getPartners, getSetting, getDict } from "@/lib/queries";
 import Marquee from "@/components/Marquee";
 import SocialLinks from "@/components/SocialLinks";
-import { pickTicker, type TickerSetting } from "@/lib/ticker";
+import { pickTicker, type TickerSetting, DEFAULT_VOLUNTEER_URL } from "@/lib/ticker";
 import { alternatesFor } from "@/lib/seo";
 import { JsonLd, ficheArianeJsonLd } from "@/lib/jsonld";
 
@@ -23,13 +23,15 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function InfosPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const dict = await getDict(locale);
-  const [team, partners, practical, ticker, socials] = await Promise.all([
+  const [team, partners, practical, ticker, socials, volunteer] = await Promise.all([
     getTeam(),
     getPartners(),
     getSetting("practical"),
     getSetting<TickerSetting>("ticker"),
-    getSetting<Record<string, string>>("socials")
+    getSetting<Record<string, string>>("socials"),
+    getSetting<{ url?: string }>("volunteer")
   ]);
+  const volunteerUrl = volunteer?.url?.trim() || DEFAULT_VOLUNTEER_URL;
   const visiblePartners = partners.filter((p) => p.is_published !== false);
   const tickerText = pickTicker(ticker, "infos", locale);
 
@@ -169,7 +171,7 @@ export default async function InfosPage({ params }: { params: Promise<{ locale: 
               <p className="mt-3 text-base leading-relaxed text-paper/80">{dict.infos.volunteerText}</p>
             </div>
             <a
-              href="mailto:admin.asso.prism@gmail.com?subject=Candidature%20b%C3%A9n%C3%A9vole%20Common%20Quest%202026"
+              href={volunteerUrl}
               className="btn-acid mt-6 flex min-h-11 w-full items-center justify-center whitespace-nowrap md:mt-0 md:w-auto md:shrink-0"
             >
               {dict.infos.volunteerCta}
