@@ -67,6 +67,17 @@ export default function CookiesPage() {
                   <td className="py-3 pr-4">12 mois</td>
                   <td className="py-3">Common Quest</td>
                 </tr>
+                <tr className="border-b border-white/10">
+                  <td className="py-3 pr-4 font-mono text-[13px]">cq_voter</td>
+                  <td className="py-3 pr-4">
+                    Identifiant anonyme d’appareil, créé uniquement si vous participez au vote du
+                    public d’un événement. Il sert à garantir un seul vote par personne et par
+                    manche. Il ne contient ni nom, ni adresse e-mail, ni aucune donnée permettant
+                    de vous identifier, et n’est jamais utilisé à d’autres fins
+                  </td>
+                  <td className="py-3 pr-4">7 jours</td>
+                  <td className="py-3">Common Quest</td>
+                </tr>
                 <tr>
                   <td className="py-3 pr-4 font-mono text-[13px]">cq_cookie_ack</td>
                   <td className="py-3 pr-4">
@@ -80,8 +91,9 @@ export default function CookiesPage() {
             </table>
           </div>
           <p className="mt-4 text-[15px] text-smoke">
-            Les deux premiers ne sont déposés que si vous créez un compte et vous connectez. En simple visite, seuls
-            les deux derniers existent.
+            Les deux premiers ne sont déposés que si vous créez un compte et vous connectez. Le cookie de vote
+            n’apparaît que si vous participez au vote du public d’un événement. En simple visite, seuls le cookie de
+            langue et celui du bandeau existent.
           </p>
         </section>
 

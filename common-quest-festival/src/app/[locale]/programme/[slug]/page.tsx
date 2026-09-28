@@ -49,6 +49,8 @@ export default async function EventPage({
   // Une fiche sans lien propre retombe sur la billetterie generale du festival,
   // pour qu aucun bouton ne reste mort a l approche de l evenement.
   const ticketing = await getSetting<{ url?: string }>("ticketing");
+  const clash = await getSetting<{ slug?: string }>("clash");
+  const estFicheClash = (clash?.slug?.trim() || "clash-crew-rap") === event.slug;
   const ticketUrl = event.ticket_url?.trim() || ticketing?.url?.trim() || DEFAULT_TICKET_URL;
 
   const time = formatRange(event.start_time, event.end_time, locale);
@@ -237,6 +239,16 @@ export default async function EventPage({
           </div>
 
           <div className="mt-6">
+            {/* Acces au vote du public, uniquement sur la fiche du clash. */}
+            {estFicheClash && (
+              <a
+                href={`/${locale}/clash`}
+                className="mb-3 flex min-h-12 w-full items-center justify-center rounded-full border-2 border-violet bg-violet px-5 text-center font-display text-[15px] uppercase tracking-[0.04em] text-paper transition-opacity hover:opacity-85"
+              >
+                Voter pour votre crew
+              </a>
+            )}
+
             {event.is_free && !event.ticket_url ? (
               <p className="rounded-full border-2 border-acid/40 px-5 py-3.5 text-center font-display text-[16px] uppercase tracking-[0.04em] text-acid">
                 {dict.event.ctaFree}

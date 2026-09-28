@@ -8,6 +8,7 @@ export default function robots(): MetadataRoute.Robots {
           "/fr/compte", "/en/compte", "/es/compte",
           "/fr/connexion", "/en/connexion", "/es/connexion",
           "/fr/inscription", "/en/inscription", "/es/inscription",
+          "/fr/clash", "/en/clash", "/es/clash",
           "/api/"
         ] }],
     sitemap: `${base}/sitemap.xml`

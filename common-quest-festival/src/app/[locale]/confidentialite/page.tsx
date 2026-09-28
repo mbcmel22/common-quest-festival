@@ -45,6 +45,11 @@ export default function PrivacyPage() {
               Mesure d’audience : page consultée, page d’origine, type d’appareil, navigateur et pays. Sans cookie et
               sans identifiant conservé sur votre appareil. Voir la section dédiée plus bas.
             </li>
+            <li>
+              Vote du public : si vous participez au vote d’un événement, nous enregistrons votre choix, la date, un
+              identifiant anonyme d’appareil et une empreinte irréversible de votre adresse IP. Ces éléments servent
+              uniquement à garantir un seul vote par personne et par manche, et sont supprimés après le festival.
+            </li>
           </ul>
         </section>
 
@@ -94,6 +99,20 @@ export default function PrivacyPage() {
             festival et d’en rendre compte à nos partenaires. Les données sont agrégées et conservées un an au
             maximum. Vous pouvez vous opposer à cette mesure en écrivant à associationprism.hello@gmail.com, ou en
             activant le signal « Do Not Track » ou un bloqueur dans votre navigateur.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="display-m text-paper">Vote du public</h2>
+          <p className="mt-3">
+            Lors de certains événements, le public vote depuis son téléphone. Nous conservons le crew choisi, la date
+            du vote, un identifiant anonyme généré pour votre appareil, et une empreinte irréversible de votre adresse
+            IP. L’identifiant ne contient aucune donnée personnelle et l’adresse IP elle-même n’est pas conservée.
+          </p>
+          <p className="mt-3">
+            La base légale est notre intérêt légitime à garantir la sincérité du vote. Ces données sont supprimées au
+            plus tard un mois après la fin du festival, et ne servent à rien d’autre. Aucun résultat individuel n’est
+            publié : seuls les totaux par crew sont affichés.
           </p>
         </section>
 

@@ -19,6 +19,7 @@ export default function SettingsEditor({ dict }: { dict: Dictionary }) {
   const [supportUrl, setSupportUrl] = useState("");
   const [ticketUrl, setTicketUrl] = useState("");
   const [volunteerUrl, setVolunteerUrl] = useState("");
+  const [clashSlug, setClashSlug] = useState("");
   const [ticker, setTicker] = useState<Ticker>({ home: { ...emptyZone }, infos: { ...emptyZone }, speed_home: 75, speed_infos: 75 });
   const [logoUrl, setLogoUrl] = useState<string | null>(null);
   const [state, setState] = useState<"idle" | "saving" | "saved" | "error">("idle");
@@ -29,7 +30,7 @@ export default function SettingsEditor({ dict }: { dict: Dictionary }) {
     supabase
       .from("site_settings")
       .select("key, value")
-      .in("key", ["practical", "ticker", "brand", "socials", "typography", "support", "ticketing", "volunteer"])
+      .in("key", ["practical", "ticker", "brand", "socials", "typography", "support", "ticketing", "volunteer", "clash"])
       .then(({ data }) => {
         (data ?? []).forEach((row: { key: string; value: Record<string, string> }) => {
           if (row.key === "practical") setPractical((v) => ({ ...v, ...row.value }));
@@ -48,6 +49,7 @@ export default function SettingsEditor({ dict }: { dict: Dictionary }) {
           if (row.key === "support") setSupportUrl(row.value?.url ?? "");
           if (row.key === "ticketing") setTicketUrl(row.value?.url ?? "");
           if (row.key === "volunteer") setVolunteerUrl(row.value?.url ?? "");
+          if (row.key === "clash") setClashSlug(row.value?.slug ?? "");
         });
       });
   }, []);
@@ -65,7 +67,8 @@ export default function SettingsEditor({ dict }: { dict: Dictionary }) {
         { key: "typography", value: { scale: typeScale } },
         { key: "support", value: { url: supportUrl } },
         { key: "ticketing", value: { url: ticketUrl } },
-        { key: "volunteer", value: { url: volunteerUrl } }
+        { key: "volunteer", value: { url: volunteerUrl } },
+        { key: "clash", value: { slug: clashSlug } }
       ],
       { onConflict: "key" }
     );
@@ -230,6 +233,23 @@ export default function SettingsEditor({ dict }: { dict: Dictionary }) {
           value={volunteerUrl}
           onChange={(e) => setVolunteerUrl(e.target.value)}
           placeholder="mailto:benevoles@common-quest.fr"
+        />
+      </div>
+
+      <div className="space-y-3 rounded-2xl border border-ink/12 bg-white p-6 lg:col-span-2">
+        <h2 className="display-m">Fiche du Clash</h2>
+        <p className="text-sm text-ink/60">
+          Adresse de la page de l’événement sur laquelle afficher le bouton de vote du public.
+          Laissez vide pour <code>clash-crew-rap</code>.
+        </p>
+        <label className="label" htmlFor="clash-slug">Adresse de la fiche</label>
+        <input
+          id="clash-slug"
+          type="text"
+          className="field-light"
+          value={clashSlug}
+          onChange={(e) => setClashSlug(e.target.value)}
+          placeholder="clash-crew-rap"
         />
       </div>
 
