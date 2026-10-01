@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import {
   CREWS, niveauNote, pointsPublic, totalJure, totalManche,
@@ -25,12 +25,19 @@ export default function ClashJury({ initial }: { initial: ClashRound[] }) {
   const [n1, setN1] = useState([0, 0, 0, 0]);
   const [f4, setF4] = useState([0, 0, 0, 0]);
   const [verrouille, setVerrouille] = useState(false);
+  const verrouRef = useRef(false);
+  useEffect(() => { verrouRef.current = verrouille; }, [verrouille]);
   const [etat, setEtat] = useState<{ total_jures: number; valides: number } | null>(null);
   const [resultats, setResultats] = useState<{ scores: ClashScore[]; publicTotals: Record<number, { n1: number; f4: number }> } | null>(null);
   const [envoi, setEnvoi] = useState(false);
   const [info, setInfo] = useState<string | null>(null);
 
   const manche = rounds.find((r) => r.id === rid) ?? rounds[0];
+
+  function deconnexion() {
+    try { window.sessionStorage.removeItem("cq_jury_code"); } catch { /* rien */ }
+    setJuror(null); setCode(""); setResultats(null); setInfo(null);
+  }
 
   async function connexion() {
     setErreur(null);
@@ -87,6 +94,21 @@ export default function ClashJury({ initial }: { initial: ClashRound[] }) {
     const t = setInterval(async () => {
       const { data } = await supabase.from("clash_rounds").select("*").order("id");
       if (data) setRounds(data as ClashRound[]);
+      if (verrouRef.current) {
+        const { data: moi } = await supabase
+          .from("clash_scores")
+          .select("scores_n1,scores_f4,validated")
+          .eq("round_id", rid)
+          .eq("juror_id", juror.juror_id)
+          .maybeSingle();
+        if (!moi) {
+          setN1([0, 0, 0, 0]); setF4([0, 0, 0, 0]); setVerrouille(false);
+          setInfo("L’organisation a remis cette manche à zéro. Vous pouvez la noter à nouveau.");
+        } else if (!moi.validated) {
+          setN1(moi.scores_n1); setF4(moi.scores_f4); setVerrouille(false);
+          setInfo("L’organisation a rouvert cette manche. Corrigez puis validez à nouveau.");
+        }
+      }
       const { data: st } = await supabase.rpc("clash_jury_state", { p_round: rid });
       const ligne = Array.isArray(st) ? st[0] : st;
       if (ligne) setEtat(ligne);
@@ -116,7 +138,7 @@ export default function ClashJury({ initial }: { initial: ClashRound[] }) {
   }
 
   async function voirResultats() {
-    const { data: scores } = await supabase.from("clash_scores").select("*");
+    const { data: scores } = await supabase.rpc("clash_scores_officiels");
     const totals: Record<number, { n1: number; f4: number }> = {};
     for (const r of rounds) {
       const { data } = await supabase.rpc("clash_public_totals", { p_round: r.id });
@@ -151,15 +173,18 @@ export default function ClashJury({ initial }: { initial: ClashRound[] }) {
 
   return (
     <div>
-      <div className="flex flex-wrap items-baseline justify-between gap-3">
-        <div>
-          <p className="eyebrow text-acid">{juror.juror_name}</p>
-          <h1 className="display-l mt-1">Notation</h1>
+      {/* Le nom en grand : un jure qui s est trompe de code le voit immediatement. */}
+      <div className="rounded-2xl border-2 border-acid bg-ink-soft p-4">
+        <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-paper/50">Connecté en tant que</p>
+        <div className="mt-1 flex flex-wrap items-center justify-between gap-3">
+          <p className="font-display text-3xl uppercase text-acid">{juror.juror_name}</p>
+          {juror.is_admin && <span className="tag border-violet bg-violet text-paper">Mode test</span>}
         </div>
-        {juror.is_admin && (
-          <span className="tag border-violet bg-violet text-paper">Mode test</span>
-        )}
+        <button onClick={deconnexion} className="mt-2 text-xs text-paper/60 underline underline-offset-4 hover:text-paper">
+          Ce n’est pas vous ? Changer de code
+        </button>
       </div>
+      <h1 className="display-l mt-6">Notation</h1>
 
       {/* Choix de la manche */}
       <div className="mt-6 flex flex-wrap gap-2">
@@ -297,7 +322,8 @@ function Classement({
   publicTotals: Record<number, { n1: number; f4: number }>;
 }) {
   const parManche = rounds.map((r) => {
-    const valides = scores.filter((s) => s.round_id === r.id && s.validated);
+    // Deja filtrees en base : notes validees des jures officiels uniquement.
+    const valides = scores.filter((s) => s.round_id === r.id);
     const pub = publicTotals[r.id] ?? { n1: 10, f4: 10 };
     return {
       id: r.id,
